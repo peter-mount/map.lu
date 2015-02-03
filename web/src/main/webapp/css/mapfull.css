@@ -1,0 +1,24 @@
+
+#footer-outer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#map, #map-menu
+{
+    position: absolute;
+    top: 5.5em;
+    bottom: 3em;
+}
+
+#map {
+    left: 10em;
+    right: 0.5em;
+}
+
+#map-menu {
+    left: 0em;
+    width: 9em;
+}

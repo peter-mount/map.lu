@@ -1,0 +1,227 @@
+/*
+Copyright 2014 peter.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+/* 
+    Created on : 15-Jul-2014, 19:03:29
+    Author     : peter
+*/
+#banner_outer {
+    display: table;
+    table-layout: auto;
+    width: 100%;
+    background: midnightblue;
+    color: antiquewhite;
+}
+#banner_inner {
+    display: table-row;
+}
+#banner_left, #banner_right {
+    display: table-cell;
+    padding: 3px;
+}
+#banner_right {
+    text-align: right;
+    text-wrap: avoid;
+}
+#banner_left h1 {
+    margin:0;
+    padding:0;
+}
+
+#banner_inner h1 {
+    font-size: 2em;
+}
+
+#eu_cookie_notice {
+    border-bottom: 1px solid black;
+    padding:2px;
+    margin:0;
+    margin-bottom: 2px;
+    background: orange;
+    color: black;
+}
+
+#navbar {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background: midnightblue;
+}
+
+#navbar a {
+    margin-left: .2em;
+    margin-right: .2em;
+    text-decoration: underline;
+    text-decoration: none;
+    color:antiquewhite;
+}
+
+#navbar a:visited {
+    color:antiquewhite;
+}
+
+#navbar a:hover {
+    color:white;
+    text-decoration: underline;
+}
+#maincontent {
+    padding: 2px;
+    line-height: 1.4em;
+    font-family: "Lucida Grande","Trebuchet MS",Verdana,Helvetica,Arial,sans-serif;
+    font-size: 1em;
+    color: #333;
+}
+
+#maincontent h2 {
+    color: #28313F;
+    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-weight: normal;
+    color: #3F3F3F;
+    font-size: 2em;
+    margin: 0.2em 0 0.2em 0;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+#pagebody {
+    margin: 2px;
+}
+
+#home-1col {
+    width: 100%;
+    border: 1px solid red;
+}
+
+#home-2coll-left, #home-3col-left {
+    float: left;
+    width: 25%;
+    border: 1px solid red;
+}
+
+#home-2colr-right, #home-3col-right {
+    float: left;
+    width: 25%;
+    border: 1px solid red;
+}
+
+#home-2coll-center, #home-2colr-center {
+    width: 75%;
+    border: 1px solid red;
+}
+
+#home-3col-center {
+    width: 50%;
+    border: 1px solid red;
+}
+
+article {
+    background: white;
+    color: black;
+    padding-left: 5em;
+    padding-right: 5em;
+}
+
+div.mappreview {
+    margin: 1px;
+    padding: 1px;
+}
+
+div.mappreview div {
+    margin-left: 2px;
+    margin-top: 1px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    height: 300px;
+    width: 320px;
+}
+
+div.mappreview div div {
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    position: absolute;
+    overflow: hidden;
+    height: 300px;
+    width: 320px;
+}
+div.mappreview div div img {
+    position: absolute;
+    opacity: 1;
+    width: 256px;
+    height: 256px;
+}
+div.mappreview p {
+    font-size: 60%;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    display: block;
+    text-align: center;
+}
+
+#map-outer {
+    width: 100%;
+    height: 100%;
+    display: table;
+    table-layout: auto;
+}
+
+#map-inner {
+    display: table-row;
+}
+
+#map-menu {
+    display: table-cell;
+    background: #fff;
+    width: 10em;
+    overflow: hidden;
+    padding: 2px;
+    margin: 1px;
+}
+#map-menu .map-pane {
+    font-size: 0.8em;
+}
+
+#map-zoom-control {
+    float: left;
+    padding-left: 1em;
+    padding-top: 1em;
+}
+
+#map-zoom-info {
+    float: left;
+    padding-left: 1em;
+    padding-top: 1em;
+    color: black;
+    line-height: 1.1;
+    font-size: 11px;
+    text-shadow: 1px 1px 1px #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+}
+#map-zoom-scale {
+    padding-left: 2px;
+}
+
+#map {
+    display: table-cell;
+    margin: 1px;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+/* Stuff to hide */
+#OpenLayers_Control_Attribution_7 {
+    display: none;
+}
