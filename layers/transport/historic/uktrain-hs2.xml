@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map[]>
+<Map srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over" background-color="transparent" maximum-extent="-20037508.34,-20037508.34,20037508.34,20037508.34">
+
+<Parameters>
+  <Parameter name="bounds">-0.6647,50.3209,2.3346,51.812</Parameter>
+  <Parameter name="center">0.5933,51.1897,9</Parameter>
+  <Parameter name="format">png</Parameter>
+  <Parameter name="minzoom">0</Parameter>
+  <Parameter name="maxzoom">22</Parameter>
+  <Parameter name="name"><![CDATA[UK Train HS2]]></Parameter>
+  <Parameter name="description"><![CDATA[Land layout for uktra.in]]></Parameter>
+</Parameters>
+
+
+<Style name="hs2-inner" filter-mode="first" >
+  <Rule>
+    <MaxScaleDenominator>400000</MaxScaleDenominator>
+    <MinScaleDenominator>25000</MinScaleDenominator>
+    <Filter>([tunnel] = 'yes')</Filter>
+    <LineSymbolizer stroke-dasharray="4, 6" stroke="#ffffff" stroke-width="3" />
+  </Rule>
+  <Rule>
+    <MaxScaleDenominator>25000</MaxScaleDenominator>
+    <Filter>([tunnel] = 'yes')</Filter>
+    <LineSymbolizer stroke-dasharray="8, 12" stroke="#ffffff" stroke-width="3" />
+  </Rule>
+  <Rule>
+    <MinScaleDenominator>400000</MinScaleDenominator>
+    <Filter>([tunnel] = 'yes')</Filter>
+    <LineSymbolizer stroke-dasharray="2, 3" stroke="#ffffff" stroke-width="3" />
+  </Rule>
+</Style>
+<Style name="hs2" filter-mode="first" >
+  <Rule>
+    <Filter>([tunnel] = 'yes')</Filter>
+    <LineSymbolizer stroke="#ff0000" stroke-width="3" stroke-linejoin="round" />
+  </Rule>
+  <Rule>
+    <LineSymbolizer stroke="#ff0000" stroke-width="3" stroke-linejoin="round" />
+  </Rule>
+</Style>
+<Layer name="hs2"
+  srs="+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over">
+    <StyleName>hs2</StyleName>
+    <StyleName>hs2-inner</StyleName>
+    <Datasource>
+       <Parameter name="type"><![CDATA[postgis]]></Parameter>
+       <Parameter name="table"><![CDATA[(select way,highway,
+case when tunnel in ('yes','true','1') then 'yes'::text else tunnel end as tunnel,
+railway
+from planet_osm_roads
+where railway is not null and name in ('HS2','HS2 (Phase 2)','High Speed 2')
+order by z_order
+) as rail]]></Parameter>
+       <Parameter name="key_field"><![CDATA[]]></Parameter>
+       <Parameter name="geometry_field"><![CDATA[]]></Parameter>
+       <Parameter name="extent_cache"><![CDATA[auto]]></Parameter>
+       <Parameter name="extent"><![CDATA[-1226003.71,5953695.4,232870.54,8639843.17]]></Parameter>
+<!--
+       <Parameter name="host"><![CDATA[ganymede.retep.org]]></Parameter>
+       <Parameter name="port"><![CDATA[5432]]></Parameter>
+-->
+       <Parameter name="user"><![CDATA[gis]]></Parameter>
+       <Parameter name="password"><![CDATA[sig]]></Parameter>
+       <Parameter name="dbname"><![CDATA[gis]]></Parameter>
+       <Parameter name="id"><![CDATA[uktrain_rail]]></Parameter>
+       <Parameter name="project"><![CDATA[uktrain-land]]></Parameter>
+       <Parameter name="srs"><![CDATA[+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over]]></Parameter>
+    </Datasource>
+  </Layer>
+
+</Map>

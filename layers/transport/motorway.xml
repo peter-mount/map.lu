@@ -1,0 +1,940 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map [
+<!ENTITY % entities SYSTEM "inc/entities.xml.inc">
+%entities;
+]>
+<!-- Layer for displaying Motorways -->
+<!-- This stylesheet uses features only available in mapnik builds with
+     libxml2 as the XML parser. Furthermore, there are other features
+     and behaviour that necessitate an upgrade to mapnik 0.7.1 -->
+<Map bgcolor="transparent" srs="&srs900913;" minimum_version="0.7.1">
+  &fontset-settings;
+<Style name="tunnels-casing">
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom12;
+      &minscale_zoom12;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">3</CssParameter>
+        <CssParameter name="stroke-dasharray">4,2</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom14;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">6.5</CssParameter>
+        <CssParameter name="stroke-dasharray">4,2</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom15;
+      &minscale_zoom16;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">10</CssParameter>
+        <CssParameter name="stroke-dasharray">4,2</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom18;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">13</CssParameter>
+        <CssParameter name="stroke-dasharray">4,2</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+</Style>
+<Style name="tunnels-fill">
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom12;
+      &minscale_zoom12;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#d6dfea</CssParameter>
+        <CssParameter name="stroke-width">2</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway] = 'motorway_link'</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom14;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#d6dfea</CssParameter>
+        <CssParameter name="stroke-width">5</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway] = 'motorway_link'</Filter>
+      &maxscale_zoom15;
+      &minscale_zoom16;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#d6dfea</CssParameter>
+        <CssParameter name="stroke-width">8.5</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway] = 'motorway_link'</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom18;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#d6dfea</CssParameter>
+        <CssParameter name="stroke-width">11</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+</Style>
+<Style name="minor-roads-casing-links">
+    <Rule>
+      <Filter>[highway]='motorway_link' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom12;
+      &minscale_zoom12;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">1.5</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway]='motorway_link' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom14;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">4.5</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway]='motorway_link' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom15;
+      &minscale_zoom16;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">8</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway]='motorway_link' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom18;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">11</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+</Style>
+<Style name="minor-roads-casing">
+    <Rule>
+      <Filter>[highway] = 'motorway' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom12;
+      &minscale_zoom12;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">3</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom14;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">6.5</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom15;
+      &minscale_zoom16;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">10</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom18;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">13</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+</Style>
+<Style name="minor-roads-fill-links">
+    <Rule>
+      <Filter>[highway]='motorway_link' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom12;
+      &minscale_zoom12;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">0.5</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway_link' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom14;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">3</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway_link' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom15;
+      &minscale_zoom16;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">6.5</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway_link' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom18;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">9</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+</Style>
+<Style name="minor-roads-fill"> 
+    <Rule>
+      &maxscale_zoom12;
+      &minscale_zoom12;
+      <Filter>([highway] = 'proposed' or [highway]='construction') and ([construction]='motorway' or [construction]='motorway_link')</Filter>
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">2</CssParameter>
+      </LineSymbolizer>
+      <LineSymbolizer>
+        <CssParameter name="stroke">white</CssParameter>
+        <CssParameter name="stroke-width">2</CssParameter>
+        <CssParameter name="stroke-dasharray">4,2</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      &maxscale_zoom13;
+      &minscale_zoom15;
+      <Filter>([highway] = 'proposed' or [highway]='construction') and ([construction]='motorway' or [construction]='motorway_link')</Filter>
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">4</CssParameter>
+      </LineSymbolizer>
+      <LineSymbolizer>
+        <CssParameter name="stroke">white</CssParameter>
+        <CssParameter name="stroke-width">3.5</CssParameter>
+        <CssParameter name="stroke-dasharray">6,4</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      &maxscale_zoom16;
+      &minscale_zoom18;
+      <Filter>([highway] = 'proposed' or [highway]='construction') and ([construction]='motorway' or [construction]='motorway_link')</Filter>
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">8</CssParameter>
+      </LineSymbolizer>
+      <LineSymbolizer>
+        <CssParameter name="stroke">white</CssParameter>
+        <CssParameter name="stroke-width">7</CssParameter>
+        <CssParameter name="stroke-dasharray">8,6</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom12;
+      &minscale_zoom12;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">2</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom14;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">5</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom15;
+      &minscale_zoom16;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">8.5</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and not [tunnel] = 'yes'</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom18;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">11</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+</Style>
+<Style name="bridges_casing">
+     <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom12;
+      &minscale_zoom12;
+        <LineSymbolizer>
+        <CssParameter name="stroke">#506077</CssParameter>
+        <CssParameter name="stroke-width">3</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom14;
+        <LineSymbolizer>
+        <CssParameter name="stroke">black</CssParameter>
+        <CssParameter name="stroke-width">6.5</CssParameter>
+      </LineSymbolizer>
+    </Rule>    
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom15;
+      &minscale_zoom16;
+        <LineSymbolizer>
+        <CssParameter name="stroke">black</CssParameter>
+        <CssParameter name="stroke-width">9</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom18;
+        <LineSymbolizer>
+        <CssParameter name="stroke">black</CssParameter>
+        <CssParameter name="stroke-width">12</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+</Style>
+<Style name="bridges_fill">
+     <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom12;
+      &minscale_zoom12;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">2</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>   
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom14;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">5.5</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>   
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom15;
+      &minscale_zoom16;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">7.5</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+   <Rule>
+      <Filter>[highway] = 'motorway' or [highway]='motorway_link'</Filter>
+      &maxscale_zoom17;
+      &minscale_zoom18;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">10</CssParameter>
+        <CssParameter name="stroke-linejoin">round</CssParameter>
+        <CssParameter name="stroke-linecap">round</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+</Style>
+<Style name="roads">
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway] = 'motorway_link'</Filter>
+      &maxscale_zoom5;
+      &minscale_zoom6;
+      <LineSymbolizer>
+        <CssParameter name="stroke">#809bc0</CssParameter>
+        <CssParameter name="stroke-width">0.5</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' or [highway] = 'motorway_link'</Filter>
+      &maxscale_zoom7;
+      &minscale_zoom8;
+      <LineSymbolizer>
+       <CssParameter name="stroke">#809bc0</CssParameter>
+       <CssParameter name="stroke-width">1</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+<Rule>
+      <Filter>[highway] = 'motorway' or [highway] = 'motorway_link'</Filter>
+      &maxscale_zoom9;
+      &minscale_zoom9;
+      <LineSymbolizer>
+       <CssParameter name="stroke">#809bc0</CssParameter>
+       <CssParameter name="stroke-width">1.4</CssParameter>
+      </LineSymbolizer>
+    </Rule>
+   <Rule>
+     <Filter>[highway] = 'motorway' or [highway] = 'motorway_link'</Filter>
+      &maxscale_zoom10;
+      &minscale_zoom10;
+      <LineSymbolizer>
+      <CssParameter name="stroke">#809bc0</CssParameter>
+      <CssParameter name="stroke-width">2</CssParameter>
+    </LineSymbolizer>
+   </Rule>
+   <Rule>
+     <Filter>[highway] = 'motorway' or [highway] = 'motorway_link'</Filter>
+      &maxscale_zoom11;
+      &minscale_zoom11;
+      <LineSymbolizer>
+      <CssParameter name="stroke">#809bc0</CssParameter>
+      <CssParameter name="stroke-width">2.5</CssParameter>
+    </LineSymbolizer>
+   </Rule>
+</Style>
+<Style name="roads-text-low-zoom">
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 1</Filter>
+      &maxscale_zoom10;
+      &minscale_zoom12;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield1.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 2</Filter>
+      &maxscale_zoom10;
+      &minscale_zoom12;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield2.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 3</Filter>
+      &maxscale_zoom10;
+      &minscale_zoom12;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield3.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 4</Filter>
+      &maxscale_zoom10;
+      &minscale_zoom12;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield4.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 5</Filter>
+      &maxscale_zoom10;
+      &minscale_zoom12;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield5.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 6</Filter>
+      &maxscale_zoom10;
+      &minscale_zoom12;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield6.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 7</Filter>
+      &maxscale_zoom10;
+      &minscale_zoom12;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield6.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 8</Filter>
+      &maxscale_zoom10;
+      &minscale_zoom12;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield7.png" min_distance="30" spacing="750"/>
+    </Rule>
+</Style>
+<Style name="roads-text">
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 1</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom18;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield1.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 2</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom18;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield2.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 3</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom18;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield3.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 4</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom18;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield4.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 5</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom18;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield5.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 6</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom18;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield6.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 7</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom18;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield6.png" min_distance="30" spacing="750"/>
+    </Rule>
+    <Rule>
+      <Filter>[highway] = 'motorway' and [length] = 8</Filter>
+      &maxscale_zoom13;
+      &minscale_zoom18;
+      <ShieldSymbolizer name="ref" fontset-name="bold-fonts" size="10" fill="#fff" placement="line" file="&symbols;/mot_shield7.png" min_distance="30" spacing="750"/>
+    </Rule>
+</Style>
+
+<Layer name="tunnels" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>tunnels-casing</StyleName>
+    <StyleName>tunnels-fill</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,highway from &prefix;_line where highway in ('motorway','motorway_link','trunk','trunk_link','primary','primary_link','secondary','secondary_link','tertiary','tertiary_link','residential','unclassified') and tunnel in ('yes','true','1') order by z_order) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="turning_circle-casing" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>turning_circle-casing</StyleName>    
+    <Datasource>
+      <Parameter name="table">
+      (select distinct on (p.way) p.way as way,l.highway as int_tc_type
+       from &prefix;_point p
+       join &prefix;_line l
+        on ST_DWithin(p.way,l.way,&dwithin_node_way;)
+       join (values
+        ('tertiary',1),
+        ('unclassified',2),
+        ('residential',3),
+        ('living_street',4),
+        ('service',5)
+       ) as v (highway,prio)
+        on v.highway=l.highway
+       where p.highway='turning_circle'
+       order by p.way,v.prio
+      ) as turning_circle
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<!-- clear_label_cache="on" needs to follow immediately after the turning_circle-casing layer -->
+<Layer name="footbikecycle-tunnels" status="on" srs="&osm2pgsql_projection;" clear_label_cache="on">
+    <StyleName>footbikecycle-tunnels</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,highway,horse,foot,bicycle from &prefix;_line where highway in ('bridleway','footway','cycleway','path') and tunnel in ('yes','true','1') order by z_order) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="tracks-tunnels" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>tracks-tunnels</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,tracktype from &prefix;_line where highway='track' and tunnel in ('yes','true','1')) as tracks
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+<Layer name="line features" status="on" srs="&osm2pgsql_projection;">
+     <StyleName>cliffs</StyleName>
+     <StyleName>barriers</StyleName>
+     <Datasource>
+      <Parameter name="table">
+      (select way,barrier,"natural",man_made from &prefix;_line where barrier is not null or "natural" in ('hedge','cliff') or man_made='embankment') as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+<Layer name="polygon barriers" status="on" srs="&osm2pgsql_projection;">
+      <StyleName>barriers_area</StyleName>
+      <Datasource>
+             <Parameter name="table">
+       (select way,barrier,"natural" from &prefix;_polygon where barrier is not null or "natural"='hedge') as barriers
+       </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="minor-roads-casing" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>minor-roads-casing-links</StyleName>
+    <StyleName>minor-roads-casing</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,highway,
+       case when tunnel in ('yes','true','1') then 'yes'::text else tunnel end as tunnel,
+       case when service in ('parking_aisle','drive-through','driveway') then 'INT-minor'::text else service end as service
+       from &prefix;_line
+       where highway in ('motorway','motorway_link','trunk','trunk_link','primary','primary_link','secondary','secondary_link','tertiary','tertiary_link','residential','unclassified','road','service','pedestrian','raceway','living_street')
+       order by z_order) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="minor-roads-fill" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>minor-roads-fill-links</StyleName>
+    <StyleName>minor-roads-fill</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,highway,horse,bicycle,foot,construction,aeroway,
+       case when tunnel in ('yes','true','1') then 'yes'::text else tunnel end as tunnel,
+       case when bridge in ('yes','true','1','viaduct') then 'yes'::text else bridge end as bridge,
+       case when railway in ('spur','siding')
+              or (railway='rail' and service in ('spur','siding','yard'))
+            then 'spur-siding-yard'::text else railway end as railway,
+       case when service in ('parking_aisle','drive-through','driveway') then 'INT-minor'::text else service end as service
+       from &prefix;_line
+       where highway is not null
+          or aeroway in ('runway','taxiway')
+          or railway in ('light_rail','narrow_gauge','funicular','rail','subway','tram','spur','siding','platform','disused','abandoned','construction','miniature')
+       order by z_order) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="roads" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>roads</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,highway,
+       case when tunnel in ('yes','true','1') then 'yes'::text else tunnel end as tunnel,
+       case when railway='preserved' and service in ('spur','siding','yard') then 'INT-preserved-ssy'::text else railway end as railway
+       from &prefix;_roads
+       where highway is not null
+          or (railway is not null and railway!='preserved' and (service is null or service not in ('spur','siding','yard')))
+          or railway='preserved'
+       order by z_order
+      ) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="waterway-bridges" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>waterway-bridges</StyleName>
+    <Datasource>
+      <Parameter name="table">(select way,name from &prefix;_line where waterway='canal' and bridge in ('yes','true','1','aqueduct') order by z_order) as water</Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="access-pre_bridges" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>access</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,access,highway,
+       case when service in ('parking_aisle','drive-through','driveway') then 'INT-minor'::text end as service
+       from &prefix;_line
+       where access is not null and highway is not null
+         and (bridge is null or bridge not in ('yes','true','1','viaduct'))
+      ) as access
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="direction_pre_bridges" status="on" srs="&osm2pgsql_projection;">
+     <StyleName>directions</StyleName>
+     <Datasource>
+      <Parameter name="table">
+      (select way,
+       case when oneway in ('yes','true','1') then 'yes'::text else oneway end as oneway
+       from &prefix;_line
+       where oneway is not null
+         and (highway is not null or railway is not null or waterway is not null)
+         and (bridge is null or bridge not in ('yes','true','1','viaduct'))
+      ) as directions
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="bridges_layer0" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>bridges_casing</StyleName>
+    <StyleName>bridges_casing2</StyleName>
+    <StyleName>bridges_fill</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,highway,aeroway,horse,bicycle,foot,tracktype,
+       case when railway in ('spur','siding')
+              or (railway='rail' and service in ('spur','siding','yard'))
+            then 'INT-spur-siding-yard'::text else railway end as railway
+       from &prefix;_line
+       where (highway is not null
+              or aeroway in ('runway','taxiway')
+              or railway in ('light_rail','subway','narrow_gauge','rail','spur','siding','disused','abandoned','construction'))
+         and bridge in ('yes','true','1','viaduct')
+         and (layer is null or layer = '0')
+       order by z_order
+      ) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="bridges_directions0" status="on" srs="&osm2pgsql_projection;">
+     <StyleName>directions</StyleName>
+     <Datasource>
+      <Parameter name="table">
+      (select way,
+       case when oneway in ('yes','true','1') then 'yes'::text else oneway end as oneway
+       from &prefix;_line
+       where oneway is not null
+         and (highway is not null or railway is not null or waterway is not null)
+         and bridge in ('yes','true','1','viaduct')
+         and (layer is null or layer in ('-5','-4','-3','-2','-1','0'))
+      ) as directions
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="bridges_layer1" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>bridges_casing</StyleName>
+    <StyleName>bridges_fill</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,highway,aeroway,horse,bicycle,foot,tracktype,
+       case when railway in ('spur','siding')
+              or (railway='rail' and service in ('spur','siding','yard'))
+            then 'INT-spur-siding-yard'::text else railway end as railway
+       from &prefix;_line
+       where (highway is not null
+              or aeroway in ('runway','taxiway')
+              or railway in ('light_rail','subway','narrow_gauge','rail','spur','siding','disused','abandoned','construction'))
+         and bridge in ('yes','true','1','viaduct')
+         and layer = '1'
+       order by z_order
+      ) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="bridges_layer2" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>bridges_casing</StyleName>
+    <StyleName>bridges_fill</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,highway,aeroway,horse,bicycle,foot,tracktype,
+       case when railway in ('spur','siding')
+              or (railway='rail' and service in ('spur','siding','yard'))
+            then 'INT-spur-siding-yard'::text else railway end as railway
+       from &prefix;_line
+       where (highway is not null
+              or aeroway in ('runway','taxiway')
+              or railway in ('light_rail','subway','narrow_gauge','rail','spur','siding','disused','abandoned','construction'))
+         and bridge in ('yes','true','1','viaduct')
+         and layer = '2'
+       order by z_order
+      ) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="bridges_layer3" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>bridges_casing</StyleName>
+    <StyleName>bridges_fill</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,highway,aeroway,horse,bicycle,foot,tracktype,
+       case when railway in ('spur','siding')
+              or (railway='rail' and service in ('spur','siding','yard'))
+            then 'INT-spur-siding-yard'::text else railway end as railway
+       from &prefix;_line
+       where (highway is not null
+              or aeroway in ('runway','taxiway')
+              or railway in ('light_rail','subway','narrow_gauge','rail','spur','siding','disused','abandoned','construction'))
+         and bridge in ('yes','true','1','viaduct')
+         and layer = '3'
+       order by z_order
+      ) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="bridges_layer4" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>bridges_casing</StyleName>
+    <StyleName>bridges_fill</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,highway,aeroway,horse,bicycle,foot,tracktype,
+       case when railway in ('spur','siding')
+              or (railway='rail' and service in ('spur','siding','yard'))
+            then 'INT-spur-siding-yard'::text else railway end as railway
+       from &prefix;_line
+       where (highway is not null
+              or aeroway in ('runway','taxiway')
+              or railway in ('light_rail','subway','narrow_gauge','rail','spur','siding','disused','abandoned','construction'))
+         and bridge in ('yes','true','1','viaduct')
+         and layer = '4'
+       order by z_order
+      ) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="bridges_layer5" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>bridges_casing</StyleName>
+    <StyleName>bridges_fill</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,highway,aeroway,horse,bicycle,foot,tracktype,
+       case when railway in ('spur','siding')
+              or (railway='rail' and service in ('spur','siding','yard'))
+            then 'INT-spur-siding-yard'::text else railway end as railway
+       from &prefix;_line
+       where (highway is not null
+              or aeroway in ('runway','taxiway')
+              or railway in ('light_rail','subway','narrow_gauge','rail','spur','siding','disused','abandoned','construction'))
+         and bridge in ('yes','true','1','viaduct')
+         and layer = '5'
+       order by z_order
+      ) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+<Layer name="planet roads text osm low zoom" status="on" srs="&osm2pgsql_projection;">
+     <StyleName>roads-text-low-zoom</StyleName>
+     <Datasource>
+      <Parameter name="table">
+      (select way,highway,ref,char_length(ref) as length
+       from &prefix;_roads
+       where highway='motorway'
+         and ref is not null
+      ) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+<Layer name="planet roads text osm" status="on" srs="&osm2pgsql_projection;">
+     <StyleName>roads-text</StyleName>
+     <Datasource>
+      <Parameter name="table">
+      (select way,highway,aeroway,name,ref,char_length(ref) as length,
+       case when bridge in ('yes','true','1') then 'yes'::text else bridge end as bridge
+       from &prefix;_line
+       where waterway IS NULL
+         and leisure IS NULL
+         and landuse IS NULL
+         and (name is not null or ((highway is not null or aeroway is not null) and ref is not null))
+      ) as roads
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+<Layer name="text" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>text</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,amenity,shop,access,leisure,landuse,man_made,"natural",place,tourism,ele,name,ref,military,aeroway,waterway,historic,'yes'::text as point
+       from &prefix;_point
+       where amenity is not null
+          or shop in ('supermarket','bakery','clothes','fashion','convenience','doityourself','hairdresser','department_store','butcher','car','car_repair','bicycle','florist')
+          or leisure is not null
+          or landuse is not null
+          or tourism is not null
+          or "natural" is not null
+          or man_made in ('lighthouse','windmill')
+          or place='island'
+          or military='danger_area'
+          or aeroway='gate'
+          or waterway='lock'
+          or historic in ('memorial','archaeological_site')
+      ) as text
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+<Layer name="text-poly" status="on" srs="&osm2pgsql_projection;">
+    <StyleName>text</StyleName>
+    <Datasource>
+      <Parameter name="table">
+      (select way,aeroway,shop,access,amenity,leisure,landuse,man_made,"natural",place,tourism,NULL as ele,name,ref,military,waterway,historic,'no'::text as point
+       from &prefix;_polygon
+       where amenity is not null
+          or shop in ('supermarket','bakery','clothes','fashion','convenience','doityourself','hairdresser','department_store', 'butcher','car','car_repair','bicycle')
+          or leisure is not null
+          or landuse is not null
+          or tourism is not null
+          or "natural" is not null
+          or man_made in ('lighthouse','windmill')
+          or place='island'
+          or military='danger_area'
+          or historic in ('memorial','archaeological_site')
+      ) as text
+      </Parameter>
+      &datasource-settings;
+    </Datasource>
+</Layer>
+
+</Map>
