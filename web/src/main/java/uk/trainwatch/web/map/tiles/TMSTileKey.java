@@ -15,25 +15,33 @@
  */
 package uk.trainwatch.web.map.tiles;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
-import uk.trainwatch.web.map.cache.ImageCacheUrlProvider;
-
 /**
- *
+ * A Tile in TMS format, i.e. Geoserver
+ * <p>
  * @author Peter T Mount
  */
-final class TileUrlProvider
-        implements ImageCacheUrlProvider<TileKey>
+public final class TMSTileKey
+        extends TileKey
 {
 
-    @Override
-    public URLConnection getImageUrl( TileKey key )
-            throws IOException
+    private static final String NORMALIZE_PATH = "%1$s@EPSG:900913@%5$s/%2$d/%3$d/%4$d.%5$s";
+    private static final String CACHE_PATH = "/usr/local/maps/%s/%d/%d/%d.%s";
+
+    public TMSTileKey( TileKeyFactory factory, int z, int x, int y, String layer, String type )
     {
-        return new URL( key.getFactory().
-                getRemoteUrl() + key.getPath() ).openConnection();
+        super( factory, z, x, y, layer, type );
+    }
+
+    @Override
+    protected String getNormalizePath()
+    {
+        return NORMALIZE_PATH;
+    }
+
+    @Override
+    protected String getCachePath()
+    {
+        return CACHE_PATH;
     }
 
 }

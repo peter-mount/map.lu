@@ -22,13 +22,11 @@ import uk.trainwatch.web.map.cache.ImageCacheKey;
  *
  * @author Peter T Mount
  */
-public final class TileKey
+public abstract class TileKey
         implements ImageCacheKey
 {
 
-    private static final String NORMALIZE_PATH = "%s/%d/%d/%d.%s";
-    private static final String CACHE_PATH = "/usr/local/maps/" + NORMALIZE_PATH;
-
+    private final TileKeyFactory factory;
     private final int z;
     private final int x;
     private final int y;
@@ -36,8 +34,9 @@ public final class TileKey
     private final String type;
     private final int hashCode;
 
-    public TileKey( int z, int x, int y, String layer, String type )
+    public TileKey( TileKeyFactory factory, int z, int x, int y, String layer, String type )
     {
+        this.factory = factory;
         this.z = z;
         this.x = x;
         this.y = y;
@@ -52,28 +51,36 @@ public final class TileKey
         hashCode = 83 * hash + Objects.hashCode( this.type );
     }
 
-    public String getPath()
+    protected abstract String getNormalizePath();
+
+    protected abstract String getCachePath();
+
+    public final String getPath()
     {
-        return String.format( NORMALIZE_PATH, layer, z, x, y, type );
+        return String.format( getNormalizePath(), layer, z, x, y, type );
     }
 
     @Override
-    public String getKeyPath()
+    public final String getKeyPath()
     {
-        return String.format( CACHE_PATH, layer, z, x, y, type );
+        return String.format( getCachePath(), layer, z, x, y, type );
+    }
+
+    public final TileKeyFactory getFactory()
+    {
+        return factory;
     }
 
     @Override
-    public int hashCode()
+    public final int hashCode()
     {
         return hashCode;
     }
 
     @Override
-    public boolean equals( Object obj )
+    public final boolean equals( Object obj )
     {
-        if( obj == null || getClass() != obj.getClass() )
-        {
+        if( obj == null || getClass() != obj.getClass() ) {
             return false;
         }
         final TileKey other = (TileKey) obj;

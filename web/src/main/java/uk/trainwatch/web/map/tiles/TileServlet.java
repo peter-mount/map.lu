@@ -27,7 +27,7 @@ import uk.trainwatch.web.map.cache.ImageCacheUrlProvider;
  *
  * @author Peter T Mount
  */
-@WebServlet( name = "TileServlet", urlPatterns = "/tiles/*" )
+@WebServlet(name = "TileServlet", urlPatterns = "/tiles/*")
 public class TileServlet
         extends ImageCacheServlet<TileKey>
 {
@@ -43,14 +43,13 @@ public class TileServlet
             throws ServletException,
                    IOException
     {
-        TileKey tile = TileKeyFactory.INSTANCE.createTile( request.getPathInfo() );
+        TileKey tile = TileKeyFactory.createTile( request.getPathInfo() );
 
-        if( tile == null )
-        {
+        if( tile == null ) {
             // The tile path is invalid
             //response.sendError( HttpServletResponse.SC_NOT_FOUND, request.getPathInfo() + " not found." );
         }
-        
+
         return tile;
     }
 

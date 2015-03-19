@@ -160,6 +160,8 @@ public class ImageCache<K extends ImageCacheKey>
                         toFile().
                         mkdirs();
                 Files.copy( is, path, StandardCopyOption.REPLACE_EXISTING );
+                LOG.log( Level.INFO, () -> "Retrieved " + path.toFile().
+                         length() + " from " + connection.getURL() );
             }
         }
         catch( IOException ex ) {

@@ -15,9 +15,8 @@
  */
 package uk.trainwatch.web.map.cache;
 
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -86,6 +85,10 @@ public abstract class ImageCacheServlet<K extends ImageCacheKey>
                     response.setContentType( "image/png" );
                     ImageUtils.sendFile( path, CacheControl.HOUR, response );
                 }
+            }
+            catch( FileNotFoundException ex ) {
+                // The tile path is invalid
+                response.sendError( HttpServletResponse.SC_NOT_FOUND, request.getPathInfo() + "not found." );
             }
             catch( InterruptedException ex ) {
                 response.sendError( HttpServletResponse.SC_GATEWAY_TIMEOUT, request.getPathInfo() + "not found." );

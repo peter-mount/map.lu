@@ -5,7 +5,16 @@
     right: 0;
     bottom: 0;
 }
+#map-menu,
+#map-menu input,
+#map-menu select
+{
+    font-size: 1em;
+}
 
+#map-zoom-level-slide {
+width: 8em;    
+}
 #map, #map-menu
 {
     position: absolute;
@@ -22,3 +31,48 @@
     left: 0em;
     width: 9em;
 }
+
+#map-base-layers ul,
+#map-observation-layers ul,
+#map-forecast-layers ul,
+#map-aux-layers ul,
+#map-osm-layers ul,
+#map-osgb-layers ul {
+    list-style: none;
+    -webkit-margin-after:0;
+    -webkit-margin-before: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+    -webkit-padding-start: 0;
+}
+
+#map-zoom-scale {
+    padding-left: 2px;
+}
+
+#map-zoom-info {
+    float: left;
+    padding-left: 1px;
+    padding-top: 1em;
+    color: black;
+    line-height: 1.1;
+    font-size: 11px;
+    text-shadow: 1px 1px 1px #fff;
+    background-color: rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* ********************************************************************** */
+
+/* Stuff to hide */
+#OpenLayers_Control_Attribution_7 {
+    display: none;
+}
+
+#OpenLayers_Control_Zoom_5 {
+    position: relative;
+}
+
+/* ********************************************************************** */
+/* general toolbar styles */

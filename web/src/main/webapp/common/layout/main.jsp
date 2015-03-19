@@ -18,6 +18,7 @@
         </title>
         <link rel="stylesheet" href="/css/tcmain.css" />
         <link rel="stylesheet" href="/css/map.css" />
+        <link rel="stylesheet" href="/css/ol.css" />
         <tiles:insertAttribute name="javascript"/>
     </head>
     <body>

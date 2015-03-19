@@ -15,25 +15,33 @@
  */
 package uk.trainwatch.web.map.tiles;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
-import uk.trainwatch.web.map.cache.ImageCacheUrlProvider;
-
 /**
- *
+ * A Tile in XYZ format, i.e. Google Maps, OpenStreetMap etc
+ * <p>
  * @author Peter T Mount
  */
-final class TileUrlProvider
-        implements ImageCacheUrlProvider<TileKey>
+public final class XYZTileKey
+        extends TileKey
 {
 
-    @Override
-    public URLConnection getImageUrl( TileKey key )
-            throws IOException
+    private static final String NORMALIZE_PATH = "%s/%d/%d/%d.%s";
+    private static final String CACHE_PATH = "/usr/local/maps/" + NORMALIZE_PATH;
+
+    public XYZTileKey( TileKeyFactory factory, int z, int x, int y, String layer, String type )
     {
-        return new URL( key.getFactory().
-                getRemoteUrl() + key.getPath() ).openConnection();
+        super( factory, z, x, y, layer, type );
+    }
+
+    @Override
+    protected String getNormalizePath()
+    {
+        return NORMALIZE_PATH;
+    }
+
+    @Override
+    protected String getCachePath()
+    {
+        return CACHE_PATH;
     }
 
 }
