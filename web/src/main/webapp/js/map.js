@@ -91,6 +91,8 @@ function showMap() {
     // Base Layers
     var baseLayers = {
         osgb: newOSMapLayer('osgb', 'OS Vector District', true, '#0099FF'),
+        osgbland: newOSMapLayer('landcover', 'OSGB Land Cover', true, '#0099FF'),
+        osgbdark: newOSMapLayer('rail_dark', 'UK Railway Dark', true, '#0099FF'),
         osm: new OpenLayers.Layer.MapLu('Open Street Map', 'osm', true),
         land: new OpenLayers.Layer.MapLu('OSM Land Cover', 'land', true)
     };
