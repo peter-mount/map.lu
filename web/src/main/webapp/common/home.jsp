@@ -37,6 +37,8 @@
         </c:forEach>
     </div>
     
+    <div class="clear"></div>
+    
     <h2>OpenStreetMap based Maps</h2>
 
     <div>
