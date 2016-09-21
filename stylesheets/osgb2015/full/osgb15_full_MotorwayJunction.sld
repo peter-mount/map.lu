@@ -18,7 +18,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
           <PointSymbolizer>
             <Geometry>
                <ogc:Function name="offset">
-                  <ogc:PropertyName>the_geom</ogc:PropertyName>
+                  <ogc:PropertyName>geom</ogc:PropertyName>
                   <ogc:Literal>1.5</ogc:Literal>
                   <ogc:Literal>-1.7</ogc:Literal>
                </ogc:Function>
@@ -43,7 +43,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
           </PointSymbolizer>
           <TextSymbolizer>
             <Label>
-              <ogc:PropertyName>juncnum</ogc:PropertyName>
+              <ogc:PropertyName>junctnum</ogc:PropertyName>
             </Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>
@@ -90,7 +90,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
           <MaxScaleDenominator>25000</MaxScaleDenominator>
           <TextSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Label>
-              <ogc:PropertyName>juncnum</ogc:PropertyName>
+              <ogc:PropertyName>junctnum</ogc:PropertyName>
             </Label>
             <Font>
               <CssParameter name="font-family">Arial</CssParameter>

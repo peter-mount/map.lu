@@ -18,7 +18,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
           <LineSymbolizer>
             <Geometry>
               <ogc:Function name="offset">
-                <ogc:PropertyName>the_geom</ogc:PropertyName>
+                <ogc:PropertyName>geom</ogc:PropertyName>
                 <ogc:Literal>-0.0642</ogc:Literal>
                 <ogc:Literal>-0.0642</ogc:Literal>
               </ogc:Function>
@@ -33,7 +33,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
           <LineSymbolizer>
             <Geometry>
               <ogc:Function name="offset">
-                <ogc:PropertyName>the_geom</ogc:PropertyName>
+                <ogc:PropertyName>geom</ogc:PropertyName>
                 <ogc:Literal>0.0642</ogc:Literal>
                 <ogc:Literal>0.0642</ogc:Literal>
               </ogc:Function>
@@ -53,7 +53,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
           <LineSymbolizer>
             <Geometry>
               <ogc:Function name="offset">
-                <ogc:PropertyName>the_geom</ogc:PropertyName>
+                <ogc:PropertyName>geom</ogc:PropertyName>
                 <ogc:Literal>-0.0642</ogc:Literal>
                 <ogc:Literal>-0.0642</ogc:Literal>
               </ogc:Function>
@@ -68,7 +68,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
           <LineSymbolizer>
             <Geometry>
               <ogc:Function name="offset">
-                <ogc:PropertyName>the_geom</ogc:PropertyName>
+                <ogc:PropertyName>geom</ogc:PropertyName>
                 <ogc:Literal>0.0642</ogc:Literal>
                 <ogc:Literal>0.0642</ogc:Literal>
               </ogc:Function>
