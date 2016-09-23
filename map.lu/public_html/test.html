@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="js/leaflet.css" />
+    <script src="js/leaflet.js"></script>
+    <link rel="stylesheet" href="test.css" />
+  </head>
+  <body>
+    <div id="mapid"></div>
+    <script>
+      var map = L.map('mapid').setView([51.505, -0.09], 13);
+
+      var wmsLayer = L.tileLayer.wms('http://ganymede.area51.onl:8080/geoserver/wms?', {
+      layers: 'osgb15full'
+      }).addTo(map);
+    </script>
+  </body>
+</html>
