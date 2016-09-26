@@ -1,0 +1,27 @@
+
+.center {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#body {
+    padding-top: 5em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    line-height: 1;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+#mapid {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    top: 4.75em;
+    bottom: 5px;
+    border: 1px solid red;
+}
