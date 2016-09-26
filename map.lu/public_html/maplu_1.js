@@ -32,15 +32,31 @@ $(document).ready(function () {
     //if ($('#mapid'))
     {
         var map = L.map('mapid').setView([51.505, -0.09], 15);
+        var baseLayers = {}, overlays = {};
         var config;
         var ctrl = L.control.layers().addTo(map);
+
+        var c = $("#baseLayers");
         $.get("layers.json", function (d) {
             config = d;
             $.each(d.baseLayers, function (i, v) {
                 v.layer = L.tileLayer(v.tileLayer);
+                baseLayers[v.label] = v.layer;
+                v.comp = $("<input></input>")
+                        .attr({"title": v.description,
+                            "type": "checkbox",
+                            "value": v.label
+                        });
+                $("<div></div>")
+                        .append(v.comp)
+                        .append(v.label)
+                        .appendTo(c);
+                if(i===0)
+                    v.comp.attr({"checked":"checked"});
                 ctrl.addBaseLayer(v.layer,v.label);
             });
         });
         console.log(baseLayers);
+        //L.control.layers(baseLayers, overlays).addTo(map);
     }
 });

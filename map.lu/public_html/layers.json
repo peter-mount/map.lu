@@ -1,0 +1,11 @@
+{
+    "baseLayers": [
+        {
+            "label": "OSGB2015",
+            "description": "Ordnance Survey Vector Map District 2015",
+            "tileLayer": "http://geoserver.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb15full@EPSG:900913@png/{z}/{x}/{-y}.png",
+            "minZoom": 0,
+            "maxZoom": 15
+        }
+    ]
+}

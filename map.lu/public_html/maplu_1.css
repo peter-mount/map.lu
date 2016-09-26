@@ -16,11 +16,42 @@
     margin-left: 1em;
     margin-right: 1em;
 }
-#mapid {
+
+#layers {
     position: absolute;
     left: 5px;
+    width: 10em;
+    top: 4.75em;
+    bottom: 5px;
+}
+#mapid {
+    position: absolute;
+    left: 10em;
+    margin-left: 8px;
     right: 5px;
     top: 4.75em;
     bottom: 5px;
     border: 1px solid black;
+}
+
+#layers .navbox {
+    border: 1px solid black;
+    background: #fff;
+    margin-bottom: 2px;
+}
+#layers .navbox .title {
+    border-bottom: 1px solid black;
+    background: #ccc;
+    padding: 1px;
+}
+
+#layers .navbox .navbody {
+    
+}
+
+#pan {
+    text-align: center;
+}
+#zoom {
+    text-align: center;
 }

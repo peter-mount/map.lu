@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Map.lu</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="description" content="UK Mapping"/>
+        <meta name="author" content="Peter Mount"/>
+        <link rel="icon" href="/favicon.ico"/>
+        <link href="//d2n6o1jfdmw4z0.cloudfront.net/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="//d2n6o1jfdmw4z0.cloudfront.net/js/jquery/jquery.js"></script>
+
+        <link rel="stylesheet" href="//d2n6o1jfdmw4z0.cloudfront.net/js/leaflet/1.0.0-rc3/leaflet.css" />
+        <script src="//d2n6o1jfdmw4z0.cloudfront.net/js/leaflet/1.0.0-rc3/leaflet.js"></script>
+
+        <link rel="stylesheet" href="maplu.css" />
+        <script src="maplu.js"></script>
+    </head>
+    <body>
+        <nav id="nav"></nav>
+        <div id="body">
+            <div id="layers">
+                <div class="navbox">
+                    <div class="navbody">
+                        <div id="pan">
+                            <div>
+                                <img src="http://d2n6o1jfdmw4z0.cloudfront.net/images/nav/Up16.png"/>
+                            </div>
+                            <div>
+                                <img src="http://d2n6o1jfdmw4z0.cloudfront.net/images/nav/Back16.png"/>
+                                <img src="http://d2n6o1jfdmw4z0.cloudfront.net/images/nav/Home16.png"/>
+                                <img src="http://d2n6o1jfdmw4z0.cloudfront.net/images/nav/Forward16.png"/>
+                            </div>
+                            <div>
+                                <img src="http://d2n6o1jfdmw4z0.cloudfront.net/images/nav/Down16.png"/>
+                            </div>
+                        </div>
+                        <div id="zoom">
+                            <img src="http://d2n6o1jfdmw4z0.cloudfront.net/images/nav/Back24.png"/>
+                            <span>00</span>
+                            <img src="http://d2n6o1jfdmw4z0.cloudfront.net/images/nav/Forward24.png"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbox">
+                    <div class="title">Base Layers</div>
+                    <div id="baseLayers" class="navbody"></div>
+                </div>
+            </div>
+            <div id="mapid"></div>
+        </div>
+    </body>
+</html>
