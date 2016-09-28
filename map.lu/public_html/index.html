@@ -43,18 +43,27 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">About</a></li>
+                        <li><a onclick="showAbout();">About</a></li>
+                        <li><a onclick="showReuse();">Reuse</a></li>
                         <li><a onclick="showCopyright();">Copyright</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Maps <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">UK</a></li>
+                                <li><a onclick="showMap('uk');">UK</a></li>
+                                <li><a onclick="showMap('england);">England</a></li>
+                                <li><a onclick="showMap('england-se');">England South East</a></li>
+                                <li><a onclick="showMap('england-sw');">England South West</a></li>
+                                <li><a onclick="showMap('scotland');">Scotland</a></li>
+                                <li><a onclick="showMap('wales');">Wales</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a onclick="showMap('london');">London</a></li>
+                                <!--
                                 <li><a href="#">London</a></li>
                                 <li><a href="#">Kent</a></li>
-                                <li role="separator" class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#">One more separated link</a></li>
+                                -->
                             </ul>
                         </li>
                     </ul>
@@ -65,6 +74,69 @@
             <div id="mapid"></div>
         </div>
 
+        <!-- About -->
+        <div id="about" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">About map.lu</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            map.lu is the mapping project for <a href="//area51.onl" target="_blank">ProjectArea51</a>
+                            providing all mapping content for the various projects.
+                        </p>
+                        <p>
+                            This is the second generation mapping site and as such it's content is still being generated.
+                        </p>
+                        <p>
+                            For more information please feel free to contact me via twitter
+                            <a href="https://twitter.com/peter_mount" target="_top">@Peter_Mount</a> or
+                            <a href="https://twitter.com/peter_mount" target="_top">@ProjectArea51</a>.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- reuse -->
+        <div id="reuse" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Reusing map.lu content</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            map.lu is is free for reuse for non-commercial purposes as long as you stay
+                            within the various copyrights of the underlying data and your traffic is not excessive.
+                            If you do use the map tiles please let me know.
+                        </p>
+                        <p>
+                            Please note that bulk downloading of tiles is prohibited.
+                        </p>
+                        <p>
+                            If you want to use the map data for commercial use, or you expect your traffic to be heavy then please get in touch.
+                            The main concern here is hosting and transfer costs of the map tiles.
+                        </p>
+                        <p>
+                            To get in touch with me please do so via Twitter:
+                            <a href="https://twitter.com/peter_mount" target="_top">@Peter_Mount</a> or
+                            <a href="https://twitter.com/peter_mount" target="_top">@ProjectArea51</a>.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- Copyright modal -->
         <div id="copyright" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">

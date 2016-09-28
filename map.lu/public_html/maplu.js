@@ -180,12 +180,36 @@
     };
 })(window);
 
+var map;
+
+function showAbout() {
+    $("#about").modal();
+}
+
 function showCopyright() {
     $("#copyright").modal();
 }
 
+function showReuse() {
+    $("#reuse").modal();
+}
+
+var maps = {
+    "uk": [[61, 2], [50, -9]],
+    "england": [[55, 2], [50, -6]],
+    "england-se": [[52.5, 2], [50.5, -1]],
+    "england-sw": [[52.5, -1], [50, -6]],
+    "scotland": [[59, -1.5], [55.5, -8]],
+    "wales": [[53.5, -2], [51.5, -5.5]],
+    "london": [[51.75,0.5],[51.25,-0.5]]
+};
+
+function showMap(id) {
+    map.fitBounds(maps[id]);
+}
+
 $(document).ready(function () {
-    var map = L.map('mapid', {
+    map = L.map('mapid', {
         //center:,
         attributionControl: false,
         zoomControl: true
@@ -205,17 +229,9 @@ $(document).ready(function () {
             {
                 "id": "OF",
                 "label": "OSGB Full (2015)",
-                "description": "Ordnance Survey Vector Map District 2015",
-                "tileLayer": "http://geoserver.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb15full@EPSG:900913@png/{z}/{x}/{-y}.png",
-                "minZoom": 6,
-                "maxZoom": 16
-            },
-            {
-                "id": "TST",
-                "label": "OSGB Full (2015) TEST",
-                "description": "Ordnance Survey Vector Map District 2015",
+                "description": "Ordnance Survey Vector Map District 2015, Full theme",
                 "tileLayer": "tiles/osgb2015/full/{z}/{x}/{-y}.png",
-                "minZoom": 6,
+                "minZoom": 5,
                 "maxZoom": 16
             }
         ],
