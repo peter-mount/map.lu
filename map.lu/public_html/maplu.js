@@ -36,11 +36,10 @@
                 });
                 $.each(args, function (i, id) {
                     if (i >= 3) {
-                        var l = map.meta.baseLayers[id];
-                        if (!l)
-                            l = map.meta.overlayLayers[id];
+                        var l = map.xr[id];
+                        console.log(i, id, l);
                         if (l)
-                            map.addLayer(l.layer);
+                            map.addLayer(l);
                     }
                 });
                 return {
@@ -185,10 +184,9 @@ function showCopyright() {
     $("#copyright").modal();
 }
 
-function showMap() {
+$(document).ready(function () {
     var map = L.map('mapid', {
-        center: [51.505, -0.09],
-        zoom: 15,
+        //center:,
         attributionControl: false,
         zoomControl: true
     });
@@ -200,33 +198,61 @@ function showMap() {
         "prefix": "Map imagery ©2012-2016 Peter Mount, <a onclick=\"showCopyright();\">more information</a>"
     }).addTo(map);
 
-    // URL shortlink
-    var hash = new L.hash(map);
-
     var ctrl = L.control.layers().addTo(map);
-    $.get("layers.json", function (d) {
-        map.meta = d;
+    //$.get("layers.json", function (d) {
+    map.meta = {
+        "baseLayers": [
+            {
+                "id": "OF",
+                "label": "OSGB Full (2015)",
+                "description": "Ordnance Survey Vector Map District 2015",
+                "tileLayer": "http://geoserver.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb15full@EPSG:900913@png/{z}/{x}/{-y}.png",
+                "minZoom": 6,
+                "maxZoom": 16
+            },
+            {
+                "id": "TST",
+                "label": "OSGB Full (2015) TEST",
+                "description": "Ordnance Survey Vector Map District 2015",
+                "tileLayer": "tiles/osgb2015/full/{z}/{x}/{-y}.png",
+                "minZoom": 6,
+                "maxZoom": 16
+            }
+        ],
+        "overlayLayers": []
+    };
+    map.xr = {};
 
-        // Add base layers
-        $.each(d.baseLayers, function (i, v) {
-            v.layer = L.tileLayer(v.tileLayer);
-            v.layer.meta = v;
-            ctrl.addBaseLayer(v.layer, v.label);
-            // Activate first base layer
-            if (i === 0)
-                d.baseLayers[0].layer.addTo(map);
+    // Add base layers
+    $.each(map.meta.baseLayers, function (i, v) {
+        v.layer = L.tileLayer(v.tileLayer, {
+            errorTileUrl: "error.png"
         });
-
-        // Add overlay layers
-        $.each(d.overlayLayers, function (i, v) {
-            v.layer = L.tileLayer(v.tileLayer);
-            v.layer.meta = v;
-            ctrl.addOverlay(v.layer, v.label);
-        });
-
+        v.layer.meta = v;
+        map.xr[v.id] = v.layer;
+        ctrl.addBaseLayer(v.layer, v.label);
+        // Activate first base layer
+        if (i === 0)
+            map.meta.baseLayers[0].layer.addTo(map);
     });
-}
 
-$(document).ready(function () {
-    showMap();
+    // Add overlay layers
+    $.each(map.meta.overlayLayers, function (i, v) {
+        v.layer = L.tileLayer(v.tileLayer, {
+            errorTileUrl: "blank.png"
+        });
+        v.layer.meta = v;
+        map.xr[v.id] = v.layer;
+        ctrl.addOverlay(v.layer, v.label);
+    });
+
+    // URL shortlink
+    console.log(location.hash);
+    if (!location.hash || location.hash === '#')
+        location.hash = "#15/51.505/-0.09/OF";
+
+    var hash = new L.hash(map);
+    //map.setView([51.505, -0.09], 15);
+    console.log(window.location.hash);
+
 });
