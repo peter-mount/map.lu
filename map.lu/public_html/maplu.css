@@ -16,6 +16,12 @@
     margin-left: 1em;
     margin-right: 1em;
 }
+
+/* Bootstrap navbar and modal above the map */
+nav {z-index: 1999;}
+.modal {z-index: 2001;}
+.modal-backdrop {z-index: 2000;}
+
 #mapid {
     position: absolute;
     left: 5px;
@@ -23,4 +29,11 @@
     top: 4.75em;
     bottom: 5px;
     border: 1px solid black;
+}
+
+.ui-front {
+    z-index: 2000;
+}
+#copyright {
+    font-size: 0.8em;
 }
