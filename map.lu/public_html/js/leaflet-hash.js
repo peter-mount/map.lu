@@ -36,7 +36,7 @@
                 $.each(args, function (i, id) {
                     if (i >= 3) {
                         var l = map.xr[id];
-                        console.log(i, id, l);
+                        //console.log(i, id, l);
                         if (l)
                             map.addLayer(l);
                     }

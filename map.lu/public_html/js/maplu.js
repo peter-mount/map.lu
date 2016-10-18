@@ -35,8 +35,10 @@ $(document).ready(function () {
     L.control.scale({metric: true, imperial: true}).addTo(map);
 
     // Attribution
+    var year = new Date().getYear()+1900;
+    $('.copyYear').empty().append(year);
     L.control.attribution({
-        "prefix": "Map imagery ©2012-2016 Peter Mount, <a onclick=\"showCopyright();\">more information</a>"
+        "prefix": "Map imagery ©2012-"+year+" Peter Mount, <a onclick=\"showCopyright();\">more information</a>"
     }).addTo(map);
 
     var ctrl = L.control.layers().addTo(map);
