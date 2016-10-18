@@ -52,7 +52,8 @@ $(document).ready(function () {
     // Add base layers
     $.each(map.meta.baseLayers, function (i, v) {
         v.layer = L.tileLayer(v.tileLayer, {
-            errorTileUrl: "error.png"
+            //errorTileUrl: "error.png"
+            errorTileUrl: "blank.png"
         });
         v.layer.meta = v;
         map.xr[v.id] = v.layer;
