@@ -21,6 +21,11 @@ function showMap(id) {
 }
 
 $(document).ready(function () {
+    // Collapse the nav bar on small devices when option selected
+    $(document).on('click', '.navbar-collapse.in', function (e) {
+        $(this).collapse('hide');
+    });
+
     map = L.map('mapid', {
         //center:,
         attributionControl: false,
