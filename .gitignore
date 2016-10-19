@@ -6,3 +6,5 @@ pom.xml.next
 release.properties
 /map.lu/nbproject/private/
 /map.lu/public_html/tiles/
+/map.lu/node_modules/
+/map.lu/dist/
