@@ -1,6 +1,24 @@
 module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
+        copy: {
+            main: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: "public_html",
+                        src: "js/leaflet*",
+                        dest: "dist/"
+                    },
+                    {
+                        expand: true,
+                        cwd: "public_html",
+                        src: "css/leaflet*",
+                        dest: "dist/"
+                    }
+                ]
+            }
+        },
         cssmin: {
             options: {
                 shorthandCompacting: false,
@@ -12,6 +30,9 @@ module.exports = function (grunt) {
                         "public_html/css/bootstrap.min.css",
                         "public_html/css/leaflet.css",
                         "public_html/css/maplu.css"
+                    ],
+                    "dist/css/leaflet-min.css": [
+                        "public_html/css/leaflet.css"
                     ]
                 }
             }
@@ -34,6 +55,14 @@ module.exports = function (grunt) {
             mobile: {
                 src: "dist/maplu.js",
                 dest: "dist/maplu-min.js"
+            },
+            leaflet: {
+                src: "dist/js/leaflet.js",
+                dest: "dist/js/leaflet-min.js"
+            },
+            leaflethash: {
+                src: "dist/js/leaflet-hash.js",
+                dest: "dist/js/leaflet-hash-min.js"
             }
         },
         processhtml: {
@@ -57,10 +86,11 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-processhtml');
 
-    grunt.registerTask('build', ['cssmin', 'concat', 'uglify', 'processhtml', 'htmlmin']);
+    grunt.registerTask('build', ['copy','cssmin', 'concat', 'uglify', 'processhtml', 'htmlmin']);
 };

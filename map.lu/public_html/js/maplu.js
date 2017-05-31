@@ -35,10 +35,10 @@ $(document).ready(function () {
     L.control.scale({metric: true, imperial: true}).addTo(map);
 
     // Attribution
-    var year = new Date().getYear()+1900;
+    var year = new Date().getYear() + 1900;
     $('.copyYear').empty().append(year);
     L.control.attribution({
-        "prefix": "Map imagery ©2012-"+year+" Peter Mount, <a onclick=\"showCopyright();\">more information</a>"
+        "prefix": "Map imagery ©2012-" + year + " Peter Mount, <a onclick=\"showCopyright();\">more information</a>"
     }).addTo(map);
 
     var ctrl = L.control.layers().addTo(map);
@@ -65,9 +65,49 @@ $(document).ready(function () {
 
     // Add overlay layers
     $.each(map.meta.overlayLayers, function (i, v) {
-        v.layer = L.tileLayer(v.tileLayer, {
-            errorTileUrl: "blank.png"
-        });
+        if (v.tileLayer) {
+            console.log('tile', v.tileLayer);
+            v.layer = L.tileLayer(v.tileLayer, {
+                errorTileUrl: "blank.png"
+            });
+        } else if (v.geoJSON) {
+            console.log('geoj', v.geoJSON);
+            function onEachFeature(feature, layer) {
+                var popupContent = "<p>Mag " + feature.properties.mag + " " + feature.properties.place + "</p>"
+                        + "<p>" + new Date(feature.properties.time) + "</p>";
+
+                if (feature.properties && feature.properties.popupContent) {
+                    popupContent += feature.properties.popupContent;
+                }
+
+                layer.bindPopup(popupContent);
+            }
+            ;
+
+            v.layer = L.geoJSON([], {
+                style: function (feature) {
+                    return feature.properties && feature.properties.style;
+                },
+                onEachFeature: onEachFeature,
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, {
+                        radius: 1.5*feature.properties.mag,//8,
+                        fillColor: "#ff7800",
+                        color: "#000",
+                        weight: 1,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    });
+                }
+            });
+            $.ajax({
+                url: v.geoJSON,
+                success: function (layer) {
+                    v.layer.addData(layer);
+                }
+            });
+        }
+
         v.layer.meta = v;
         map.xr[v.id] = v.layer;
         ctrl.addOverlay(v.layer, v.label);

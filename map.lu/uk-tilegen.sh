@@ -51,6 +51,8 @@ echo
 echo "Geneting $genz"
 echo "$z	$x1	$x2	$y1	$y2	$n"
 
+c=0
+
 x=$x1
 while [ $x -le $x2 ]
 do
@@ -60,7 +62,9 @@ do
     y=$y1
     while [ $y -le $y2 ]
     do
-        echo "Tile $x $y"
+	pc=$((echo scale=3;echo "${c}*100/$n")|bc)
+        echo "Tile $x $y $pc $c/$n"
+	c=$(($c+1))
         if [ -f temp.png ]
         then
             rm -f temp.png
