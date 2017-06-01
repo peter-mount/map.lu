@@ -21,16 +21,17 @@ function showMap(id) {
 }
 
 $(document).ready(function () {
-    // Collapse the nav bar on small devices when option selected
-    $(document).on('click', '.navbar-collapse.in', function (e) {
-        $(this).collapse('hide');
-    });
+    //// Collapse the nav bar on small devices when option selected
+    //$(document).on('click', '.navbar-collapse.in', function (e) {
+    //    $(this).collapse('hide');
+    //});
 
     map = L.map('mapid', {
         //center:,
         attributionControl: false,
         zoomControl: true
     });
+    
     // Map scale
     L.control.scale({metric: true, imperial: true}).addTo(map);
 
@@ -38,7 +39,7 @@ $(document).ready(function () {
     var year = new Date().getYear() + 1900;
     $('.copyYear').empty().append(year);
     L.control.attribution({
-        "prefix": "Map imagery ©2012-" + year + " Peter Mount, <a onclick=\"showCopyright();\">more information</a>"
+        "prefix": "Map imagery ©2012-" + year + " Peter Mount, <a href=\"../copyright/\">more information</a>"
     }).addTo(map);
 
     var ctrl = L.control.layers().addTo(map);

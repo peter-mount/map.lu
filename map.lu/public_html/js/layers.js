@@ -9,7 +9,7 @@ var baseLayers = [
         "description": "Open Street Map",
         "tileLayer": "//map.lu/osm/{z}/{x}/{y}.png",
         "minZoom": 5,
-        "maxZoom": 16
+        "maxZoom": 18
     },
     {
         "id": "WT",

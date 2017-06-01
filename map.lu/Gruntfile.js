@@ -1,20 +1,25 @@
 module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
+        clean: [
+            'temp/*',
+            'dist/*'
+        ],
         copy: {
             main: {
                 files: [
                     {
                         expand: true,
                         cwd: "public_html",
-                        src: "js/leaflet*",
-                        dest: "dist/"
+                        src: "**/*.html",
+                        dest: "temp/"
                     },
+                    // Images
                     {
                         expand: true,
-                        cwd: "public_html",
-                        src: "css/leaflet*",
-                        dest: "dist/"
+                        cwd: 'public_html',
+                        src: '**/*.png',
+                        dest: 'dist/'
                     }
                 ]
             }
@@ -26,13 +31,8 @@ module.exports = function (grunt) {
             },
             target: {
                 files: {
-                    "dist/maplu-min.css": [
-                        "public_html/css/bootstrap.min.css",
-                        "public_html/css/leaflet.css",
+                    "dist/css/maplu.min.css": [
                         "public_html/css/maplu.css"
-                    ],
-                    "dist/css/leaflet-min.css": [
-                        "public_html/css/leaflet.css"
                     ]
                 }
             }
@@ -40,36 +40,27 @@ module.exports = function (grunt) {
         concat: {
             dist: {
                 src: [
-                    "public_html/js/jquery-3.1.1.min.js",
-                    "public_html/js/bootstrap.min.js",
-                    "public_html/js/leaflet.js",
-                    "public_html/js/leaflet-hash.js",
-                    "public_html/js/maps.js",
+                    "public_html/js/maplu.js",
                     "public_html/js/layers.js",
-                    "public_html/js/maplu.js"
+                    "public_html/js/maps.js"
                 ],
-                dest: "dist/maplu.js"
+                dest: "temp/js/maplu.js"
             }
         },
         uglify: {
-            mobile: {
-                src: "dist/maplu.js",
-                dest: "dist/maplu-min.js"
-            },
-            leaflet: {
-                src: "dist/js/leaflet.js",
-                dest: "dist/js/leaflet-min.js"
-            },
-            leaflethash: {
-                src: "dist/js/leaflet-hash.js",
-                dest: "dist/js/leaflet-hash-min.js"
+            maplu: {
+                src: "temp/js/maplu.js",
+                dest: "dist/js/maplu.min.js"
             }
         },
-        processhtml: {
+        dom_munger: {
             build: {
-                files: {
-                    "dist/index.html": "public_html/index.html"
-                }
+                options: {
+                    callback: function ($, file) {
+                        require('./dom-parser')($, file, grunt);
+                    }
+                },
+                src: "temp/**/*.html"
             }
         },
         htmlmin: {
@@ -78,19 +69,33 @@ module.exports = function (grunt) {
                     removeComments: true,
                     collapseWhitespace: true
                 },
-                files: {
-                    "dist/index.html": "dist/index.html"
-                }
+                files: [{
+                        expand: true,
+                        cwd: 'temp',
+                        src: '**/*.html',
+                        dest: 'dist'
+                    }]
             }
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
-    grunt.loadNpmTasks('grunt-processhtml');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-dom-munger');
+    grunt.loadNpmTasks('grunt-newer');
+    //grunt.loadNpmTasks('grunt-processhtml');
 
-    grunt.registerTask('build', ['copy','cssmin', 'concat', 'uglify', 'processhtml', 'htmlmin']);
+    grunt.registerTask('build', [
+        //'clean',
+        'copy',
+        'cssmin',
+        'concat',
+        'uglify',
+        'dom_munger',
+        'htmlmin'
+    ]);
 };

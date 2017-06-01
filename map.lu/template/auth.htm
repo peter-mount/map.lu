@@ -1,0 +1,190 @@
+<!-- Auth login modal -->
+<div id="authLoginModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close authClose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Login</h4>
+            </div>
+            <div class="modal-body">
+                <div id="authLoginRequired" class="hidden">
+                    <div id="authLoginRequired" class="alert alert-info" role="alert">
+                        You must be logged in to access this resource:
+                    </div>
+                    <br/>
+                </div>
+                <form>
+                    <table width="100%">
+                        <tr>
+                            <td>Username or Email</td>
+                            <td>
+                                <input type="text" value="" id="authName"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td>
+                                <input type="password" value="" id="authPass"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <button class="btn btn-default" type="button" onclick="Auth.loginUser()">Login</button>
+                                <a data-dismiss="modal" onclick="A51Util.modal('authForgotPasswordModal')">Reset Password</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="alert alert-danger hidden modalError" role="alert"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class='text-center left'>
+                    If you don't have an account then please
+                    <a data-dismiss="modal" onclick="A51Util.modal('authRegisterModal')">Register</a>.
+                </div>
+                <button type="button" class="btn btn-default authClose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Register new account -->
+<div id="authRegisterModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close authClose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Register for an account</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <table width="100%">
+                        <tr>
+                            <td>Username</td>
+                            <td>
+                                <input type="text" value="" id="authRegName"/>
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle='tooltip' data-placement='right' title="Name you will be visible as"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>
+                                <input type="text" value="" id="authRegEmail"/>
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle='tooltip' data-placement='right' title="Email is only used for lost passwords"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td>
+                                <input type="password" value="qwer1234" id="authRegPass"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                Passwords must be between 8 and 256 characters.
+                                <p>
+                                    It is up to you to specify the <a href="https://xkcd.com/936/" target="_blank">complexity</a> &amp; security of the password.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>
+                                <button class="btn btn-default" type="button" onclick="Auth.registerUser()">Register</button>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="alert alert-danger hidden modalError" role="alert"></div>
+                </form>
+                <br/>
+                <div class="alert alert-info" role="alert">
+                    Please note that you only need to register once on a ProjectArea51 website.
+                    Those credentials can then be used on any other of our websites.
+                    <br/>
+                    If you already have an account then please
+                    <a data-dismiss="modal" onclick="A51Util.modal('authLoginModal')">Login</a>
+                    with the same details.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default authClose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Shows the Auth module doing some work -->
+<div id="authWait" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Please wait...</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm account modal -->
+<div id="authConfirmModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close authClose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Account confirmation</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Your account has not yet been confirmed.
+                    Please enter the confirmation code you should have received
+                    by email.
+                </p>
+                <input id="authConfirmCode" type="text" value=""/>
+                <button class="btn btn-default" type="button" onclick="Auth.confirmUser()">Confirm</button>
+                <p>
+                    If you have not yet received the code (it can take a few minutes)
+                    then you can
+                    <a>request</a>
+                    a new one.
+                </p>
+                <div class="alert alert-danger hidden modalError" role="alert"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default authClose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Forgot password modal -->
+<div id="authForgotPasswordModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close authClose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Forgot Password</h4>
+            </div>
+            <div class="modal-body">
+                <table width="100%">
+                    <tr>
+                        <td>Username or Email</td>
+                        <td>
+                            <input type="text" value="" id="authResetEmail"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <button class="btn btn-default" type="button" onclick="Auth.resetPassword()">Reset Password</button>
+                        </td>
+                    </tr>
+                </table>
+                <div class="alert alert-danger hidden modalError" role="alert"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default authClose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
