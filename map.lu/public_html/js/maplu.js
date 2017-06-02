@@ -31,7 +31,7 @@ $(document).ready(function () {
         attributionControl: false,
         zoomControl: true
     });
-    
+
     // Map scale
     L.control.scale({metric: true, imperial: true}).addTo(map);
 
@@ -39,33 +39,50 @@ $(document).ready(function () {
     var year = new Date().getYear() + 1900;
     $('.copyYear').empty().append(year);
     L.control.attribution({
-        "prefix": "Map imagery ©2012-" + year + " Peter Mount, <a href=\"../copyright/\">more information</a>"
+        "prefix": "Map imagery ©2012-" + year + " Peter Mount, map.lu &amp; others: <a href=\"../copyright/\">more information</a>"
     }).addTo(map);
 
-    var ctrl = L.control.layers().addTo(map);
+    //var ctrl = L.control.layers().addTo(map);
     //$.get("layers.json", function (d) {
-    map.meta = {
-        "baseLayers": baseLayers,
-        "overlayLayers": overlayLayers
-    };
+    map.meta = layers;
     map.xr = {};
 
+    var baseLayers = {}, overlays = {}, options = {
+        // Declare groups that are to be exclusive (use radio inputs)
+        exclusiveGroups: Object.keys(layers.groups).reduce(function (a, b) {
+            if (layers.groups[b])
+                a.push(b);
+            return a;
+        }, []),
+        // Show a checkbox next to non-exclusive group labels for toggling all
+        groupCheckboxes: false
+    };
+
     // Add base layers
-    $.each(map.meta.baseLayers, function (i, v) {
+    $.each(layers.baseLayers, function (i, v) {
         v.layer = L.tileLayer(v.tileLayer, {
             //errorTileUrl: "error.png"
             errorTileUrl: "blank.png"
         });
         v.layer.meta = v;
         map.xr[v.id] = v.layer;
-        ctrl.addBaseLayer(v.layer, v.label);
+        //ctrl.addBaseLayer(v.layer, v.label);
+
+        baseLayers[v.label] = v.layer;
+
         // Activate first base layer
         if (i === 0)
-            map.meta.baseLayers[0].layer.addTo(map);
+            v.layer.addTo(map);
     });
 
     // Add overlay layers
-    $.each(map.meta.overlayLayers, function (i, v) {
+    $.each(layers.overlayLayers, function (i, v) {
+        // Ensure the groups exist
+        if (!v.group)
+            v.group = "Undefined";
+        if (!overlays[v.group])
+            overlays[v.group] = {};
+
         if (v.tileLayer) {
             console.log('tile', v.tileLayer);
             v.layer = L.tileLayer(v.tileLayer, {
@@ -92,7 +109,7 @@ $(document).ready(function () {
                 onEachFeature: onEachFeature,
                 pointToLayer: function (feature, latlng) {
                     return L.circleMarker(latlng, {
-                        radius: 1.5*feature.properties.mag,//8,
+                        radius: 1.5 * feature.properties.mag, //8,
                         fillColor: "#ff7800",
                         color: "#000",
                         weight: 1,
@@ -111,8 +128,11 @@ $(document).ready(function () {
 
         v.layer.meta = v;
         map.xr[v.id] = v.layer;
-        ctrl.addOverlay(v.layer, v.label);
+
+        overlays[v.group][v.label] = v.layer;
+        //ctrl.addOverlay(v.layer, v.label);
     });
+    ctrl = L.control.groupedLayers(baseLayers, overlays, options).addTo(map);
 
     // URL shortlink
     console.log(location.hash);
@@ -123,5 +143,4 @@ $(document).ready(function () {
     var hash = new L.hash(map);
     //map.setView([51.505, -0.09], 15);
     console.log(window.location.hash);
-
 });
