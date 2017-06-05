@@ -18,6 +18,21 @@
     border-bottom: 1px solid black;
 }
 
+#map-control-layers {
+    margin-left: 0.5em;
+}
+
+#map-control-layers .leaflet-control-layers-separator {
+    display: none;
+}
+
+/*
+.leaflet-control-layers-group-label {
+    
+}
+
+#map-control-layers > label.leaflet-control-layers-group-label > span,
+*/
 .map-control-pane h3 {
     background-color: #033c73;
     color: #ffffff;

@@ -2,12 +2,11 @@
 <html>
     <head>
         <title>Map Viewer</title>
-        <link rel="stylesheet" href="//area51.onl/css/leaflet.min.css">
-        <link rel="stylesheet" href="//area51.onl/css/leaflet.groupedlayercontrol.min.css">
+        <link rel="stylesheet" href="https://area51.onl/css/leaflet.min.css">
+        <link rel="stylesheet" href="https://area51.onl/css/leaflet.groupedlayercontrol.min.css">
         <link rel="stylesheet" href="/css/maplu.min.css">
-        <script src="//area51.onl/js/leaflet.min.js"></script>
-        <script src="//area51.onl/js/leaflet.groupedlayercontrol.min.js"></script>
-        <script src="//area51.onl/js/leaflet-hash.min.js"></script>
+        <script src="https://area51.onl/js/leaflet.min.js"></script>
+        <script src="https://area51.onl/js/leaflet-hash.min.js"></script>
         <script src="/js/maplu.min.js"></script>
     </head>
     <body>
@@ -16,16 +15,7 @@
 
             <div class="map-control-pane">
                 <h3>Features</h3>
-                <ul>
-                    <li>Base Layers</li>
-                    <li>Overlays</li>
-                </ul>
-                <h3>Overlays</h3>
-                <div id="overlays">
-                    <label><input type="checkbox" data-layer="WB">World Borders</label>
-                    <label><input type="checkbox" data-layer="TZ">Time Zones</label>
-                    <label><input type="checkbox" data-layer="GL">Geog Lines</label>
-                </div>
+                <div id="map-control-layers"></div>
             </div>
 
             <div class="map-pane">

@@ -66,13 +66,11 @@ $(document).ready(function () {
         });
         v.layer.meta = v;
         map.xr[v.id] = v.layer;
-        //ctrl.addBaseLayer(v.layer, v.label);
-
         baseLayers[v.label] = v.layer;
 
         // Activate first base layer
-        if (i === 0)
-            v.layer.addTo(map);
+//        if (i === 0)
+//            v.layer.addTo(map);
     });
 
     // Add overlay layers
@@ -100,7 +98,6 @@ $(document).ready(function () {
 
                 layer.bindPopup(popupContent);
             }
-            ;
 
             v.layer = L.geoJSON([], {
                 style: function (feature) {
@@ -130,9 +127,13 @@ $(document).ready(function () {
         map.xr[v.id] = v.layer;
 
         overlays[v.group][v.label] = v.layer;
-        //ctrl.addOverlay(v.layer, v.label);
     });
+    
+    // Add the control
     ctrl = L.control.groupedLayers(baseLayers, overlays, options).addTo(map);
+    // Move it to our frame
+    $('.leaflet-control-layers form').remove().appendTo($('#map-control-layers'));
+    $('.leaflet-control-layers').remove();
 
     // URL shortlink
     console.log(location.hash);
