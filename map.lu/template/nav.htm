@@ -8,52 +8,29 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/">
-                <img alt="Project Area51" height="35" src="//d2n6o1jfdmw4z0.cloudfront.net/images/a51/area51_logo_white.png" width="188"/>
+                <img alt="Project Area51" height="35" src="https://cdn.area51.onl/images/a51/area51_logo_white.png" width="188"/>
             </a>
         </div>
         <div class="collapse navbar-collapse" id="a51NavBar">
             <ul class="nav navbar-nav" id="a51NavBarLeft">
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        Websites
-                        <span class="fa fa-caret-down"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="http://uktra.in/">UK Trains</a></li>
-                        <li><a href="http://departureboards.mobi/">UK Train Departure Boards</a></li>
-                        <li><a href="http://map.lu/">Online Mapping</a></li>
-                        <li><a href="http://iot.onl/">IOT Project</a></li>
-                        <li><a href="http://a51.li/">URL Shortener</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><em>Sites under maintenance</em></li>
-                        <li><a class="disabled">Maidstone Weather</a></li>
-                        <li><a class="disabled">PI Weather Center</a></li>
-                        <!--
-                        <li><a href="http://maidstoneweather.com/">Maidstone Weather</a></li>
-                        <li><a href="http://piweather.center/">PI Weather Center</a></li>
-                        -->
-                        <li><a href="http://a51.space/">Space</a></li>
-                    </ul>
-                </li>
+                <li><a href="/about/">About</a></li>
+                <li><a href="/reuse/">Reuse</a></li>
+                <li><a href="/copyright/">Copyright</a></li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        Developer
-                        <span class="fa fa-caret-down"></span>
-                    </a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Maps <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/api/">API's</a></li>
-                        <li><a href="/tools/">Online tools</a></li>
-                        <li><a href="/docker/">Docker Images</a></li>
+                        <li><a onclick="MapLu.showMap('uk');">UK</a></li>
+                        <li><a onclick="MapLu.showMap('england);">England</a></li>
+                        <li><a onclick="MapLu.showMap('england-se');">England South East</a></li>
+                        <li><a onclick="MapLu.showMap('england-sw');">England South West</a></li>
+                        <li><a onclick="MapLu.showMap('scotland');">Scotland</a></li>
+                        <li><a onclick="MapLu.showMap('wales');">Wales</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="https://jenkins.area51.onl/">Jenkins build server</a></li>
-                        <li><a href="https://nexus.area51.onl/">Nexus repository</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="/status/">System Status</a></li>
+                        <li><a onclick="MapLu.showMap('london');">London</a></li>
                     </ul>
                 </li>
-
             </ul>
 
             <ul class="nav navbar-nav navbar-right" id="a51NavBarRight">

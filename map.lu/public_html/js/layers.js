@@ -9,7 +9,7 @@ var layers = {
             "label": "Open Street Map",
             "description": "Open Street Map",
             "tileLayer": "https://map.lu/osm/{z}/{x}/{y}.png",
-            "minZoom": 5,
+            "minZoom": 0,
             "maxZoom": 18
         },
         {
@@ -67,6 +67,16 @@ var layers = {
         "Grids": true,
     },
     overlayLayers: [
+        /*
+        {
+            "id": "OSMO",
+            "label": "Open Street Map",
+            "description": "Open Street Map",
+            "tileLayer": "//loge.amsterdam.area51.onl/land/{z}/{x}/{y}.png",
+            "minZoom": 0,
+            "maxZoom": 18
+        },
+        */
         {
             "id": "WB",
             "label": "TM World Borders",

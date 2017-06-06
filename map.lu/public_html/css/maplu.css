@@ -26,13 +26,6 @@
     display: none;
 }
 
-/*
-.leaflet-control-layers-group-label {
-    
-}
-
-#map-control-layers > label.leaflet-control-layers-group-label > span,
-*/
 .map-control-pane h3 {
     background-color: #033c73;
     color: #ffffff;
@@ -46,6 +39,16 @@
     display: block;
     font-size: 12px;
     margin: 0;
+}
+
+.map-control-pane > .leaflet-control-layers-group-name {
+    display: block;
+    background-color: #033c73;
+    color: #ffffff;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-size: 120%;
+    font-weight: bold;
 }
 .map-control-pane label input {
     padding-right: 0.2em;
