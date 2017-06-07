@@ -5,10 +5,25 @@
 var layers = {
     baseLayers: [
         {
+            "id": "OS",
+            "label": "Open Street Map Ocean",
+            "description": "Composite of Ocean Bottom and Open Street Map layers",
+            "layerGroup": [
+                {
+                    "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+                },
+                {
+                    "tileLayer": "https:{s}.map.lu/land/{z}/{x}/{y}.png"
+                }
+            ],
+            "minZoom": 0,
+            "maxZoom": 18
+        },
+        {
             "id": "OSM",
-            "label": "Open Street Map",
-            "description": "Open Street Map",
-            "tileLayer": "https://map.lu/osm/{z}/{x}/{y}.png",
+            "label": "Open Street Map Standard",
+            "description": "Open Street Map with detail for British Isles in the standard Mapnik theme",
+            "tileLayer": "https://{s}.map.lu/osm/{z}/{x}/{y}.png",
             "minZoom": 0,
             "maxZoom": 18
         },
@@ -16,7 +31,7 @@ var layers = {
             "id": "WT",
             "label": "World Terrain",
             "description": "Terrain map of the world",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3AHypsometric_10m@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3AHypsometric_10m@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -24,7 +39,7 @@ var layers = {
             "id": "NE1",
             "label": "Natural Earth 1",
             "description": "Natural Earth I with Shaded Relief, Water, and Drainages",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANaturalEarth1_10m@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANaturalEarth1_10m@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -32,7 +47,7 @@ var layers = {
             "id": "NE2",
             "label": "Natural Earth 2",
             "description": "Natural Earth II with Shaded Relief, Water, and Drainages",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANaturalEarth2_10m@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANaturalEarth2_10m@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -40,7 +55,7 @@ var layers = {
             "id": "WB",
             "label": "TM World Borders",
             "description": "TM World Borders 0.3",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/area51%3ATM_WORLD_BORDERS-0.3@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/area51%3ATM_WORLD_BORDERS-0.3@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -48,7 +63,7 @@ var layers = {
             "id": "OB",
             "label": "Ocean Bottom",
             "description": "Natural Earth Ocean Bottom",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -56,7 +71,7 @@ var layers = {
             "id": "T12",
             "label": "Temp 12",
             "description": "Natural Earth Ocean Bottom",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NOAA%3ATemperature_surface_012@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NOAA%3ATemperature_surface_012@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         }
@@ -67,22 +82,21 @@ var layers = {
         "Grids": true,
     },
     overlayLayers: [
-        /*
         {
-            "id": "OSMO",
+            "id": "OSO",
             "label": "Open Street Map",
-            "description": "Open Street Map",
-            "tileLayer": "//loge.amsterdam.area51.onl/land/{z}/{x}/{y}.png",
+            "group": "Geographic",
+            "description": "Open Street Map with detail for British Isles in the standard Mapnik theme",
+            "tileLayer": "https:{s}.map.lu/land/{z}/{x}/{y}.png",
             "minZoom": 0,
             "maxZoom": 18
         },
-        */
         {
             "id": "WB",
             "label": "TM World Borders",
             "group": "Geographic",
             "description": "TM World Borders 0.3",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/area51%3ATM_WORLD_BORDERS-0.3@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/area51%3ATM_WORLD_BORDERS-0.3@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -91,38 +105,48 @@ var layers = {
             "label": "Populated Places",
             "group": "Geographic",
             "description": "Populated Places",
-            //"tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-            "tileLayer": "//loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https:loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
         /*
+         {
+         "id": "EQ",
+         "label": "Recent Earthquakes",
+         "greoup": "Real Time",
+         "description": "Recent earthquakes (USGS)",
+         "geoJSON": "http://api.area51.onl/earthquake/significant.geojson",
+         //"geoJSON": "http://api.area51.onl/fdsnws/event/1/query?format=geojson&starttime=2016-11-08&endtime=2016-11-14",
+         "minZoom": 0,
+         "maxZoom": 16
+         },
+         */
+        // Blank layer to allow disabling of lines
         {
-            "id": "EQ",
-            "label": "Recent Earthquakes",
-            "greoup": "Real Time",
-            "description": "Recent earthquakes (USGS)",
-            "geoJSON": "http://api.area51.onl/earthquake/significant.geojson",
-            //"geoJSON": "http://api.area51.onl/fdsnws/event/1/query?format=geojson&starttime=2016-11-08&endtime=2016-11-14",
+            "label": "None",
+            "group": "Grids",
+            "description": "No grids",
+            // See https://stackoverflow.com/a/28094977
+            "tileLayer": "",
             "minZoom": 0,
             "maxZoom": 16
         },
-        */
         {
             "id": "GL",
             "label": "Geographic Lines",
             "group": "Grids",
             "description": "Geographic Lines",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_geographic_lines@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_geographic_lines@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
         {
             "id": "TZ",
             "label": "Time Zones",
-            "group": "Grids",
+            "group": "Geographic",
             "description": "Time Zones",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_time_zones@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_time_zones@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -131,7 +155,7 @@ var layers = {
             "label": "Graticule 30d",
             "group": "Grids",
             "description": "Graticule 1 degree",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_graticules_30@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_graticules_30@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -140,7 +164,7 @@ var layers = {
             "label": "Graticule 20d",
             "group": "Grids",
             "description": "Graticule 20 degree",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_graticules_20@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_graticules_20@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -149,7 +173,7 @@ var layers = {
             "label": "Graticule 15 d",
             "group": "Grids",
             "description": "Graticule 15 degree",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_graticules_15@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_graticules_15@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -158,7 +182,7 @@ var layers = {
             "label": "Graticule 10 d",
             "group": "Grids",
             "description": "Graticule 1degree",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_graticules_10@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_graticules_10@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -167,7 +191,7 @@ var layers = {
             "label": "Graticule 1 d",
             "group": "Grids",
             "description": "Graticule 1 degree",
-            "tileLayer": "https://map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_graticules_1@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3Ane_10m_graticules_1@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         }

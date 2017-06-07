@@ -11,6 +11,75 @@ var MapLu = (function () {
         initMap();
     });
 
+    MapLu.layerTypes = {
+        // Either XYZ or TMS tile server
+        tileLayer: function (v) {
+            return L.tileLayer(v, {
+                errorTileUrl: "blank.png"
+            });
+        },
+        // geoJSON datasource
+        geoJSON: function (v) {
+            // FIXME this is specific to earthQuake
+            function onEachFeature(feature, layer) {
+                var popupContent = "<p>Mag " + feature.properties.mag + " " + feature.properties.place + "</p>"
+                        + "<p>" + new Date(feature.properties.time) + "</p>";
+
+                if (feature.properties && feature.properties.popupContent) {
+                    popupContent += feature.properties.popupContent;
+                }
+
+                layer.bindPopup(popupContent);
+            }
+            function pointToLayer(feature, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 1.5 * feature.properties.mag, //8,
+                    fillColor: "#ff7800",
+                    color: "#000",
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 0.8
+                });
+            }
+
+            var ret = L.geoJSON([], {
+                style: function (feature) {
+                    return feature.properties && feature.properties.style;
+                },
+                onEachFeature: onEachFeature,
+                pointToLayer: pointToLayer
+            });
+            $.ajax({
+                url: v,
+                success: function (layer) {
+                    ret.addData(layer);
+                }
+            });
+
+            return ret;
+        },
+        // Layer group
+        layerGroup: function (v) {
+            console.log(v);
+            var l = v.reduce(function (a, b) {
+                console.log(b);
+                a.push(MapLu.createLayer(b));
+                return a;
+            }, []);
+            console.log(l);
+            return L.layerGroup(l);
+        }
+    };
+
+    MapLu.createLayer = function (v) {
+        return Object.keys(v)
+                .reduce(function (a, key) {
+                    if (MapLu.layerTypes[key])
+                        return MapLu.layerTypes[key](v[key]);
+                    return a;
+                }, null);
+    };
+
     function initMap() {
         map = L.map('mapid', {
             //center:,
@@ -48,11 +117,10 @@ var MapLu = (function () {
 
         // Add base layers
         $.each(layers.baseLayers, function (i, v) {
-            v.layer = L.tileLayer(v.tileLayer, {
-                errorTileUrl: "blank.png"
-            });
+            v.layer = MapLu.createLayer(v);
             v.layer.meta = v;
-            map.xr[v.id] = v.layer;
+            if (v.id)
+                map.xr[v.id] = v.layer;
             baseLayers[v.label] = v.layer;
 
             // Activate first base layer
@@ -68,53 +136,11 @@ var MapLu = (function () {
             if (!overlays[v.group])
                 overlays[v.group] = {};
 
-            if (v.tileLayer) {
-                console.log('tile', v.tileLayer);
-                v.layer = L.tileLayer(v.tileLayer, {
-                    errorTileUrl: "blank.png"
-                });
-            } else if (v.geoJSON) {
-                console.log('geoj', v.geoJSON);
-                // FIXME this is specific to earthQuake
-                function onEachFeature(feature, layer) {
-                    var popupContent = "<p>Mag " + feature.properties.mag + " " + feature.properties.place + "</p>"
-                            + "<p>" + new Date(feature.properties.time) + "</p>";
-
-                    if (feature.properties && feature.properties.popupContent) {
-                        popupContent += feature.properties.popupContent;
-                    }
-
-                    layer.bindPopup(popupContent);
-                }
-                function pointToLayer(feature, latlng) {
-                    return L.circleMarker(latlng, {
-                        radius: 1.5 * feature.properties.mag, //8,
-                        fillColor: "#ff7800",
-                        color: "#000",
-                        weight: 1,
-                        opacity: 1,
-                        fillOpacity: 0.8
-                    });
-                }
-
-                v.layer = L.geoJSON([], {
-                    style: function (feature) {
-                        return feature.properties && feature.properties.style;
-                    },
-                    onEachFeature: onEachFeature,
-                    pointToLayer: pointToLayer
-                });
-                $.ajax({
-                    url: v.geoJSON,
-                    success: function (layer) {
-                        v.layer.addData(layer);
-                    }
-                });
-            }
-
+            // Create the layer
+            v.layer = MapLu.createLayer(v);
             v.layer.meta = v;
-            map.xr[v.id] = v.layer;
-
+            if (v.id)
+                map.xr[v.id] = v.layer;
             overlays[v.group][v.label] = v.layer;
         });
 
@@ -126,15 +152,15 @@ var MapLu = (function () {
 
         // URL shortlink
         if (!location.hash || location.hash === '#')
-            showMap(defaultMap);
+            MapLu.showMap(defaultMap);
 
         // Add url hash
         new L.hash(map);
     }
- 
+
     MapLu.showMap = function (id) {
         map.fitBounds(maps[id]);
-    }
+    };
 
     return MapLu;
 })();
