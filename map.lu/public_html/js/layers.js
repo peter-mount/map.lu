@@ -13,7 +13,7 @@ var layers = {
                     "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png"
                 },
                 {
-                    "tileLayer": "https:{s}.map.lu/land/{z}/{x}/{y}.png"
+                    "tileLayer": "https://{s}.map.lu/land/{z}/{x}/{y}.png"
                 }
             ],
             "minZoom": 0,
@@ -71,7 +71,7 @@ var layers = {
             "label": "Open Street Map",
             "group": "Geographic",
             "description": "Open Street Map with detail for British Isles in the standard Mapnik theme",
-            "tileLayer": "https:{s}.map.lu/land/{z}/{x}/{y}.png",
+            "tileLayer": "https://{s}.map.lu/land/{z}/{x}/{y}.png",
             "minZoom": 0,
             "maxZoom": 18
         },
