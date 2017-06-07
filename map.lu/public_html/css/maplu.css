@@ -1,3 +1,11 @@
+/* EU cookie law */
+#body > div.alert.alert-warning.alert-dismissible {
+    position: absolute;
+    right: 0.5em;
+    top: 4.5em;
+    z-index: 1000;
+    border: 1px solid black;
+}
 
 .map-container {
     position: absolute;
@@ -41,6 +49,7 @@
     margin: 0;
 }
 
+label.leaflet-control-layers-group-label > span,
 .map-control-pane > .leaflet-control-layers-group-name {
     display: block;
     background-color: #033c73;

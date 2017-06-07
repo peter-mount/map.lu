@@ -13,4 +13,4 @@ var maps = {
 /*
  * The default map to show
  */
-var defaultMap = "england-se";
+var defaultMap = "uk";

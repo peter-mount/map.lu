@@ -1,66 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Open Mapping</title>
+        <title>Map Viewer</title>
+        <link rel="stylesheet" href="https://area51.onl/css/leaflet.min.css">
+        <link rel="stylesheet" href="https://area51.onl/css/leaflet.groupedlayercontrol.min.css">
         <link rel="stylesheet" href="/css/maplu.min.css">
+        <script src="https://area51.onl/js/leaflet.min.js"></script>
+        <script src="https://area51.onl/js/leaflet-hash.min.js"></script>
+        <script src="/js/maplu.min.js"></script>
     </head>
     <body>
-            <div id="home-top">
 
-                <div id="home-top-center">
-                    <div id="home-motto">
-                        <h1>ProjectArea51 Mapping Project</h1>
-                        Geographic presentation of open data
-                    </div>
+        <div class="map-container">
 
-                    <br><br>
-                    <div>
-                        <a class="btn btn-primary btn-lg auth-unlogged" href="/view/">View the maps</a>
-                        <a class="btn btn-primary btn-lg auth-logged" href="/view/">View the maps</a>
-                        <br><br>
-                        <div class="link-list">
-                            <a href="/iot/api/" target="_blank">API</a>
-                            <a href="https://area51.onl/">Project Area51</a>
-                            <a href="https://hub.docker.com/r/area51/" target="_blank">Docker</a>
-                            <a href="https://github.com/peter-mount" target="_blank">GitHub</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="map-control-pane">
+                <h3>Features</h3>
+                <div id="map-control-layers"></div>
             </div>
-            <br/>
 
-            <div class="row">
-
-                <div class="col-sm-8">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Features</h3>
-                        </div>
-                        <div class="panel-body panel-home">
-                            <ul>
-                                <li>OpenStreetMap tiles for the British Isles (UK, Ireland, Isle of Man)</li>
-                                <li>Compliant TMS, WCS, WFS, WMS, WMS-C, WMTS services</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Connect With Us</h3>
-                        </div>
-                        <div class="panel-body panel-home">
-                            <ul>
-                                <li><a href="http://www.twitter.com/ProjectArea51" title="Follow ProjectArea51 on Twitter" target="_blank">Twitter</a></li>
-                                <li><a href="https://github.com/peter-mount" title="Open Source on GitHub" target="_blank">GitHub</a></li>
-                                <li><a href="http://area-51.blog/" title="Blog">Blog</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="map-pane">
+                <div id="mapid"></div>
             </div>
+
+        </div>
 
     </body>
 </html>
