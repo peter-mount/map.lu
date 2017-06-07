@@ -52,26 +52,10 @@ var layers = {
             "maxZoom": 16
         },
         {
-            "id": "WB",
-            "label": "TM World Borders",
-            "description": "TM World Borders 0.3",
-            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/area51%3ATM_WORLD_BORDERS-0.3@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-            "minZoom": 0,
-            "maxZoom": 16
-        },
-        {
             "id": "OB",
             "label": "Ocean Bottom",
             "description": "Natural Earth Ocean Bottom",
             "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-            "minZoom": 0,
-            "maxZoom": 16
-        },
-        {
-            "id": "T12",
-            "label": "Temp 12",
-            "description": "Natural Earth Ocean Bottom",
-            "tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NOAA%3ATemperature_surface_012@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         }
