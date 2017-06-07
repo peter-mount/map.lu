@@ -9,3 +9,4 @@ release.properties
 /map.lu/node_modules/
 /map.lu/dist/
 /map.lu/temp/
+npm-debug.log
