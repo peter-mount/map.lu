@@ -60,6 +60,33 @@ var layers = {
             "minZoom": 0,
             "maxZoom": 16
         },
+        /* This works but can crash geoserver at low zoom levels. Zoom 16 is best
+        {
+          "id": "OSGB",
+          "label": "District 2016",
+          "description": "OSGB District 2016",
+          "wms": {
+            //"server": "https://map.lu/geoserver/osgb/wms",
+            "server": "http://loge.amsterdam.area51.onl/geoserver/osgb/wms",
+            "layers": "osgb:District_2016"
+          },
+          //"tileLayer": "http://loge.amsterdam.area51.onl/tms/osgb:District_2016@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+          "minZoom": 0,
+          "maxZoom": 16
+      },
+      */
+      {
+          "id": "TM",
+          "label": "True Marble",
+          "description": "True Marble",
+          "wms": {
+            "server": "https://map.lu/geoserver/TrueMarble/wms",
+            //"server": "http://loge.amsterdam.area51.onl/geoserver/TrueMarble/wms",
+            "layers": "TrueMarble:truemarble"
+          },
+          "minZoom": 0,
+          "maxZoom": 16
+      },
         {
             "id": "BKMC2016",
             "label": "Black Marble Colour 2016",
@@ -269,6 +296,6 @@ var layers = {
             "tileLayer": "https://{s}.map.lu/tms/department_of_transport%3Adepartment_of_transport_stationsPoint@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
-        }
+          }
     ]
 };
