@@ -1,5 +1,5 @@
 /*
- * 
+ *
  * The available map layers
  */
 var layers = {
@@ -59,6 +59,54 @@ var layers = {
             "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
+        },
+        {
+            "id": "BKMC2016",
+            "label": "Black Marble Colour 2016",
+            "description": "NASA Black Marble Colour 2016",
+            "wms": {
+              "server": "https://map.lu/geoserver/NASA/wms",
+              //"server": "http://loge.amsterdam.area51.onl/geoserver/NASA/wms",
+              "layers": "NASA:BlackMarble_2016_Colour"
+            },
+            "minZoom": 0,
+            "maxZoom": 16
+        },
+        {
+            "id": "BKMC2016G",
+            "label": "Black Marble Grey 2016",
+            "description": "NASA Black Marble Grey 2016",
+            "wms": {
+              "server": "https://map.lu/geoserver/NASA/wms",
+              //"server": "http://loge.amsterdam.area51.onl/geoserver/NASA/wms",
+              "layers": "NASA:BlackMarble_2016_Gray"
+            },
+            "minZoom": 0,
+            "maxZoom": 16
+        },
+        {
+            "id": "BMNG",
+            "label": "Blue Marble NG",
+            "description": "NASA Blue Marble Next Generation",
+            "tileLayer": "https://{s}.map.lu/tms/NASA%3ABlueMarbleNG@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "minZoom": 0,
+            "maxZoom": 16
+        },
+        {
+            "id": "BMNGTB",
+            "label": "Blue Marble NG TB",
+            "description": "NASA Blue Marble Next Generation with Topography and Bathymetry",
+            "tileLayer": "https://{s}.map.lu/tms/NASA%3ABlueMarbleNG-TB@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "minZoom": 0,
+            "maxZoom": 16
+        },
+        {
+            "id": "NASAVEG",
+            "label": "Vegetation cover 2017/09",
+            "description": "NASA Vegetation coverage Sept 2017",
+            "tileLayer": "https://{s}.map.lu/tms/NASA%3AVegetation_2017_09@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "minZoom": 0,
+            "maxZoom": 16
         }
     ],
     groups: {
@@ -66,6 +114,7 @@ var layers = {
         "Rail": false,
         "Real Time": false,
         "Grids": true,
+        "UK Railway": false
     },
     overlayLayers: [
         {
@@ -91,11 +140,21 @@ var layers = {
             "label": "Populated Places",
             "group": "Geographic",
             "description": "Populated Places",
-            //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-            "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
+      {
+          "id": "EQ",
+          "label": "Earthquake 30 day",
+          "group": "Geographic",
+          "description": "Earthquakes in last 30 days",
+          "tileLayer": "https://{s}.map.lu/tms/area51:v_quake@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+          //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/area51:v_quake@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+          "minZoom": 0,
+          "maxZoom": 16
+      },
         /*
         {
             "id": "TIPLOC",
@@ -190,6 +249,24 @@ var layers = {
             "group": "Grids",
             "description": "Graticule 1 degree",
             "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_1@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "minZoom": 0,
+            "maxZoom": 16
+          },
+          {
+            "id": "TRNET",
+            "label": "Railway Network",
+            "group": "UK Railway",
+            "description": "Railway network",
+            "tileLayer": "https://{s}.map.lu/tms/department_of_transport%3Adepartment_of_transport_railnetworkLine@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "minZoom": 0,
+            "maxZoom": 16
+          },
+          {
+            "id": "TRSTN",
+            "label": "Railway Stations",
+            "group": "UK Railway",
+            "description": "Railway stations",
+            "tileLayer": "https://{s}.map.lu/tms/department_of_transport%3Adepartment_of_transport_stationsPoint@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         }

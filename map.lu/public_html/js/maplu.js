@@ -60,14 +60,28 @@ var MapLu = (function () {
         },
         // Layer group
         layerGroup: function (v) {
-            console.log(v);
             var l = v.reduce(function (a, b) {
                 console.log(b);
                 a.push(MapLu.createLayer(b));
                 return a;
             }, []);
-            console.log(l);
             return L.layerGroup(l);
+        },
+        // WMS
+        wms: function (v) {
+          return L.tileLayer.wms( v.server, {
+            layers: v.layers
+          } );
+        },
+        // gibs
+        gibs: function (v) {
+          //var template = "https://map1{s}.vis.earthdata.nasa.gov/wmts-geo/{layer}"+
+          //"/default/{time}/{tileMatrixSet}/{z}/{y}/{x}.jpg";
+          var template = "https://gibs.earthdata.nasa.gov/wmts/epsg4326/" +
+          "{quality}/{layer}/default/{tileMatrixSet}" +
+          "/{z}/{y}/{x}.jpeg";
+
+          return L.tileLayer(template, v);
         }
     };
 
