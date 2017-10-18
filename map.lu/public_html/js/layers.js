@@ -80,7 +80,8 @@ var layers = {
           "label": "True Marble",
           "description": "True Marble",
           "wms": {
-            "server": "https://map.lu/geoserver/TrueMarble/wms",
+            "server": "https://map.lu/truemarble/wms",
+            //"server": "https://map.lu/geoserver/TrueMarble/wms",
             //"server": "http://loge.amsterdam.area51.onl/geoserver/TrueMarble/wms",
             "layers": "TrueMarble:truemarble"
           },
@@ -92,7 +93,8 @@ var layers = {
             "label": "Black Marble Colour 2016",
             "description": "NASA Black Marble Colour 2016",
             "wms": {
-              "server": "https://map.lu/geoserver/NASA/wms",
+              "server": "https://map.lu/nasa/wms",
+              //"server": "https://map.lu/geoserver/NASA/wms",
               //"server": "http://loge.amsterdam.area51.onl/geoserver/NASA/wms",
               "layers": "NASA:BlackMarble_2016_Colour"
             },
@@ -104,7 +106,8 @@ var layers = {
             "label": "Black Marble Grey 2016",
             "description": "NASA Black Marble Grey 2016",
             "wms": {
-              "server": "https://map.lu/geoserver/NASA/wms",
+              "server": "https://map.lu/nasa/wms",
+              //"server": "https://map.lu/geoserver/NASA/wms",
               //"server": "http://loge.amsterdam.area51.onl/geoserver/NASA/wms",
               "layers": "NASA:BlackMarble_2016_Gray"
             },
