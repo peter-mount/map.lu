@@ -43,6 +43,7 @@ module.exports = function (grunt) {
                     "public_html/js/maplu.js",
                     "public_html/js/maps.js",
                     "public_html/js/groupcontrol.js",
+                    "public_html/js/leaflet-hash.js",
                     "public_html/js/layers.js"
                 ],
                 dest: "temp/js/maplu.js"

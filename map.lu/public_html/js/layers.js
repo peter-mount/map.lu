@@ -75,6 +75,21 @@ var layers = {
           "maxZoom": 16
       },
       */
+      /*
+      {
+          "id": "CT",
+          "label": "UK Contour",
+          "description": "OSGB Terra50",
+          "wms": {
+            //"server": "https://map.lu/truemarble/wms",
+            //"server": "https://map.lu/geoserver/TrueMarble/wms",
+            "server": "http://loge.amsterdam.area51.onl/geoserver/osgb/wms",
+            "layers": "osgb:terra50point"
+          },
+          "minZoom": 0,
+          "maxZoom": 16
+      },
+      */
       {
           "id": "TM",
           "label": "True Marble",
@@ -114,6 +129,7 @@ var layers = {
             "minZoom": 0,
             "maxZoom": 16
         },
+        /* Disabled as broken
         {
             "id": "BMNG",
             "label": "Blue Marble NG",
@@ -130,6 +146,7 @@ var layers = {
             "minZoom": 0,
             "maxZoom": 16
         },
+        */
         {
             "id": "NASAVEG",
             "label": "Vegetation cover 2017/09",

@@ -61,7 +61,6 @@ var MapLu = (function () {
         // Layer group
         layerGroup: function (v) {
             var l = v.reduce(function (a, b) {
-                console.log(b);
                 a.push(MapLu.createLayer(b));
                 return a;
             }, []);
@@ -165,8 +164,9 @@ var MapLu = (function () {
         $('.leaflet-control-layers').remove();
 
         // URL shortlink
-        if (!location.hash || location.hash === '#')
-            MapLu.showMap(defaultMap);
+        if( !L.Hash.parseSearch(location.search) && !L.Hash.parseHash(location.hash) ) {
+          MapLu.showMap(defaultMap);
+        }
 
         // Add url hash
         new L.hash(map);
