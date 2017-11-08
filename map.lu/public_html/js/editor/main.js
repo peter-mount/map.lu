@@ -36,7 +36,7 @@ MapLu.initMap = function() {
 
   // Move it to our frame
   //$('.leaflet-control-layers form').remove().appendTo($('#map-control-layers'));
-  //$('.leaflet-control-layers').remove();
+  $('.leaflet-control-layers').remove();
 
   // URL shortlink
   if( !L.Hash.parseSearch(location.search) && !L.Hash.parseHash(location.hash) ) {
