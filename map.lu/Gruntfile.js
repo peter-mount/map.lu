@@ -20,6 +20,12 @@ module.exports = function (grunt) {
                         cwd: 'public_html',
                         src: '**/*.png',
                         dest: 'dist/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'public_html',
+                        src: '**/*.svg',
+                        dest: 'dist/'
                     }
                 ]
             }
@@ -32,22 +38,69 @@ module.exports = function (grunt) {
             target: {
                 files: {
                     "dist/css/maplu.min.css": [
-                        "public_html/css/maplu.css"
+                      "public_html/css/maplu.css",
+                      "public_html/css/leaflet.draw.css"
                     ]
                 }
             }
         },
         concat: {
-            dist: {
-                src: [
-                    "public_html/js/maplu.js",
-                    "public_html/js/maps.js",
-                    "public_html/js/groupcontrol.js",
-                    "public_html/js/leaflet-hash.js",
-                    "public_html/js/layers.js"
-                ],
-                dest: "temp/js/maplu.js"
-            }
+          dist: {
+              src: [
+                  "public_html/js/maplu.js",
+                  "public_html/js/maps.js",
+                  "public_html/js/groupcontrol.js",
+                  "public_html/js/leaflet-hash.js",
+                  "public_html/js/layers.js"
+              ],
+              dest: "temp/js/maplu.js"
+          },
+          editor: {
+              src: [
+                //"public_html/js/leaflet.js",
+                //"public_html/js/draw/libs/leaflet-src.js",
+                "public_html/js/draw/Leaflet.draw.js",
+                "public_html/js/draw/Leaflet.Draw.Event.js",
+                // Leaflet Draw Editor
+                "public_html/js/draw/Toolbar.js",
+                "public_html/js/draw/Tooltip.js",
+                "public_html/js/draw/ext/GeometryUtil.js",
+                "public_html/js/draw/ext/LatLngUtil.js",
+                "public_html/js/draw/ext/LineUtil.Intersect.js",
+                "public_html/js/draw/ext/Polygon.Intersect.js",
+                "public_html/js/draw/ext/Polyline.Intersect.js",
+                "public_html/js/draw/ext/TouchEvents.js",
+                "public_html/js/draw/draw/DrawToolbar.js",
+                "public_html/js/draw/draw/handler/Draw.Feature.js",
+                "public_html/js/draw/draw/handler/Draw.SimpleShape.js",
+                "public_html/js/draw/draw/handler/Draw.Polyline.js",
+                "public_html/js/draw/draw/handler/Draw.Marker.js",
+                "public_html/js/draw/draw/handler/Draw.Circle.js",
+                "public_html/js/draw/draw/handler/Draw.CircleMarker.js",
+                "public_html/js/draw/draw/handler/Draw.Polygon.js",
+                "public_html/js/draw/draw/handler/Draw.Rectangle.js",
+                "public_html/js/draw/edit/EditToolbar.js",
+                "public_html/js/draw/edit/handler/EditToolbar.Edit.js",
+                "public_html/js/draw/edit/handler/EditToolbar.Delete.js",
+                "public_html/js/draw/Control.Draw.js",
+                "public_html/js/draw/edit/handler/Edit.Poly.js",
+                "public_html/js/draw/edit/handler/Edit.SimpleShape.js",
+                "public_html/js/draw/edit/handler/Edit.Rectangle.js",
+                "public_html/js/draw/edit/handler/Edit.Marker.js",
+                "public_html/js/draw/edit/handler/Edit.CircleMarker.js",
+                "public_html/js/draw/edit/handler/Edit.Circle.js",
+                //
+                "public_html/js/editor/main.js",
+                "public_html/js/editor/layertypes.js",
+                "public_html/js/editor/controls.js",
+                "public_html/js/maps.js",
+                "public_html/js/groupcontrol.js",
+                "public_html/js/leaflet-hash.js",
+                "public_html/js/layers.js",
+                "public_html/js/editor/editor.js"
+              ],
+              dest: "dist/js/editor.js"
+          }
         },
         uglify: {
             maplu: {
