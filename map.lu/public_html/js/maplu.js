@@ -160,7 +160,65 @@ var MapLu = (function () {
         // Add the control
         ctrl = L.control.groupedLayers(baseLayers, overlays, options).addTo(map);
         // Move it to our frame
-        $('.leaflet-control-layers form').remove().appendTo($('#map-control-layers'));
+
+        // The base layers
+        $('.leaflet-control-layers .leaflet-control-layers-base')
+          .remove()
+          .appendTo($('#collapseOne .card-body'));
+
+        // Now our groups
+        var accordion = $('#accordion');
+        for( var i=1; $('#leaflet-control-layers-group-'+i).length > 0; i++) {
+          console.log( 'Group', i );
+          var src = $('#leaflet-control-layers-group-'+i).remove();
+          var title = src.find('.leaflet-control-layers-group-name').text()
+          src.find('label.leaflet-control-layers-group-label').remove();
+          var selectors = src.find('label').remove();
+
+          var e = $('<div></div>')
+            .appendTo(accordion)
+            .addClass('card')
+            .append(
+              $('<div></div>')
+                .attr( {
+                  class: 'card-header',
+                  role:'tab',
+                  id: 'heading' + i
+                } )
+                .append(
+                  $('<h5></h5')
+                    .addClass('mb-0')
+                    .append(
+                      $('<a></a>')
+                        .attr( {
+                          class: 'collapsed',
+                          'data-toggle': 'collapse',
+                          href: '#collapse' + i,
+                          'aria-expanded': false,
+                          'aria-controls': "collapse" + i
+                        })
+                        .text( title )
+                    )
+                )
+            )
+            .append(
+              $('<div></div>')
+                .attr( {
+                  id: 'collapse' + i,
+                  class: 'collapse',
+                  role: 'tabpanel',
+                  'aria-labelledby': 'heading' + i,
+                  'data-parent': '#accordion'
+                } )
+                .append(
+                  $('<div></div>')
+                    .addClass('card-body')
+                    .append( selectors )
+                )
+            )
+        }
+
+        //$('.leaflet-control-layers form').remove().appendTo($('#map-control-layers'));
         $('.leaflet-control-layers').remove();
 
         // URL shortlink

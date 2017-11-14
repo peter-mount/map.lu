@@ -29,6 +29,22 @@ var layers = {
             "maxZoom": 18
         },
         {
+            "id": "OS2",
+            "label": "Open Street Map GeoServer",
+            "description": "Open Street Map rendered in GeoServer not Mapnik",
+            "layerGroup": [
+                //{
+                //    "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+                //},
+                {
+                  "tileLayer": "https://{s}.map.lu/tms/osm:planet_osm_line@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+                  //    "tileLayer": "https://{s}.map.lu/land/{z}/{x}/{y}.png"
+                }
+            ],
+            "minZoom": 0,
+            "maxZoom": 18
+        },
+        {
             "id": "WT",
             "label": "World Terrain",
             "description": "Terrain map of the world",
