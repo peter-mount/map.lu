@@ -102,6 +102,40 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
             </Stroke>
           </LineSymbolizer>
         </Rule>
+        <Rule>
+          <Name>Contours - 1:2,000,001 to 1:10,000,000</Name>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>feat_type</ogc:PropertyName>
+              <ogc:Literal>ContourLine</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <MinScaleDenominator>2000001</MinScaleDenominator>
+          <MaxScaleDenominator>10000000</MaxScaleDenominator>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#E0945E</CssParameter>
+              <CssParameter name="stroke-width">0.02</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+        </Rule>
+        <Rule>
+          <Name>Contours - 1:10,000,001 to 1:20,000,000</Name>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>feat_type</ogc:PropertyName>
+              <ogc:Literal>ContourLine</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <MinScaleDenominator>10000001</MinScaleDenominator>
+          <MaxScaleDenominator>20000000</MaxScaleDenominator>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#E0945E</CssParameter>
+              <CssParameter name="stroke-width">0.01</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+        </Rule>
       </FeatureTypeStyle>
 
       <!--  LandWaterBoundary  -->
@@ -271,6 +305,23 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
           </ogc:Filter>
           <MinScaleDenominator>1000001</MinScaleDenominator>
           <MaxScaleDenominator>2000000</MaxScaleDenominator>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#179AE5</CssParameter>
+              <CssParameter name="stroke-width">0.1875</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+        </Rule>
+        <Rule>
+          <Name>meanHighWater 1:2,000,000 to 1:10,000,000</Name>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>sub_type</ogc:PropertyName>
+              <ogc:Literal>meanHighWater</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <MinScaleDenominator>2000001</MinScaleDenominator>
+          <MaxScaleDenominator>10000000</MaxScaleDenominator>
           <LineSymbolizer>
             <Stroke>
               <CssParameter name="stroke">#179AE5</CssParameter>
