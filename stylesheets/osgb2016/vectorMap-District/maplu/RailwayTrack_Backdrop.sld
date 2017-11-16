@@ -20,7 +20,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <MinScaleDenominator>16001</MinScaleDenominator>
-          <MaxScaleDenominator>25000</MaxScaleDenominator>
+          <MaxScaleDenominator>20000000</MaxScaleDenominator>
           <LineSymbolizer>
             <Stroke>
               <CssParameter name="stroke">#919191</CssParameter>
@@ -57,7 +57,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <MinScaleDenominator>16001</MinScaleDenominator>
-          <MaxScaleDenominator>25000</MaxScaleDenominator>
+          <MaxScaleDenominator>20000000</MaxScaleDenominator>
           <LineSymbolizer>
             <Stroke>
               <CssParameter name="stroke">#919191</CssParameter>
@@ -94,7 +94,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
             </ogc:PropertyIsEqualTo>
           </ogc:Filter>
           <MinScaleDenominator>7000</MinScaleDenominator>
-          <MaxScaleDenominator>25000</MaxScaleDenominator>
+          <MaxScaleDenominator>20000000</MaxScaleDenominator>
           <LineSymbolizer>
             <Stroke>
               <CssParameter name="stroke">#919191</CssParameter>

@@ -164,6 +164,26 @@ var layers = {
         },
         */
         {
+          "id": "Contour",
+          "label": "OSGB Terra50 2016",
+          //"group": "OSGB",
+          "description": "OSGB Terra50 2016",
+          //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+          //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+          "tileLayer": "https://geoserver.ganymede.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb:terrain502016@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+          "minZoom": 0,
+          "maxZoom": 16
+        },
+        {
+            "id": "WBB",
+            "label": "TM World Borders Base",
+            "group": "Geographic",
+            "description": "TM World Borders 0.3",
+            "tileLayer": "https://{s}.map.lu/tms/area51%3ATM_WORLD_BORDERS-0.3@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "minZoom": 0,
+            "maxZoom": 16
+        },
+        {
             "id": "NASAVEG",
             "label": "Vegetation cover 2017/09",
             "description": "NASA Vegetation coverage Sept 2017",
@@ -180,6 +200,17 @@ var layers = {
         "UK Railway": false
     },
     overlayLayers: [
+      {
+        "id": "OSGBRail",
+        "label": "OSGB UK Railway",
+        "group": "OSGB",
+        "description": "OSGB UK Railway",
+        //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "tileLayer": "https://geoserver.ganymede.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb:railway2016@EPSG:900913@png/{z}/{x}/{-y}.png",
+        "minZoom": 0,
+        "maxZoom": 16
+      },
         {
             "id": "OSO",
             "label": "Open Street Map",
