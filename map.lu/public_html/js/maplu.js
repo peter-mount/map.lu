@@ -160,20 +160,21 @@ var MapLu = (function () {
         // Add the control
         ctrl = L.control.groupedLayers(baseLayers, overlays, options).addTo(map);
         // Move it to our frame
+        /*
 
         // The base layers
         $('.leaflet-control-layers .leaflet-control-layers-base')
-          .remove()
-          .appendTo($('#collapseOne .card-body'));
+          //.remove()
+          .appendTo($('#collapse0 .card-body'));
 
         // Now our groups
         var accordion = $('#accordion');
         for( var i=1; $('#leaflet-control-layers-group-'+i).length > 0; i++) {
           console.log( 'Group', i );
-          var src = $('#leaflet-control-layers-group-'+i).remove();
+          var src = $('#leaflet-control-layers-group-'+i);//.remove();
           var title = src.find('.leaflet-control-layers-group-name').text()
           src.find('label.leaflet-control-layers-group-label').remove();
-          var selectors = src.find('label').remove();
+          var selectors = src.find('label');//.remove();
 
           var e = $('<div></div>')
             .appendTo(accordion)
@@ -186,16 +187,18 @@ var MapLu = (function () {
                   id: 'heading' + i
                 } )
                 .append(
-                  $('<h5></h5')
+                  $('<h3></h3>')
                     .addClass('mb-0')
                     .append(
                       $('<a></a>')
                         .attr( {
+                          id: 'heading' + 1,
                           class: 'collapsed',
                           'data-toggle': 'collapse',
                           href: '#collapse' + i,
                           'aria-expanded': false,
-                          'aria-controls': "collapse" + i
+                          'aria-controls': "collapse" + i,
+                          'data-parent': '#accordion'
                         })
                         .text( title )
                     )
@@ -220,6 +223,7 @@ var MapLu = (function () {
 
         //$('.leaflet-control-layers form').remove().appendTo($('#map-control-layers'));
         $('.leaflet-control-layers').remove();
+        */
 
         // URL shortlink
         if( !L.Hash.parseSearch(location.search) && !L.Hash.parseHash(location.hash) ) {

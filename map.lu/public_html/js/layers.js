@@ -325,6 +325,16 @@ var layers = {
             "maxZoom": 16
           },
           {
+            "id": "OSR",
+            "label": "OSM Railway Network",
+            "group": "UK Railway",
+            "description": "OSM Railway network",
+            //"tileLayer": "https://{s}.map.lu/tms/osm:osm_railway@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osm:osm_railway@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "minZoom": 0,
+            "maxZoom": 16
+          },
+          {
             "id": "TRSTN",
             "label": "Railway Stations",
             "group": "UK Railway",
