@@ -109,7 +109,7 @@ var MapLu = (function () {
         var year = new Date().getYear() + 1900;
         $('.copyYear').empty().append(year);
         L.control.attribution({
-            "prefix": "Map imagery ©2012-" + year + " Peter Mount, map.lu &amp; others: <a href=\"/about/\">more information</a>"
+            "prefix": "Map imagery ©2012-" + year + " Peter Mount, map.lu &amp; others: <a href=\"/about/index.html\">more information</a>"
         }).addTo(map);
 
         //var ctrl = L.control.layers().addTo(map);
