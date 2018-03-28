@@ -28,6 +28,7 @@ var layers = {
             "minZoom": 0,
             "maxZoom": 18
         },
+        /* development
         {
             "id": "OS2",
             "label": "Open Street Map GeoServer",
@@ -44,6 +45,7 @@ var layers = {
             "minZoom": 0,
             "maxZoom": 18
         },
+        */
         {
             "id": "WT",
             "label": "World Terrain",
@@ -64,7 +66,8 @@ var layers = {
             "id": "NE2",
             "label": "Natural Earth 2",
             "description": "Natural Earth II with Shaded Relief, Water, and Drainages",
-            "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3ANaturalEarth2_10m@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://s{s}.map.lu/NaturalEarth2_10m/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3ANaturalEarth2_10m@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -163,6 +166,7 @@ var layers = {
             "maxZoom": 16
         },
         */
+        /* In development
         {
           "id": "Contour",
           "label": "OSGB Terra50 2016",
@@ -174,6 +178,7 @@ var layers = {
           "minZoom": 0,
           "maxZoom": 16
         },
+        */
         {
             "id": "WBB",
             "label": "TM World Borders Base",
@@ -200,6 +205,7 @@ var layers = {
         "UK Railway": false
     },
     overlayLayers: [
+      /* development
       {
         "id": "OSGBRail",
         "label": "OSGB UK Railway",
@@ -211,6 +217,7 @@ var layers = {
         "minZoom": 0,
         "maxZoom": 16
       },
+      */
         {
             "id": "OSO",
             "label": "Open Street Map",
@@ -355,6 +362,7 @@ var layers = {
             "minZoom": 0,
             "maxZoom": 16
           },
+          /* development
           {
             "id": "OSR",
             "label": "OSM Railway Network",
@@ -365,6 +373,7 @@ var layers = {
             "minZoom": 0,
             "maxZoom": 16
           },
+          */
           {
             "id": "TRSTN",
             "label": "Railway Stations",
