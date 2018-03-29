@@ -181,7 +181,6 @@ var layers = {
           "minZoom": 0,
           "maxZoom": 16
         },
-        */
         {
             "id": "WBB",
             "label": "TM World Borders Base",
@@ -191,6 +190,7 @@ var layers = {
             "minZoom": 0,
             "maxZoom": 16
         },
+        */
         {
             "id": "NASAVEG",
             "label": "Vegetation cover 2017/09",
@@ -235,7 +235,8 @@ var layers = {
             "label": "TM World Borders",
             "group": "Geographic",
             "description": "TM World Borders 0.3",
-            "tileLayer": "https://{s}.map.lu/tms/area51%3ATM_WORLD_BORDERS-0.3@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://s{s}.map.lu/TM_World_Borders_0.3/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/area51%3ATM_WORLD_BORDERS-0.3@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -298,7 +299,8 @@ var layers = {
             "label": "Geographic Lines",
             "group": "Grids",
             "description": "Geographic Lines",
-            "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_geographic_lines@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://s{s}.map.lu/GeographicLines_10m/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_geographic_lines@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -307,7 +309,8 @@ var layers = {
             "label": "Time Zones",
             "group": "Geographic",
             "description": "Time Zones",
-            "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_time_zones@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://s{s}.map.lu/TimeZones_10m/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_time_zones@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -315,8 +318,9 @@ var layers = {
             "id": "G30",
             "label": "Graticule 30d",
             "group": "Grids",
-            "description": "Graticule 1 degree",
-            "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_30@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "description": "Graticule 30 degree",
+            "tileLayer": "https://s{s}.map.lu/Graticule_10m_30d/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_30@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -325,7 +329,8 @@ var layers = {
             "label": "Graticule 20d",
             "group": "Grids",
             "description": "Graticule 20 degree",
-            "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_20@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://s{s}.map.lu/Graticule_10m_20d/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_20@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -334,7 +339,8 @@ var layers = {
             "label": "Graticule 15 d",
             "group": "Grids",
             "description": "Graticule 15 degree",
-            "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_15@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://s{s}.map.lu/Graticule_10m_15d/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_15@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
@@ -342,14 +348,15 @@ var layers = {
             "id": "G10",
             "label": "Graticule 10 d",
             "group": "Grids",
-            "description": "Graticule 1degree",
-            "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_10@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "description": "Graticule 10 degree",
+            "tileLayer": "https://s{s}.map.lu/Graticule_10m_10d/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_10@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
         {
             "id": "G01",
-            "label": "Graticule 1 d",
+            "label": "Graticule 1 degree",
             "group": "Grids",
             "description": "Graticule 1 degree",
             "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_1@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
