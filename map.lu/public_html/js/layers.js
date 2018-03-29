@@ -11,7 +11,8 @@ var layers = {
             "layerGroup": [
                 {
                     //"tileLayer": "https://{s}.map.lu/geoserver/gwc/service/tms/1.0.0/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png"
-                    "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+                    //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+                    "tileLayer": "https://s{s}.map.lu/OceanBottom/{z}/{x}/{-y}.png",
                 },
                 {
                     "tileLayer": "https://{s}.map.lu/land/{z}/{x}/{y}.png"
@@ -75,7 +76,8 @@ var layers = {
             "id": "OB",
             "label": "Ocean Bottom",
             "description": "Natural Earth Ocean Bottom",
-            "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3AOB_LR@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://s{s}.map.lu/OceanBottom/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
