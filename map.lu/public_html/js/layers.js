@@ -51,7 +51,8 @@ var layers = {
             "id": "WT",
             "label": "World Terrain",
             "description": "Terrain map of the world",
-            "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3AHypsometric_10m@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://s{s}.map.lu/Hypsometric_10m/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3AHypsometric_10m@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
         },
