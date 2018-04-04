@@ -21,6 +21,7 @@ var layers = {
             "minZoom": 0,
             "maxZoom": 18
         },
+        /*
         {
             "id": "OSM",
             "label": "Open Street Map Standard",
@@ -28,6 +29,16 @@ var layers = {
             "tileLayer": "https://{s}.map.lu/osm/{z}/{x}/{y}.png",
             "minZoom": 0,
             "maxZoom": 18
+        },
+        */
+        {
+            "id": "OMP",
+            "label": "OS Open Map Local",
+            "description": "Ordnance Survey Open Map Local",
+            //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3AOpenMapLocal@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "minZoom": 15,
+            "maxZoom": 17
         },
         {
             "id": "OSVMD",
@@ -219,22 +230,14 @@ var layers = {
         }
     ],
     groups: {
-        "Geographic": false,
-        "Rail": false,
-        "Real Time": false,
-        "Grids": true,
-        "UK Railway": false
+      "Open Map Local": false,
+      "Geographic": false,
+      "Rail": false,
+      "Real Time": false,
+      "Grids": true,
+      "UK Railway": false
     },
     overlayLayers: [
-      {
-          "id": "OST50",
-          "label": "OS Terrain 50",
-          "description": "Ordnance Survey Terrain 50",
-          //"tileLayer": "https://{s}.map.lu/tms/osgb%3AContourLine@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-          "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AContourLine@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-          "minZoom": 15,
-          "maxZoom": 16
-      },
       /* development
       {
         "id": "OSGBRail",
@@ -248,6 +251,58 @@ var layers = {
         "maxZoom": 16
       },
       */
+      /* Open Map Local */
+      {
+        "id": "OST50",
+        "label": "OS Terrain 50",
+        "group": "Open Map Local",
+        "description": "Ordnance Survey Terrain 50",
+        //"tileLayer": "https://{s}.map.lu/tms/osgb%3AContourLine@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AContourLine@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "minZoom": 15,
+        "maxZoom": 16
+      },
+      {
+        "id": "OMW",
+        "label": "Open Map Local Water",
+        "group": "Open Map Local",
+        "description": "Ordnance Survey Open Map Local Water features",
+        //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3AWater@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "minZoom": 15,
+        "maxZoom": 17
+      },
+      {
+        "id": "OMRD",
+        "label": "UK Roads Open Map Local",
+        "group": "Open Map Local",
+        "description": "UK Roads Ordnance Survey Open Map Local",
+        //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3ARoads@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "minZoom": 15,
+        "maxZoom": 17
+      },
+      {
+        "id": "OMR",
+        "label": "UK Railway Open Map Local",
+        "group": "Open Map Local",
+        "description": "UK Railway Ordnance Survey Open Map Local",
+        //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3ARailway@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "minZoom": 15,
+        "maxZoom": 17
+      },
+      {
+        "id": "OMRS",
+        "label": "UK Railway Stations",
+        "group": "Open Map Local",
+        "description": "UK Railway Stations Ordnance Survey Open Map Local",
+        //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3Arailwaystation@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "minZoom": 15,
+        "maxZoom": 17
+      },
+      /* Geographic */
         {
             "id": "OSO",
             "label": "Open Street Map",
