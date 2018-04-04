@@ -60,7 +60,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
           </ogc:Filter>
           <MinScaleDenominator>1000</MinScaleDenominator>
           <!--MaxScaleDenominator>15000</MaxScaleDenominator-->
-          <MaxScaleDenominator>4000000</MaxScaleDenominator>
+          <MaxScaleDenominator>10000000</MaxScaleDenominator>
           <LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Stroke>
               <CssParameter name="stroke">#646464</CssParameter>
@@ -82,7 +82,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
           </ogc:Filter>
           <MinScaleDenominator>1000</MinScaleDenominator>
           <!--MaxScaleDenominator>15000</MaxScaleDenominator-->
-          <MaxScaleDenominator>4000000</MaxScaleDenominator>
+          <MaxScaleDenominator>10000000</MaxScaleDenominator>
           <LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Stroke>
               <CssParameter name="stroke">#646464</CssParameter>

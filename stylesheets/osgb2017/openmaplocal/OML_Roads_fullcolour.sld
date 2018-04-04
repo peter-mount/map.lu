@@ -296,7 +296,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
   </ogc:Or>
 </ogc:Filter>
           <MinScaleDenominator>1000</MinScaleDenominator>
-          <MaxScaleDenominator>15000</MaxScaleDenominator>
+          <MaxScaleDenominator>70000</MaxScaleDenominator>
           <LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Stroke>
               <CssParameter name="stroke">#FFF3B5</CssParameter>
@@ -326,7 +326,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
   </ogc:Or>
        </ogc:Filter>
           <MinScaleDenominator>1000</MinScaleDenominator>
-          <MaxScaleDenominator>15000</MaxScaleDenominator>
+          <MaxScaleDenominator>150000</MaxScaleDenominator>
           <LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Stroke>
               <CssParameter name="stroke">#FFC073</CssParameter>
@@ -356,7 +356,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
   </ogc:Or>
 </ogc:Filter>
           <MinScaleDenominator>1000</MinScaleDenominator>
-          <MaxScaleDenominator>150000</MaxScaleDenominator>
+          <MaxScaleDenominator>1000000</MaxScaleDenominator>
           <!--<MaxScaleDenominator>15000</MaxScaleDenominator>-->
           <LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Stroke>
@@ -387,7 +387,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
   </ogc:Or>
    </ogc:Filter>
           <MinScaleDenominator>1000</MinScaleDenominator>
-          <MaxScaleDenominator>2000000</MaxScaleDenominator>
+          <MaxScaleDenominator>20000000</MaxScaleDenominator>
           <!--<MaxScaleDenominator>15000</MaxScaleDenominator>-->
           <LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Stroke>
@@ -418,7 +418,7 @@ xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.
   </ogc:Or>
           </ogc:Filter>
           <MinScaleDenominator>1000</MinScaleDenominator>
-          <MaxScaleDenominator>2000000</MaxScaleDenominator>
+          <MaxScaleDenominator>20000000</MaxScaleDenominator>
           <!--<MaxScaleDenominator>15000</MaxScaleDenominator>-->
           <LineSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
             <Stroke>
