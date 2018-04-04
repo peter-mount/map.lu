@@ -31,10 +31,19 @@ var layers = {
         },
         {
             "id": "OSVMD",
-            "label": "OS Vector Map District 11/2017",
+            "label": "OS Vector Map District",
             "description": "Ordnance Survey Vector Map District November 2017",
-            "tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-            //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "minZoom": 15,
+            "maxZoom": 16
+        },
+        {
+            "id": "OSVMDC",
+            "label": "OS Vector Map District + Contours",
+            "description": "Ordnance Survey Vector Map District November 2017 + Terrain 50 Contours",
+            //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD-Contour@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AOSVMD-Contour@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 15,
             "maxZoom": 16
         },
@@ -217,6 +226,15 @@ var layers = {
         "UK Railway": false
     },
     overlayLayers: [
+      {
+          "id": "OST50",
+          "label": "OS Terrain 50",
+          "description": "Ordnance Survey Terrain 50",
+          //"tileLayer": "https://{s}.map.lu/tms/osgb%3AContourLine@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+          "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AContourLine@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+          "minZoom": 15,
+          "maxZoom": 16
+      },
       /* development
       {
         "id": "OSGBRail",

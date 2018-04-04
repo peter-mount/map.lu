@@ -1,0 +1,215 @@
+<layerGroup>
+  <name>OSVMD-Contour</name>
+  <mode>SINGLE</mode>
+  <title>OS Vector Map District + Terrain 50 Contours</title>
+  <workspace>
+    <name>osgb</name>
+  </workspace>
+  <publishables>
+    <published type="layer">
+      <name>tidalwater</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/tidalwater.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>foreshore</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/foreshore.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>woodland</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/woodland.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>surfacewater_area</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/surfacewater_area.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>ornament</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/ornament.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>surfacewater_line</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/surfacewater_line.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>tidalboundary</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/tidalboundary.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>ContourLine</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/ContourLine.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>building</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/building.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>glasshouse</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/glasshouse.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>roundabout</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/roundabout.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>road</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/road.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>roundabout</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/roundabout.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>road</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/road.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>railwaytrack</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/railwaytrack.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>roadtunnel</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/roadtunnel.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>railwaytunnel</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/railwaytunnel.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>electricitytransmissionline</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/electricitytransmissionline.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>administrativeboundary</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/administrativeboundary.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>spotheight</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/spotheight.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>namedplace</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/namedplace.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>railwaystation</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/railwaystation.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>motorwayjunction</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/motorwayjunction.xml" type="application/xml"/>
+    </published>
+    <published type="layer">
+      <name>functionalsite</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/layers/functionalsite.xml" type="application/xml"/>
+    </published>
+  </publishables>
+  <styles>
+    <style>
+      <name>osgb:TidalWater_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/TidalWater_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:Foreshore_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/Foreshore_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:Woodland_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/Woodland_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:SurfaceWater_Area_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/SurfaceWater_Area_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:Ornament_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/Ornament_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:SurfaceWater_Line_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/SurfaceWater_Line_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:TidalBoundary_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/TidalBoundary_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:ContourLine</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/ContourLine.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:Building_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/Building_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:Glasshouse_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/Glasshouse_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:Roundabout_(Casing)_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/Roundabout_%28Casing%29_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:Road_(Level0)_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/Road_%28Level0%29_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:Roundabout_(Fill)_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/Roundabout_%28Fill%29_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:Road_(Levels1and2)_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/Road_%28Levels1and2%29_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:RailwayTrack_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/RailwayTrack_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:RoadTunnel_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/RoadTunnel_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:RailwayTunnel_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/RailwayTunnel_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:ElectricityTransmissionLine_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/ElectricityTransmissionLine_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:AdministrativeBoundary_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/AdministrativeBoundary_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:SpotHeight_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/SpotHeight_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:NamedPlace_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/NamedPlace_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:RailwayStation_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/RailwayStation_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:MotorwayJunction_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/MotorwayJunction_FullColour.xml" type="application/xml"/>
+    </style>
+    <style>
+      <name>osgb:FunctionalSite_FullColour</name>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="https://map.lu/geoserver/rest/workspaces/osgb/styles/FunctionalSite_FullColour.xml" type="application/xml"/>
+    </style>
+  </styles>
+  <bounds>
+    <minx>-8.74</minx>
+    <maxx>1.84</maxx>
+    <miny>49.81</miny>
+    <maxy>60.9</maxy>
+    <crs>EPSG:4277</crs>
+  </bounds>
+  <attribution>
+    <logoWidth>0</logoWidth>
+    <logoHeight>0</logoHeight>
+  </attribution>
+</layerGroup>
