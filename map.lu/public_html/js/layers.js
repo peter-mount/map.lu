@@ -15,7 +15,7 @@ var layers = {
                     "tileLayer": "https://s{s}.map.lu/OceanBottom/{z}/{x}/{-y}.png",
                 },
                 {
-                    "tileLayer": "https://{s}.map.lu/land/{z}/{x}/{y}.png"
+                    "tileLayer": "https://s{s}.map.lu/OSM_GBIE_2017/{z}/{x}/{y}.png"
                 }
             ],
             "minZoom": 0,
@@ -28,6 +28,15 @@ var layers = {
             "tileLayer": "https://{s}.map.lu/osm/{z}/{x}/{y}.png",
             "minZoom": 0,
             "maxZoom": 18
+        },
+        {
+            "id": "OSVMD",
+            "label": "OS Vector Map District 11/2017",
+            "description": "Ordnance Survey Vector Map District November 2017",
+            "tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "minZoom": 15,
+            "maxZoom": 16
         },
         /* development
         {
@@ -226,7 +235,7 @@ var layers = {
             "label": "Open Street Map",
             "group": "Geographic",
             "description": "Open Street Map with detail for British Isles in the standard Mapnik theme",
-            "tileLayer": "https://{s}.map.lu/land/{z}/{x}/{y}.png",
+            "tileLayer": "https://s{s}.map.lu/OSM_GBIE_2017/{z}/{x}/{y}.png",
             "minZoom": 0,
             "maxZoom": 18
         },
@@ -359,7 +368,8 @@ var layers = {
             "label": "Graticule 1 degree",
             "group": "Grids",
             "description": "Graticule 1 degree",
-            "tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_1@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "tileLayer": "https://s{s}.map.lu/Graticule_10m_1d/{z}/{x}/{-y}.png",
+            //"tileLayer": "https://{s}.map.lu/tms/NaturalEarth%3Ane_10m_graticules_1@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
           },
