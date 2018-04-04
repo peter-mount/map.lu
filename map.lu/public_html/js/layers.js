@@ -35,8 +35,8 @@ var layers = {
             "id": "OMP",
             "label": "OS Open Map Local",
             "description": "Ordnance Survey Open Map Local",
-            //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-            "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3AOpenMapLocal@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/tms/osgblm%3AOpenMapLocal@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3AOpenMapLocal@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 15,
             "maxZoom": 17
         },
@@ -44,8 +44,8 @@ var layers = {
             "id": "OSVMD",
             "label": "OS Vector Map District",
             "description": "Ordnance Survey Vector Map District November 2017",
-            //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-            "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 15,
             "maxZoom": 16
         },
@@ -53,8 +53,8 @@ var layers = {
             "id": "OSVMDC",
             "label": "OS Vector Map District + Contours",
             "description": "Ordnance Survey Vector Map District November 2017 + Terrain 50 Contours",
-            //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD-Contour@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-            "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AOSVMD-Contour@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            "tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD-Contour@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+            //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AOSVMD-Contour@EPSG%3A900913@png/{z}/{x}/{-y}.png",
             "minZoom": 15,
             "maxZoom": 16
         },
@@ -235,7 +235,7 @@ var layers = {
       "Rail": false,
       "Real Time": false,
       "Grids": true,
-      "UK Railway": false
+      "Department of Transport": false
     },
     overlayLayers: [
       /* development
@@ -257,8 +257,8 @@ var layers = {
         "label": "OS Terrain 50",
         "group": "Open Map Local",
         "description": "Ordnance Survey Terrain 50",
-        //"tileLayer": "https://{s}.map.lu/tms/osgb%3AContourLine@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-        "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AContourLine@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "tileLayer": "https://{s}.map.lu/tms/osgb%3AContourLine@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgb%3AContourLine@EPSG%3A900913@png/{z}/{x}/{-y}.png",
         "minZoom": 15,
         "maxZoom": 16
       },
@@ -267,8 +267,8 @@ var layers = {
         "label": "Open Map Local Water",
         "group": "Open Map Local",
         "description": "Ordnance Survey Open Map Local Water features",
-        //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-        "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3AWater@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "tileLayer": "https://{s}.map.lu/tms/osgblm%3AWater@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3AWater@EPSG%3A900913@png/{z}/{x}/{-y}.png",
         "minZoom": 15,
         "maxZoom": 17
       },
@@ -277,8 +277,8 @@ var layers = {
         "label": "UK Roads Open Map Local",
         "group": "Open Map Local",
         "description": "UK Roads Ordnance Survey Open Map Local",
-        //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-        "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3ARoads@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "tileLayer": "https://{s}.map.lu/tms/osgblm%3ARoads@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3ARoads@EPSG%3A900913@png/{z}/{x}/{-y}.png",
         "minZoom": 15,
         "maxZoom": 17
       },
@@ -287,8 +287,8 @@ var layers = {
         "label": "UK Railway Open Map Local",
         "group": "Open Map Local",
         "description": "UK Railway Ordnance Survey Open Map Local",
-        //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-        "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3ARailway@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "tileLayer": "https://{s}.map.lu/tms/osgblm%3ARailway@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3ARailway@EPSG%3A900913@png/{z}/{x}/{-y}.png",
         "minZoom": 15,
         "maxZoom": 17
       },
@@ -297,8 +297,8 @@ var layers = {
         "label": "UK Railway Stations",
         "group": "Open Map Local",
         "description": "UK Railway Stations Ordnance Survey Open Map Local",
-        //"tileLayer": "https://{s}.map.lu/tms/osgb%3AOSVMD@EPSG%3A900913@png/{z}/{x}/{-y}.png",
-        "tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3Arailwaystation@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        "tileLayer": "https://{s}.map.lu/tms/osgblm%3Arailwaystation@EPSG%3A900913@png/{z}/{x}/{-y}.png",
+        //"tileLayer": "http://loge.amsterdam.area51.onl/geoserver/gwc/service/tms/1.0.0/osgblm%3Arailwaystation@EPSG%3A900913@png/{z}/{x}/{-y}.png",
         "minZoom": 15,
         "maxZoom": 17
       },
@@ -449,12 +449,21 @@ var layers = {
           {
             "id": "TRNET",
             "label": "Railway Network",
-            "group": "UK Railway",
+            "group": "Department of Transport",
             "description": "Railway network",
             "tileLayer": "https://{s}.map.lu/tms/department_of_transport%3Adepartment_of_transport_railnetworkLine@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
             "minZoom": 0,
             "maxZoom": 16
           },
+          {
+            "id": "TRSTN",
+            "label": "Railway Stations",
+            "group": "Department of Transport",
+            "description": "Railway stations",
+            "tileLayer": "https://{s}.map.lu/tms/department_of_transport%3Adepartment_of_transport_stationsPoint@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
+            "minZoom": 0,
+            "maxZoom": 16
+          }
           /* development
           {
             "id": "OSR",
@@ -467,14 +476,5 @@ var layers = {
             "maxZoom": 16
           },
           */
-          {
-            "id": "TRSTN",
-            "label": "Railway Stations",
-            "group": "UK Railway",
-            "description": "Railway stations",
-            "tileLayer": "https://{s}.map.lu/tms/department_of_transport%3Adepartment_of_transport_stationsPoint@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png",
-            "minZoom": 0,
-            "maxZoom": 16
-          }
     ]
 };
