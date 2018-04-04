@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tiles</title>
+        <link rel="stylesheet" href="/css/maplu.min.css">
+        <style>
+        table {
+          border-collapse: collapse;
+        }
+        td, th {
+          padding-left: 0.25em;
+          padding-right: 0.25em;
+        }
+        caption { font-weight: bold; }
+        .center, td:nth-child(3), td:nth-child(4), td:nth-child(5) { text-align: center; }
+        .right, td:nth-child(7), td:nth-child(8) { text-align: right; }
+        td.sep, th.sep, tr > td:not(:nth-child(1)) { border-left: 1px solid black; }
+        td:not(:nth-child(2)) { white-space: nowrap; }
+
+        .leaflet td { text-align: left; }
+        .leaflet td:not(:last-child) { text-align: center; }
+
+        .layerName {
+          font-weight: lighter;
+          font-style: italic;
+          color: gray;
+        }
+
+        .leaflet tr,
+        .layers tr:not(.header-top) {
+          border-bottom: 1px solid black;
+        }
+        tr:not(.header), tr.header-bottom {
+          border-left: 1px solid black;
+          border-right: 1px solid black;
+        }
+        tr.heading th {
+          font-size: 120%;
+          padding-bottom: 0.25em;
+        }
+        tr.heading:not(:first-of-type) th {
+          padding-top: 1em;
+        }
+
+        .layers td {
+          vertical-align: top;
+        }
+        .layers img {
+          display: block;
+          margin: 0.25em;
+          width: 256px;
+          height: 256px;
+          opacity: 1;
+          background-color: #ffffff;
+          border: 1px solid black;
+        }
+      </style>
+    </head>
+    <body>
+
+        <div class="page-header">
+            <h1>Tile sets</h1>
+        </div>
+
+        <ol class="breadcrumb">
+            <!-- prefix with //area51.onl/ here as we use this page on a51.li/index.html as well -->
+            <li><a href="/">Home</a></li>
+            <li class="active">Tiles</li>
+        </ol>
+
+        <h4 class="modal-title">Reusing map.lu content</h4>
+        <p>
+          The following rules apply when using these layers - the full details are listed at <a href="https://map.lu/about/index.html">https://map.lu/about/index.html</a>.
+        </p>
+        <p>
+          map.lu is is free for reuse for non-commercial purposes as long as you stay within the various copyrights of the underlying data and your traffic is not excessive.
+          If you do use the map tiles please let me know.
+        </p>
+        <p>
+          Please note that bulk downloading of tiles is prohibited.
+        </p>
+        <p>
+          If you want to use the map data for commercial use, or you expect your traffic to be heavy then please get in touch. The main concern here is hosting and transfer costs of the map tiles.
+        </p>
+
+        <h4 class="modal-title">Leaflet</h4>
+        <p>
+          The following table lists the url to use with Leaflet for each layer format. Simply substitute <span class="layerName">layerName</span> with the required layerName.
+        </p>
+        <table class="leaflet">
+          <tr class="header heading">
+            <th colspan="3">Leaflet url's</th>
+          </tr>
+          <tr class="header-top header-bottom">
+            <th>Layer Format</th>
+            <th class="sep">Url type</th>
+            <th class="sep">Leaflet url</th>
+          </tr>
+          <tr>
+            <td rowspan="2">slippy</td>
+            <td>Multiple servers</td>
+            <td>
+              https://s{s}.map.lu/<span class="layerName">layerName</span>/{z}/{x}/{y}.png
+            </td>
+          </tr>
+          <tr>
+            <td>Single server</td>
+            <td>
+              https://s.map.lu/<span class="layerName">layerName</span>/{z}/{x}/{y}.png
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="2">tms</td>
+            <td>Multiple servers</td>
+            <td>
+              https://s{s}.map.lu/<span class="layerName">layerName</span>/{z}/{x}/{-y}.png
+            </td>
+          </tr>
+          <tr>
+            <td>Single server</td>
+            <td>
+              https://s.map.lu/<span class="layerName">layerName</span>/{z}/{x}/{-y}.png
+            </td>
+          </tr>
+        </table>
+
+        <h4 class="modal-title">Static Layers</h4>
+        <p>
+          The following table lists the layers, their types and the zoom ranges available for each one.
+          A json version of this table is <a href="capabilities.json">also available</a>.
+        </p>
+        <table class="layers">
+
+          <tr class="header heading">
+            <th colspan="8">Base layers</th>
+          </tr>
+          <tr class="header-top">
+            <th colspan="2">&nbsp;</th>
+            <th class="sep">Layer</th>
+            <th colspan="2" class="sep">Zoom</th>
+            <th colspan="3" class="sep">Rendered</th>
+          </tr>
+          <tr class="header header-bottom">
+            <th>Name</th>
+            <th>Description</th>
+            <th class="sep">Format</th>
+            <th class="sep">Min</th>
+            <th>Max</th>
+            <th class="sep">Date</th>
+            <th>Duration</th>
+            <th>Size</th>
+          </tr>
+
+          <tr>
+            <td>Hypsometric_10m</td>
+            <td>
+              1:10m Cross Blended Hypso with Relief, Water, Drains, and Ocean Bottom
+              <img alt="" src="https://sa.map.lu/Hypsometric_10m/4/7/10.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 29</td>
+            <td>1 h 59 m</td>
+            <td>1,959 mb</td>
+          </tr>
+
+          <tr>
+            <td>NaturalEarth1_10m</td>
+            <td>
+              1:10m Natural Earth I with Shaded Relief, Water, and Drainages
+              <img alt="" src="https://sa.map.lu/NaturalEarth1_10m/4/7/10.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 29</td>
+            <td>2 h 20 m</td>
+            <td>1,782 mb</td>
+          </tr>
+
+          <tr>
+            <td>NaturalEarth2_10m</td>
+            <td>
+              1:10m Natural Earth II with Shaded Relief, Water, and Drainages
+              <img alt="" src="https://sa.map.lu/NaturalEarth2_10m/4/7/10.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 28</td>
+            <td>2 h 3 m</td>
+            <td>1,771 mb</td>
+          </tr>
+
+          <tr>
+            <td>OceanBottom</td>
+            <td>
+              1:10m Blended depth colors and relief shading of the ocean bottom derived from CleanTOPO2 data
+              <img alt="" src="https://sa.map.lu/OceanBottom/4/7/10.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 29</td>
+            <td>1 h 54 m</td>
+            <td>965 mb</td>
+          </tr>
+
+          <tr class="header heading">
+            <th colspan="8">Overlay layers</th>
+          </tr>
+          <tr class="header-top">
+            <th colspan="2">&nbsp;</th>
+            <th class="sep">Layer</th>
+            <th colspan="2" class="sep">Zoom</th>
+            <th colspan="3" class="sep">Rendered</th>
+          </tr>
+          <tr class="header header-bottom">
+            <th>Name</th>
+            <th>Description</th>
+            <th class="sep">Format</th>
+            <th class="sep">Min</th>
+            <th>Max</th>
+            <th class="sep">Date</th>
+            <th>Duration</th>
+            <th>Size</th>
+          </tr>
+
+          <tr>
+            <td>GeographicLines_10m</td>
+            <td>
+              Tropical and polar circles, equator, and International Date Line.
+              <img alt="" src="https://sa.map.lu/GeographicLines_10m/0/0/0.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 29</td>
+            <td>1 h 11 m</td>
+            <td>358 mb</td>
+          </tr>
+
+          <tr>
+            <td>Graticule_10m_30d</td>
+            <td>
+              1:10m Graticule grid at 30° intervals.
+              <img alt="" src="https://sa.map.lu/Graticule_10m_30d/0/0/0.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 29</td>
+            <td>1 h 11 m</td>
+            <td>346 mb</td>
+          </tr>
+
+          <tr>
+            <td>Graticule_10m_20d</td>
+            <td>
+              1:10m Graticule grid at 20° intervals.
+              <img alt="" src="https://sa.map.lu/Graticule_10m_20d/0/0/0.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 29</td>
+            <td>1 h 11 m</td>
+            <td>346 mb</td>
+          </tr>
+
+          <tr>
+            <td>Graticule_10m_15d</td>
+            <td>
+              1:10m Graticule grid at 15° intervals.
+              <img alt="" src="https://sa.map.lu/Graticule_10m_15d/0/0/0.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 29</td>
+            <td>1 h 11 m</td>
+            <td>346 mb</td>
+          </tr>
+
+          <tr>
+            <td>Graticule_10m_10d</td>
+            <td>
+              1:10m Graticule grid at 10° intervals.
+              <img alt="" src="https://sa.map.lu/Graticule_10m_10d/0/0/0.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 29</td>
+            <td>1 h 11 m</td>
+            <td>346 mb</td>
+          </tr>
+
+          <tr>
+            <td>Graticule_10m_1d</td>
+            <td>
+              1:10m Graticule grid at 1° intervals.
+              <img alt="" src="https://sa.map.lu/Graticule_10m_1d/4/7/10.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 29</td>
+            <td>x h xx m</td>
+            <td>355 mb</td>
+          </tr>
+
+          <tr>
+            <td>OSM_GBIE_2017</td>
+            <td>
+              Open Street Map of Great Britain and Ireland only.
+              <img alt="" src="https://s.map.lu/OSM_GBIE_2017/14/8215/5465.png"/>
+            </td>
+            <td>slippy</td>
+            <td>0</td>
+            <td>14</td>
+            <td>2018 March 30</td>
+            <td>13 h</td>
+            <td>6,960 mb</td>
+          </tr>
+
+          <tr>
+            <td>TimeZones_10m</td>
+            <td>
+              Time Zones
+              <img alt="" src="https://sa.map.lu/TimeZones_10m/4/7/10.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 29</td>
+            <td>1 h 14 m</td>
+            <td>358 mb</td>
+          </tr>
+
+          <tr>
+            <td>TM_World_Borders_0.3</td>
+            <td>
+              World Borders Dataset Version 0.3 from <a href="http://thematicmapping.org/downloads/world_borders.php">thematicmapping.org</a>,
+              under the Creative Commons <a href="http://creativecommons.org/licenses/by-sa/3.0/">Attribution-Share Alike License</a>.
+              <img alt="" src="https://sa.map.lu/TM_World_Borders_0.3/4/7/10.png"/>
+            </td>
+            <td>tms</td>
+            <td>0</td>
+            <td>8</td>
+            <td>2018 March 29</td>
+            <td>1 h 16 m</td>
+            <td>384 mb</td>
+          </tr>
+
+        </table>
+
+    </body>
+</html>
