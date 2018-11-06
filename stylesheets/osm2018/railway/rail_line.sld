@@ -72,7 +72,7 @@
                 </ogc:PropertyIsNull>
                 <ogc:PropertyIsGreaterThanOrEqualTo>
                   <ogc:PropertyName>layer</ogc:PropertyName>
-                  <ogc:Literal>-1</ogc:Literal>
+                  <ogc:Literal>0</ogc:Literal>
                 </ogc:PropertyIsGreaterThanOrEqualTo>
               </ogc:Or>
             </ogc:And>
@@ -84,6 +84,22 @@
               <CssParameter name="stroke-linecap">round</CssParameter>
             </Stroke>
           </LineSymbolizer>
+          <TextSymbolizer>
+            <Label>
+              <ogc:PropertyName>name</ogc:PropertyName>
+            </Label>
+            <Font>
+              <CssParameter name="font-family">Arial</CssParameter>
+              <CssParameter name="font-size">10</CssParameter>
+            </Font>
+            <LabelPlacement>
+              <LinePlacement />
+            </LabelPlacement>
+            <Fill>
+              <CssParameter name="fill">#000000</CssParameter>
+            </Fill>
+            <VendorOption name="followLine">true</VendorOption>
+          </TextSymbolizer>
         </Rule>
       </FeatureTypeStyle>
       <FeatureTypeStyle>
@@ -101,7 +117,7 @@
                 </ogc:PropertyIsNull>
                 <ogc:PropertyIsGreaterThanOrEqualTo>
                   <ogc:PropertyName>layer</ogc:PropertyName>
-                  <ogc:Literal>-1</ogc:Literal>
+                  <ogc:Literal>0</ogc:Literal>
                 </ogc:PropertyIsGreaterThanOrEqualTo>
               </ogc:Or>
             </ogc:And>
