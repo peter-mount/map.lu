@@ -436,6 +436,43 @@
         </Rule>
       </FeatureTypeStyle>
 
+      <!-- Narrow Gauge line -->
+      <FeatureTypeStyle>
+        <Rule>
+          <Title>Narrow Gauge</Title>
+          <ogc:Filter>
+            <ogc:PropertyIsEqualTo>
+              <ogc:PropertyName>railway</ogc:PropertyName>
+              <ogc:Literal>narrow_gauge</ogc:Literal>
+            </ogc:PropertyIsEqualTo>
+          </ogc:Filter>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#888888</CssParameter>
+              <CssParameter name="stroke-width">0.25</CssParameter>
+              <CssParameter name="stroke-dasharray">3 3</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+          <TextSymbolizer>
+            <Label>
+              <ogc:PropertyName>name</ogc:PropertyName>
+            </Label>
+            <Font>
+              <CssParameter name="font-family">Arial</CssParameter>
+              <CssParameter name="font-size">12</CssParameter>
+            </Font>
+            <LabelPlacement>
+              <LinePlacement />
+            </LabelPlacement>
+            <Fill>
+              <CssParameter name="fill">#000000</CssParameter>
+            </Fill>
+            <VendorOption name="followLine">true</VendorOption>
+          </TextSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+
     </UserStyle>
   </NamedLayer>
+
 </StyledLayerDescriptor>
