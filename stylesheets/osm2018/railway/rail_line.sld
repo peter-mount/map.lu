@@ -260,10 +260,10 @@
                   <ogc:PropertyIsNull>
                     <ogc:PropertyName>tunnel</ogc:PropertyName>
                   </ogc:PropertyIsNull>
-                  <ogc:PropertyIsEqualTo>
+                  <ogc:PropertyIsNotEqualTo>
                     <ogc:PropertyName>tunnel</ogc:PropertyName>
-                    <ogc:Literal>no</ogc:Literal>
-                  </ogc:PropertyIsEqualTo>
+                    <ogc:Literal>yes</ogc:Literal>
+                  </ogc:PropertyIsNotEqualTo>
                 </ogc:Or>
               </ogc:And>
 
@@ -320,10 +320,10 @@
                   <ogc:PropertyIsNull>
                     <ogc:PropertyName>tunnel</ogc:PropertyName>
                   </ogc:PropertyIsNull>
-                  <ogc:PropertyIsEqualTo>
+                  <ogc:PropertyIsNotEqualTo>
                     <ogc:PropertyName>tunnel</ogc:PropertyName>
-                    <ogc:Literal>no</ogc:Literal>
-                  </ogc:PropertyIsEqualTo>
+                    <ogc:Literal>yes</ogc:Literal>
+                  </ogc:PropertyIsNotEqualTo>
                 </ogc:Or>
               </ogc:And>
 
