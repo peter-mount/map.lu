@@ -37,16 +37,10 @@
         dummy entry used to show everything so we can select new features.
         Uncomment this out only for debugging or adding features.
       -->
+      <!--
       <FeatureTypeStyle>
         <Rule>
           <Title>Other</Title>
-          <!--
-          <ogc:Filter>
-            <ogc:PropertyIsNull>
-              <ogc:PropertyName>layer</ogc:PropertyName>
-            </ogc:PropertyIsNull>
-          </ogc:Filter>
-        -->
           <LineSymbolizer>
             <Stroke>
               <CssParameter name="stroke">#cc0000</CssParameter>
@@ -55,6 +49,7 @@
           </LineSymbolizer>
         </Rule>
       </FeatureTypeStyle>
+      -->
 
       <!-- Platforms -->
       <FeatureTypeStyle>
@@ -370,6 +365,8 @@
         </Rule>
       </FeatureTypeStyle>
 
+      <!-- ========== Non mainline ========== -->
+
       <FeatureTypeStyle>
         <Rule>
           <Title>Disused</Title>
@@ -502,6 +499,182 @@
             </LabelPlacement>
             <Fill>
               <CssParameter name="fill">#000000</CssParameter>
+            </Fill>
+            <VendorOption name="followLine">true</VendorOption>
+          </TextSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+
+      <!-- ========== Tram lines ========== -->
+
+      <FeatureTypeStyle>
+        <Rule>
+          <Title>Tram Tunnel</Title>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>railway</ogc:PropertyName>
+                <ogc:Literal>tram</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>tunnel</ogc:PropertyName>
+                <ogc:Literal>yes</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#008800</CssParameter>
+              <CssParameter name="stroke-width">1</CssParameter>
+              <CssParameter name="stroke-dasharray">5 2</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+
+      <FeatureTypeStyle>
+        <Rule>
+          <Title>Tram Spur</Title>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>railway</ogc:PropertyName>
+                <ogc:Literal>tram</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>service</ogc:PropertyName>
+                <ogc:Literal>spur</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#00aa00</CssParameter>
+              <CssParameter name="stroke-width">1</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+
+      <FeatureTypeStyle>
+        <Rule>
+          <Title>Tram Siding</Title>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>railway</ogc:PropertyName>
+                <ogc:Literal>tram</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>service</ogc:PropertyName>
+                <ogc:Literal>siding</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#00aa00</CssParameter>
+              <CssParameter name="stroke-width">0.5</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+
+      <FeatureTypeStyle>
+        <Rule>
+          <Title>Tram Yard</Title>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>railway</ogc:PropertyName>
+                <ogc:Literal>tram</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>service</ogc:PropertyName>
+                <ogc:Literal>yard</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#00aa00</CssParameter>
+              <CssParameter name="stroke-width">0.5</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+
+      <FeatureTypeStyle>
+        <Rule>
+          <Title>Tram Crossover</Title>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>railway</ogc:PropertyName>
+                <ogc:Literal>tram</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>service</ogc:PropertyName>
+                <ogc:Literal>crossover</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+            </ogc:And>
+          </ogc:Filter>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#00aa00</CssParameter>
+              <CssParameter name="stroke-width">0.5</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+        </Rule>
+      </FeatureTypeStyle>
+
+      <FeatureTypeStyle>
+        <Rule>
+          <Title>Tram Line</Title>
+          <ogc:Filter>
+            <ogc:And>
+              <ogc:PropertyIsEqualTo>
+                <ogc:PropertyName>railway</ogc:PropertyName>
+                <ogc:Literal>tram</ogc:Literal>
+              </ogc:PropertyIsEqualTo>
+
+              <ogc:And>
+                <ogc:PropertyIsNull>
+                  <ogc:PropertyName>service</ogc:PropertyName>
+                </ogc:PropertyIsNull>
+
+                <ogc:Or>
+                  <ogc:PropertyIsNull>
+                    <ogc:PropertyName>tunnel</ogc:PropertyName>
+                  </ogc:PropertyIsNull>
+                  <ogc:PropertyIsNotEqualTo>
+                    <ogc:PropertyName>tunnel</ogc:PropertyName>
+                    <ogc:Literal>yes</ogc:Literal>
+                  </ogc:PropertyIsNotEqualTo>
+                </ogc:Or>
+              </ogc:And>
+
+            </ogc:And>
+          </ogc:Filter>
+          <LineSymbolizer>
+            <Stroke>
+              <CssParameter name="stroke">#008800</CssParameter>
+              <CssParameter name="stroke-width">1</CssParameter>
+            </Stroke>
+          </LineSymbolizer>
+          <TextSymbolizer>
+            <Label>
+              <ogc:PropertyName>name</ogc:PropertyName>
+            </Label>
+            <Font>
+              <CssParameter name="font-family">Arial</CssParameter>
+              <CssParameter name="font-size">12</CssParameter>
+            </Font>
+            <LabelPlacement>
+              <LinePlacement />
+            </LabelPlacement>
+            <Fill>
+              <CssParameter name="fill">#005500</CssParameter>
             </Fill>
             <VendorOption name="followLine">true</VendorOption>
           </TextSymbolizer>
