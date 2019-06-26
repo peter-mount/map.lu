@@ -27,17 +27,32 @@
     position: fixed;
     top: 1.5em;
     left: 0;
-    bottom: 0;
     width: 10em;
+}
+
+#mapStatus.open {
+    bottom: 0;
+    width: 20em;
     background: white;
     border: 1px solid black;
 }
 
-#compass {
+#mapStatus.closed {
+    background: white;
+    border: 1px solid red;
+}
+
+#mapStatus .icon, #compass {
     font-size: 1.5em;
-    width: 5em;
-    height: 7em;
-    border: 1px solid black;
+}
+
+#mapStatus .right {
+    float: right;
+}
+
+#compass {
+    width: 6em;
+    height: 6em;
     padding: 0.25em;
     margin: 0.1em;
 }

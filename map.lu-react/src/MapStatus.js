@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {config} from "./App";
 import Compass from "./Compass";
 
 class MapStatus extends Component {
@@ -10,9 +9,31 @@ class MapStatus extends Component {
 
         console.log(map.center, map.zoom);
 
-        return <div id="mapStatus">
+        if (config.expandStatus) {
+            return <div id="mapStatus" className="open">
+                <Compass app={app}/>
+                <i
+                    className="right icon fas fa-caret-square-down"
+                    onClick={() => this.toggle()}
+                />
+            </div>
+        }
+
+        return <div id="mapStatus" className="closed">
             <Compass app={app}/>
+            <i
+                className="right icon far fa-caret-square-right"
+                onClick={() => this.toggle()}
+            />
         </div>
+    }
+
+    toggle() {
+        const app = this.props.app,
+            config = app.state;
+        config.expandStatus = !config.expandStatus;
+        app.setState(config)
+        console.log("config.expandStatus", config.expandStatus)
     }
 }
 

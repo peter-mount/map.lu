@@ -10,8 +10,11 @@ This is used to render the rail_line table & shows line features for the mainlin
 ### Filters
 
 * railway=rail main filter for the main line
-* railway=platform for platforms
 
+### Platforms
+* railway=platform for platforms
+* layer negative value for subway / underground
+* layer is null for mainline
 
 # TODO
 

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {config} from "./App";
 
 // The compass rose for navigation
 class Compass extends Component {
@@ -13,7 +12,7 @@ class Compass extends Component {
         return <div id="compass">
             <div className="nav">
                 <div>
-                    <i className="fas fa-arrow-up"/>
+                    <i className="fas fa-arrow-up" onClick={() => this.north()}/>
                 </div>
                 <div>
                     <i className="fas fa-arrow-left"/>
@@ -21,7 +20,7 @@ class Compass extends Component {
                     <i className="fas fa-arrow-right"/>
                 </div>
                 <div>
-                    <i className="fas fa-arrow-down"/>
+                    <i className="fas fa-arrow-down" onClick={() => this.south()}/>
                 </div>
             </div>
             <div className="zoom">
@@ -30,6 +29,37 @@ class Compass extends Component {
                 <i className="fas fa-angle-right" onClick={() => this.zoomIn()}/>
             </div>
         </div>
+    }
+
+    latPixel() {
+        const app = this.props.app,
+            config = app.state,
+            map = config.map;
+        //return 40075016.686 * Math.cos(map.center[0]*Math.PI/180.0)/(2^map.zoom)
+        console.log(map.zoom, Math.pow(2, map.zoom))
+        return 360.0 * Math.cos(map.center[0] * Math.PI / 180.0) / Math.pow(2, map.zoom)
+    }
+
+    north() {
+        const app = this.props.app,
+            config = app.state,
+            map = config.map;
+
+        console.log(map.center);
+        map.center[0] = Math.min(90, map.center[0] + this.latPixel());
+        console.log(map.center);
+        app.setState(config)
+    }
+
+    south() {
+        const app = this.props.app,
+            config = app.state,
+            map = config.map;
+
+        console.log(map.center);
+        map.center[0] = Math.max(-90, map.center[0] - this.latPixel());
+        console.log(map.center);
+        app.setState(config)
     }
 
     zoomIn() {
