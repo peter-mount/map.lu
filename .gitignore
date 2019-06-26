@@ -9,3 +9,5 @@ release.properties
 /map.lu/dist/
 /map.lu/temp/
 npm-debug.log
+/map.lu-react/node_modules/
+.idea

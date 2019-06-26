@@ -68,9 +68,7 @@ var MapLu = (function () {
         },
         // WMS
         wms: function (v) {
-          return L.tileLayer.wms( v.server, {
-            layers: v.layers
-          } );
+          return L.tileLayer.wms( v.server, v );
         },
         // gibs
         gibs: function (v) {

@@ -1,0 +1,60 @@
+.App {
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.leaflet-container {
+    position: fixed;
+    top: 1.5em;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+#navBar {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.5em;
+    background: white;
+    border-bottom: 1px solid black;
+    font-size: 1em;
+    padding: 0.1em;
+}
+
+#mapStatus {
+    position: fixed;
+    top: 1.5em;
+    left: 0;
+    bottom: 0;
+    width: 10em;
+    background: white;
+    border: 1px solid black;
+}
+
+#compass {
+    font-size: 1.5em;
+    width: 5em;
+    height: 7em;
+    border: 1px solid black;
+    padding: 0.25em;
+    margin: 0.1em;
+}
+
+#compass .nav {
+    text-align: center;
+}
+
+#compass i {
+    padding: 0.2em;
+}
+
+#compass .zoom {
+    text-align: center;
+}
+
+#compass .zoom span {
+    width: 2em;
+    display: inline-block;
+}

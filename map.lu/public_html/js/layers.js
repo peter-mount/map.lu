@@ -6,6 +6,14 @@ var layers = {
     baseLayers: [
         {
             "id": "OS",
+            "label": "Open Street Map Oct 2018",
+            "description": "Our copy of Open Street Map exported Octover 2018",
+            "tileLayer": "https://s{s}.map.lu/osm201810/{z}/{x}/{y}.png",
+            "minZoom": 0,
+            "maxZoom": 14
+        },
+        {
+            "id": "OSO",
             "label": "Open Street Map Ocean",
             "description": "Composite of Ocean Bottom and Open Street Map layers",
             "layerGroup": [
