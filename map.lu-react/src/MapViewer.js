@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
+import {Map} from 'react-leaflet'
 import {layers} from './Layers'
 import MapLayer from "./MapLayer";
 

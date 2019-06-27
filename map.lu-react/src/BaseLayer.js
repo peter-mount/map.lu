@@ -19,7 +19,7 @@ class BaseLayer extends Component {
 
         let baseLayers = [];
         layers.baseLayers.forEach(l => {
-            baseLayers.push(<option key={l.id} value={l.id}>{l.label}</option>)
+            baseLayers.push(<option key={l.id} value={l.id} selected={l.id === map.baseLayer}>{l.label}</option>)
         });
 
         return <div className="section">

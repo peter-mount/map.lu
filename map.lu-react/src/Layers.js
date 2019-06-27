@@ -2,6 +2,9 @@
  *
  * The available map layers
  */
+
+//export var layers;
+
 export var layers = {
     baseLayers: [
         {

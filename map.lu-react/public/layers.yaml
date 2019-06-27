@@ -1,0 +1,234 @@
+version:
+  date: "2019-06-27"
+
+# The initial map to show
+map:
+  center:
+    - 54.322931143263496
+    - -4.855957031250001
+  zoom: 6
+
+  baseLayer: NE2
+  overlays:
+    - id: OMR
+      visible: true
+    - id: OMRD
+      visible: true
+    - id: OMRS
+      visible: true
+
+# debug, show the side bar expanded on startup
+expandStatus: true
+
+baseLayers:
+  OS:
+    id: "OS"
+    label: Open Street Map Oct 2018
+    description: Our pre-rendered copy of Open Street Map exported October 2018
+    tileLayer: "https://s{s}.map.lu/osm201810/{z}/{x}/{y}.png"
+    minZoom: 0
+    maxZoom: 14
+  OMP:
+    id: "OMP"
+    label: "OS Open Map Local"
+    description: "Ordnance Survey Open Map Local"
+    tileLayer: "https://{s}.map.lu/tms/osgblm%3AOpenMapLocal@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+    minZoom: 15
+    maxZoom: 17
+  WT:
+    id: "WT"
+    label: "World Terrain"
+    description: "Terrain map of the world"
+    tileLayer: "https://s{s}.map.lu/Hypsometric_10m/{z}/{x}/{-y}.png"
+    minZoom: 0
+    maxZoom: 16
+  NE1:
+    id: "NE1"
+    label: "Natural Earth 1"
+    description: "Natural Earth I with Shaded Relief, Water, and Drainages"
+    tileLayer: "https://{s}.map.lu/tms/NaturalEarth%3ANaturalEarth1_10m@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+    minZoom: 0
+    maxZoom: 8
+  NE2:
+    id: "NE2"
+    label: "Natural Earth 2"
+    description: "Natural Earth II with Shaded Relief, Water, and Drainages"
+    tileLayer: "https://s{s}.map.lu/NaturalEarth2_10m/{z}/{x}/{-y}.png"
+    minZoom: 0
+    maxZoom: 8
+  OB:
+    id: "OB"
+    label: "Ocean Bottom"
+    description: "Natural Earth Ocean Bottom"
+    tileLayer: "https://s{s}.map.lu/OceanBottom/{z}/{x}/{-y}.png"
+    minZoom: 0
+    maxZoom: 16
+  TM:
+    id: "TM"
+    label: "True Marble"
+    description: "True Marble"
+    wms:
+      server: "https://map.lu/truemarble/wms"
+      layers: "TrueMarble:truemarble"
+    minZoom: 0
+    maxZoom: 16
+  BKMC2016:
+    id: "BKMC2016"
+    label: "Black Marble Colour 2016"
+    description: "NASA Black Marble Colour 2016"
+    wms:
+      server: "https://map.lu/nasa/wms"
+      layers: "NASA:BlackMarble_2016_Colour"
+    minZoom: 0
+    maxZoom: 16
+  BKMC2016G:
+    id: "BKMC2016G"
+    label: "Black Marble Grey 2016"
+    description: "NASA Black Marble Grey 2016"
+    wms:
+      server: "https://map.lu/nasa/wms"
+      layers: "NASA:BlackMarble_2016_Gray"
+    minZoom: 0
+    maxZoom: 16
+
+overlayLayers:
+  UK:
+    group: "UK Data"
+    OSGB:
+      group: "Ordnance Survey"
+      OSGBOML:
+        group: "Open Map Local"
+        OST50:
+          id: "OST50"
+          label: "OS Terrain 50"
+          description: "Ordnance Survey Terrain 50"
+          minZoom: 15
+          maxZoom: 16
+        OMW:
+          id: "OMW"
+          label: "Open Map Local Water"
+          description: "Ordnance Survey Open Map Local Water features"
+          tileLayer: "https://{s}.map.lu/tms/osgblm%3AWater@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+          minZoom: 15
+          maxZoom: 17
+        OMRD:
+          id: "OMRD"
+          label: "UK Roads Open Map Local"
+          description: "UK Roads Ordnance Survey Open Map Local"
+          tileLayer: "https://{s}.map.lu/tms/osgblm%3ARoads@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+          minZoom: 15
+          maxZoom: 17
+        OMR:
+          id: "OMR"
+          label: "UK Railway Open Map Local"
+          description: "UK Railway Ordnance Survey Open Map Local"
+          tileLayer: "https://{s}.map.lu/tms/osgblm%3ARailway@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+          minZoom: 15
+          maxZoom: 17
+        OMRS:
+          id: "OMRS"
+          label: "UK Railway Stations"
+          description: "UK Railway Stations Ordnance Survey Open Map Local"
+          tileLayer: "https://{s}.map.lu/tms/osgblm%3Arailwaystation@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+          minZoom: 15
+          maxZoom: 17
+    DOT:
+      group: "Department of Transport"
+      TRNET:
+        id: "TRNET"
+        label: "Railway Network"
+        description: "Railway network"
+        tileLayer: "https://{s}.map.lu/tms/department_of_transport%3Adepartment_of_transport_railnetworkLine@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png"
+        minZoom: 0
+        maxZoom: 16
+      TRSTN:
+        id: "TRSTN"
+        label: "Railway Stations"
+        description: "Railway stations"
+        tileLayer: "https://{s}.map.lu/tms/department_of_transport%3Adepartment_of_transport_stationsPoint@EPSG%3A900913@jpeg/{z}/{x}/{-y}.png"
+        minZoom: 0
+        maxZoom: 16
+  NE:
+    group: "Natural Earth"
+    WB:
+      id: "WB"
+      label: "TM World Borders"
+      description: "TM World Borders 0.3"
+      tileLayer: "https://s{s}.map.lu/TM_World_Borders_0.3/{z}/{x}/{-y}.png"
+      minZoom: 0
+      maxZoom: 16
+    NEPP:
+      id: "NEPP"
+      label: "Populated Places"
+      description: "Populated Places"
+      tileLayer: "https://{s}.map.lu/tms/NaturalEarth%3ANE_PopulatedPlaces@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+      minZoom: 0
+      maxZoom: 16
+  GRIDS:
+    group: "Grids"
+    NONE:
+      id: ""
+      label: "None"
+      description: "No grids"
+      # See https://stackoverflow.com/a/28094977
+      tileLayer: ""
+      minZoom: 0
+      maxZoom: 16
+    GL:
+      id: "GL"
+      label: "Geographic Lines"
+      description: "Geographic Lines"
+      tileLayer: "https://s{s}.map.lu/GeographicLines_10m/{z}/{x}/{-y}.png"
+      minZoom: 0
+      maxZoom: 16
+    TZ:
+      id: "TZ"
+      label: "Time Zones"
+      description: "Time Zones"
+      tileLayer: "https://s{s}.map.lu/TimeZones_10m/{z}/{x}/{-y}.png"
+      minZoom: 0
+      maxZoom: 16
+    G30:
+      id: "G30"
+      label: "Graticule 30d"
+      description: "Graticule 30 degree"
+      tileLayer: "https://s{s}.map.lu/Graticule_10m_30d/{z}/{x}/{-y}.png"
+      minZoom: 0
+      maxZoom: 16
+    G20:
+      id: "G20"
+      label: "Graticule 20d"
+      description: "Graticule 20 degree"
+      tileLayer: "https://s{s}.map.lu/Graticule_10m_20d/{z}/{x}/{-y}.png"
+      minZoom: 0
+      maxZoom: 16
+    G15:
+      id: "G15"
+      label: "Graticule 15 d"
+      description: "Graticule 15 degree"
+      tileLayer: "https://s{s}.map.lu/Graticule_10m_15d/{z}/{x}/{-y}.png"
+      minZoom: 0
+      maxZoom: 16
+    G10:
+      id: "G10"
+      label: "Graticule 10 d"
+      description: "Graticule 10 degree"
+      tileLayer: "https://s{s}.map.lu/Graticule_10m_10d/{z}/{x}/{-y}.png"
+      minZoom: 0
+      maxZoom: 16
+    G01:
+      id: "G01"
+      label: "Graticule 1 degree"
+      description: "Graticule 1 degree"
+      tileLayer: "https://s{s}.map.lu/Graticule_10m_1d/{z}/{x}/{-y}.png"
+      minZoom: 0
+      maxZoom: 16
+  AREA51:
+    group: "Area51"
+    EQ:
+      id: "EQ"
+      label: "Earthquake 30 day"
+      description: "Earthquakes in last 30 days"
+      tileLayer: "https://{s}.map.lu/tms/area51:v_quake@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+      minZoom: 0
+      maxZoom: 16

@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "js-yaml": "^3.13.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "0.9.5",
-    "react-leaflet": "latest"
+    "react-leaflet": "latest",
+    "react-scripts": "0.9.5"
   },
   "devDependencies": {},
   "scripts": {
