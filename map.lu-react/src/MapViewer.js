@@ -35,8 +35,9 @@ class MapViewer extends Component {
             const app = this.props.app,
                 config = app.state,
                 map = config.map,
-                mc = this.mapRef.leafletElement;
-            map.center = mc.getCenter();
+                mc = this.mapRef.leafletElement,
+                ctr = mc.getCenter();
+            map.center = [ctr.lat, ctr.lng];
             map.zoom = mc.getZoom();
             app.setState(config);
         } else {

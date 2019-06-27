@@ -8,14 +8,12 @@ class Compass extends Component {
             config = app.state,
             map = config.map,
             ce = map.center,
-            lon = ce.lng,
-            lat = ce.lat,
             z = map.zoom;
 
         console.log(map.center, map.zoom);
         var details;
         if (config.expandStatus) {
-            details=<LatLong longitude={lon} latitude={lat}/>
+            details = <LatLong latitude={ce[0]} longitude={ce[1]}/>
         }
 
         return <div id="compass">
@@ -46,7 +44,7 @@ class Compass extends Component {
             config = app.state,
             map = config.map;
         //return 40075016.686 * Math.cos(map.center[0]*Math.PI/180.0)/(2^map.zoom)
-        return 360.0 * Math.cos(map.center.lat * Math.PI / 180.0) / Math.pow(2, map.zoom)
+        return 360.0 * Math.cos(map.center[0] * Math.PI / 180.0) / Math.pow(2, map.zoom)
     }
 
     north() {
@@ -55,7 +53,7 @@ class Compass extends Component {
             map = config.map;
 
         console.log(map.center);
-        map.center.lat = Math.min(90, map.center.lat + this.latPixel());
+        map.center[0] = Math.min(90, map.center[0] + this.latPixel());
         console.log(map.center);
         app.setState(config)
     }
