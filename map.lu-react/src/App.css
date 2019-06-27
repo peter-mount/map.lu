@@ -87,12 +87,34 @@
     font-size: 0.75em;
 }
 
-.open #compass .details span:first-child {
+.open #compass .details span {
     display: inline-block;
-    width: 3em;
     text-align: right;
-    font-weight: bold;
     padding-right: 0.25em;
+}
+
+.open #compass .details .label {
+    width: 2em;
+    font-weight: bold;
+}
+
+.open #compass .details .deg,
+.open #compass .details .min,
+.open #compass .details .sec,
+.open #compass .details .dir {
+    font-weight: normal;
+}
+
+.open #compass .details .deg {
+    width: 2.2em;
+}
+
+.open #compass .details .min {
+    width: 1.25em;
+}
+
+.open #compass .details .sec {
+    width: 3em;
 }
 
 #compass .nav {

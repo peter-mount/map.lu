@@ -1,27 +1,52 @@
 import React, {Component} from 'react';
 
+/**
+ * Converts decimal degrees to degrees minutes seconds.
+ *
+ * @param dd the decimal degrees value.
+ * @param isLng specifies whether the decimal degrees value is a longitude.
+ * @return degrees minutes seconds string in the format 49°15'51.35"N
+ */
+function convertToDms(dd, isLng) {
+    const dir = dd < 0
+        ? isLng ? 'W' : 'S'
+        : isLng ? 'E' : 'N',
+        absDd = Math.abs(dd),
+        deg = absDd | 0,
+        frac = absDd - deg,
+        min = (frac * 60) | 0,
+        sec = Math.round((frac * 3600 - min * 60) * 100) / 100;
+    //return deg + "°" + min + "'" + sec + '"' + dir;
+    return <span>
+            <span className="deg">{deg}°</span>
+            <span className="min">{min}'</span>
+            <span className="sec">{sec}"</span>
+            <span className="dir">{dir}</span>
+        </span>;
+}
+
 // The compass rose for navigation
 class Compass extends Component {
     render() {
         const app = this.props.app,
             config = app.state,
             map = config.map,
-            ce=map.center,
-            lon=ce[0],
-            lat=ce[1],
-            z=map.zoom;
+            ce = map.center,
+            lon = ce.lat,
+            lat = ce.lng,
+            z = map.zoom;
 
         console.log(map.center, map.zoom);
         var details;
-        if(config.expandStatus) {
+        if (config.expandStatus) {
             details = <div className="details">
                 <div>
-                    <span>Long</span>
-                    <span>{lon}</span>
+                    <span className="label">Lon</span>
+                    {convertToDms(lon, true)}
                 </div>
                 <div>
-                    <span>Lat</span>
-                    <span>{lat}</span>
+                    <span className="label">Lat</span>
+                    {convertToDms(lat, false)}
                 </div>
             </div>;
         }

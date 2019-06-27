@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
 import {layers} from './Layers'
+import MapLayer from "./MapLayer";
 
 class MapViewer extends Component {
 
@@ -13,7 +14,7 @@ class MapViewer extends Component {
             .filter(l => l.id === map.baseLayer)
             .reduce((a, l) => l);
 
-        let visibleLayers = [<TileLayer key={baseLayer.id} url={baseLayer.tileLayer}/>];
+        let visibleLayers = [<MapLayer key={baseLayer.id} layer={baseLayer}/>];
 
         /*
         layers.baseLayers.filter(l => l.id === map.baseLayer).forEach(l => {
