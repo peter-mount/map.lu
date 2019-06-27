@@ -13,8 +13,10 @@ export function getConfig() {
         json = {
             map: {
                 center: [51.505,-0.09],
-                zoom: 9
-            }
+                zoom: 9,
+                baseLayer: "OS"
+            },
+            expandStatus: true
         };
         saveConfig(json);
     }

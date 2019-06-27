@@ -50,11 +50,49 @@
     float: right;
 }
 
+#mapStatus .section {
+    padding-top: 0.1em;
+    clear: both;
+}
+#mapStatus .section .title {
+    background: lightgray;
+    font-weight: bold;
+    text-align: center;
+    border-top: 1px solid darkgray;
+    border-bottom: 1px solid darkgray;
+}
+
+.closed #compass {
+    width: 6em;
+}
+
+.open #compass {
+    width: 12.5em;
+}
+
 #compass {
     width: 6em;
     height: 6em;
     padding: 0.25em;
     margin: 0.1em;
+}
+
+.open #compass .nav,
+.open #compass .details {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.open #compass .details {
+    font-size: 0.75em;
+}
+
+.open #compass .details span:first-child {
+    display: inline-block;
+    width: 3em;
+    text-align: right;
+    font-weight: bold;
+    padding-right: 0.25em;
 }
 
 #compass .nav {

@@ -5,9 +5,26 @@ class Compass extends Component {
     render() {
         const app = this.props.app,
             config = app.state,
-            map = config.map;
+            map = config.map,
+            ce=map.center,
+            lon=ce[0],
+            lat=ce[1],
+            z=map.zoom;
 
         console.log(map.center, map.zoom);
+        var details;
+        if(config.expandStatus) {
+            details = <div className="details">
+                <div>
+                    <span>Long</span>
+                    <span>{lon}</span>
+                </div>
+                <div>
+                    <span>Lat</span>
+                    <span>{lat}</span>
+                </div>
+            </div>;
+        }
 
         return <div id="compass">
             <div className="nav">
@@ -22,12 +39,13 @@ class Compass extends Component {
                 <div>
                     <i className="fas fa-arrow-down" onClick={() => this.south()}/>
                 </div>
+                <div className="zoom">
+                    <i className="fas fa-angle-left" onClick={() => this.zoomOut()}/>
+                    <span>{z}</span>
+                    <i className="fas fa-angle-right" onClick={() => this.zoomIn()}/>
+                </div>
             </div>
-            <div className="zoom">
-                <i className="fas fa-angle-left" onClick={() => this.zoomOut()}/>
-                <span>{map.zoom}</span>
-                <i className="fas fa-angle-right" onClick={() => this.zoomIn()}/>
-            </div>
+            {details}
         </div>
     }
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Compass from "./Compass";
+import BaseLayer from "./BaseLayer";
 
 class MapStatus extends Component {
     render() {
@@ -9,22 +10,25 @@ class MapStatus extends Component {
 
         console.log(map.center, map.zoom);
 
-        if (config.expandStatus) {
-            return <div id="mapStatus" className="open">
+        if (!config.expandStatus) {
+            return <div id="mapStatus" className="closed">
                 <Compass app={app}/>
                 <i
-                    className="right icon fas fa-caret-square-down"
+                    className="right icon far fa-caret-square-right"
                     onClick={() => this.toggle()}
                 />
             </div>
         }
 
-        return <div id="mapStatus" className="closed">
+        return <div id="mapStatus" className="open">
             <Compass app={app}/>
             <i
-                className="right icon far fa-caret-square-right"
+                className="right icon fas fa-caret-square-down"
                 onClick={() => this.toggle()}
             />
+
+            <BaseLayer app={app}/>
+
         </div>
     }
 

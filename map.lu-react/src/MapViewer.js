@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
+import {layers} from './Layers'
 
 class MapViewer extends Component {
 
@@ -8,33 +9,43 @@ class MapViewer extends Component {
             config = app.state,
             map = config.map;
 
-        console.log("View", map.center, map.zoom);
+        let baseLayer = layers.baseLayers
+            .filter(l => l.id === map.baseLayer)
+            .reduce((a, l) => l);
+
+        let visibleLayers = [<TileLayer key={baseLayer.id} url={baseLayer.tileLayer}/>];
+
+        /*
+        layers.baseLayers.filter(l => l.id === map.baseLayer).forEach(l => {
+            console.log(l.id, l.tileLayer);
+            visibleLayers.push(<TileLayer key={l.id} url={l.tileLayer}/>);
+        });
+         */
+
         return <Map
-            onMove={this.handleMapStateChange}
-            onZoom={this.handleMapStateChange}
+            onMove={()=>this.handleMapStateChange()}
+            onZoom={()=>this.handleMapStateChange()}
             center={map.center}
             ref={(t) => this.mapRef = t}
             zoom={map.zoom}
             zoomControl={false}>
-            <TileLayer
-                url="https://sa.map.lu/osm201810/{z}/{x}/{y}.png"
-                // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            />
-            <Marker position={map.center}>
-                <Popup>A pretty CSS3 popup.<br/>Easily customizable.</Popup>
-            </Marker>
+            {visibleLayers}
         </Map>
     }
 
-    handleMapStateChange = (e) => {
-        const app = this.props.app,
-            config = app.state,
-            map = config.map,
-            mc = this.mapRef.leafletElement;
-        map.center = mc.getCenter();
-        map.zoom = mc.getZoom();
-        app.setState(config);
+    handleMapStateChange(e) {
+        // There is a race condition where mapRef can be null
+        if (this.mapRef) {
+            const app = this.props.app,
+                config = app.state,
+                map = config.map,
+                mc = this.mapRef.leafletElement;
+            map.center = mc.getCenter();
+            map.zoom = mc.getZoom();
+            app.setState(config);
+        } else {
+            console.log("*** No mapRef ***")
+        }
     }
 }
 
