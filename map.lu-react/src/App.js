@@ -23,49 +23,38 @@ class App extends Component {
             );
         }
 
-        if (!this.state.loadLayers) {
-            this.state.loadLayers = true;
-
-            const t = this;
-            fetch("/layers.yaml")
-                // Convert yaml to an object
-                .then(res => res.text())
-                .then(doc => yaml.safeLoad(doc))
-                // Add layers lookup map keyed by id
-                .then(cfg => {
-                    cfg.layers = {}
-                    walkLayer(cfg.layers, cfg.baseLayers)
-                    walkLayer(cfg.layers, cfg.overlayLayers)
-                    return cfg;
-                })
-                // Finish by setting state
-                .then(cfg => {
-                    cfg.layers = true;
-                    t.setState(cfg)
-                })
-                .catch(e => {
-                    console.error(e);
-                    alert("Failed to load available layers")
-                })
-        }
+        fetch("/layers.yaml")
+            .then(res => res.text())
+            .then(doc => yaml.safeLoad(doc))
+            .then(config => walkLayer(config, config.baseLayers))
+            .then(config => walkLayer(config, config.overlayLayers))
+            .then(config => this.setState(config))
+            .catch(e => {
+                console.error(e);
+                alert("Failed to load available layers")
+            });
 
         return <div>Loading</div>
     }
 }
 
-function walkLayer(dest, layer) {
+function walkLayer(config, layer) {
+    if (!config.layers) {
+        config.layers = {}
+    }
     if (layer.id) {
-        if (dest[layer.id]) {
+        if (config.layers[layer.id]) {
             // Should not happen, dissalow the duplicate
             console.error("Duplicate id", layer.id)
         } else {
-            dest[layer.id] = layer
+            config.layers[layer.id] = layer
         }
     } else {
         Object.keys(layer)
             .filter(k => layer[k].id || layer[k].group)
-            .forEach(k => walkLayer(dest, layer[k]))
+            .forEach(k => walkLayer(config, layer[k]))
     }
+    return config
 }
 
 export default App;

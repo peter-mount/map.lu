@@ -46,8 +46,7 @@ class Compass extends Component {
             config = app.state,
             map = config.map;
         //return 40075016.686 * Math.cos(map.center[0]*Math.PI/180.0)/(2^map.zoom)
-        console.log(map.zoom, Math.pow(2, map.zoom))
-        return 360.0 * Math.cos(map.center[0] * Math.PI / 180.0) / Math.pow(2, map.zoom)
+        return 360.0 * Math.cos(map.center.lat * Math.PI / 180.0) / Math.pow(2, map.zoom)
     }
 
     north() {
@@ -56,7 +55,7 @@ class Compass extends Component {
             map = config.map;
 
         console.log(map.center);
-        map.center[0] = Math.min(90, map.center[0] + this.latPixel());
+        map.center.lat = Math.min(90, map.center.lat + this.latPixel());
         console.log(map.center);
         app.setState(config)
     }
