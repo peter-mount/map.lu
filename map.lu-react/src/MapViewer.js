@@ -10,22 +10,29 @@ class MapViewer extends Component {
             config = app.state,
             map = config.map;
 
-        let baseLayer = layers.baseLayers
+        let visibleLayers = layers.baseLayers
             .filter(l => l.id === map.baseLayer)
-            .reduce((a, l) => l);
+            .reduce((a, l) => {
+                a.push(<MapLayer key={l.id} layer={l}/>);
+                return a
+            }, []);
 
-        let visibleLayers = [<MapLayer key={baseLayer.id} layer={baseLayer}/>];
-
-        /*
-        layers.baseLayers.filter(l => l.id === map.baseLayer).forEach(l => {
-            console.log(l.id, l.tileLayer);
-            visibleLayers.push(<TileLayer key={l.id} url={l.tileLayer}/>);
-        });
-         */
+        visibleLayers = map.overlays
+            .filter(l => l.visible)
+            .map(l => {
+                return layers.overlayLayers
+                    .filter(ol => ol.id === l.id)
+                    .reduce((a, b) => b)
+            })
+            .filter(l => l)
+            .reduce( (a,l) => {
+                a.push(<MapLayer key={l.id} layer={l}/>);
+                return a
+            },visibleLayers)
 
         return <Map
-            onMove={()=>this.handleMapStateChange()}
-            onZoom={()=>this.handleMapStateChange()}
+            onMove={() => this.handleMapStateChange()}
+            onZoom={() => this.handleMapStateChange()}
             center={map.center}
             ref={(t) => this.mapRef = t}
             zoom={map.zoom}

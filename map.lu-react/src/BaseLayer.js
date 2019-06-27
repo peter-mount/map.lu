@@ -25,7 +25,7 @@ class BaseLayer extends Component {
         return <div className="section">
             <div className="title">Base Layer</div>
             <div>
-                <select onChange={e => this.selectLayer(e.target.value)}>
+                <select id="baseLayer" onChange={e => this.selectLayer(e.target.value)}>
                     {baseLayers}
                 </select>
             </div>

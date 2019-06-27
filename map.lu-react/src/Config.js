@@ -12,9 +12,19 @@ export function getConfig() {
     if (!json || json.boards) {
         json = {
             map: {
-                center: [51.505,-0.09],
+                center: [51.505, -0.09],
                 zoom: 9,
-                baseLayer: "OS"
+                baseLayer: "OS",
+                overlays: [{
+                    id: "OMR",
+                    visible: true
+                }, {
+                    id: "OMRD",
+                    visible: true
+                }, {
+                    id: "OMRS",
+                    visible: true
+                }]
             },
             expandStatus: true
         };

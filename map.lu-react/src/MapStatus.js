@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Compass from "./Compass";
 import BaseLayer from "./BaseLayer";
+import LayerSelection from "./LayerSelection";
 
 class MapStatus extends Component {
     render() {
@@ -28,6 +29,8 @@ class MapStatus extends Component {
             />
 
             <BaseLayer app={app}/>
+
+            <LayerSelection app={app}/>
 
         </div>
     }

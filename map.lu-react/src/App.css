@@ -51,8 +51,10 @@
 
 #mapStatus .section {
     padding-top: 0.1em;
+    padding-bottom: 0.5em;
     clear: both;
 }
+
 #mapStatus .section .title {
     background: lightgray;
     font-weight: bold;
@@ -116,4 +118,42 @@
 #compass .zoom span {
     width: 2em;
     display: inline-block;
+}
+
+select#baseLayer {
+    width: 100%;
+    margin-top: 0.25em;
+}
+
+.section .overlays {
+    border-bottom: 1px solid black;
+    height: 15em;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.overlays .label {
+    display: inline-block;
+    width: 80%;
+    overflow: hidden;
+}
+
+.overlayRow .left {
+    float: left;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+
+.overlayRow .right {
+    float: right;
+}
+
+.overlayRow .right .fas {
+    padding-left: 0.1em;
+}
+
+.overlays .overlayRow:first-child .fa-caret-up,
+.overlays .overlayRow:last-child .fa-caret-down {
+    opacity: 0.25;
+    cursor: not-allowed;
 }
