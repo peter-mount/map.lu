@@ -90,6 +90,19 @@ baseLayers:
       layers: "NASA:BlackMarble_2016_Gray"
     minZoom: 0
     maxZoom: 16
+  NBL:
+    id: NBL
+    label: "No base layer"
+    description: "Dummy layer to not use a base layer"
+    minZoom: 0
+    maxZoom: 19
+  NASAVEG:
+    id: NASAVEG
+    label: "Vegetation cover 2017/09"
+    description: "NASA Vegetation coverage Sept 2017"
+    tileLayer: "https://{s}.map.lu/tms/NASA%3AVegetation_2017_09@EPSG%3A900913@png/{z}/{x}/{-y}.png"
+    minZoom: 0
+    maxZoom: 12
 
 overlayLayers:
   UK:

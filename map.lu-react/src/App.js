@@ -23,14 +23,16 @@ class App extends Component {
             );
         }
 
+        console.log("Requesting layers.yaml")
         fetch("/layers.yaml")
             .then(res => res.text())
             .then(doc => yaml.safeLoad(doc))
             .then(config => walkLayer(config, config.baseLayers))
             .then(config => walkLayer(config, config.overlayLayers))
             .then(config => this.setState(config))
+            .then(() => console.log("Loaded layers.yaml"))
             .catch(e => {
-                console.error(e);
+                console.error("Failed to load layers.yaml",e);
                 alert("Failed to load available layers")
             });
 

@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 
-import {layers} from './Layers'
-
 class BaseLayer extends Component {
 
     selectLayer(id) {
@@ -19,6 +17,7 @@ class BaseLayer extends Component {
     render() {
         const app = this.props.app,
             config = app.state,
+            baseLayers = config.baseLayers,
             map = config.map;
 
         return <div className="section">
@@ -26,7 +25,13 @@ class BaseLayer extends Component {
             <div>
                 <select id="baseLayer" value={map.baseLayer} onChange={e => this.selectLayer(e.target.value)}>
                     {
-                        layers.baseLayers
+                        Object.keys(baseLayers)
+                            .map(k => baseLayers[k])
+                            .sort((a, b) => {
+                                const al = a.label.toUpperCase(),
+                                    bl = b.label.toUpperCase();
+                                return al < bl ? -1 : al > bl ? 1 : 0
+                            })
                             .map(l => <option key={l.id} value={l.id}>{l.label}</option>)
                     }
                 </select>
