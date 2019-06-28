@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Compass from "./Compass";
 import BaseLayer from "./BaseLayer";
 import LayerSelection from "./LayerSelection";
+import Window from "./ui/Window";
 
 class MapStatus extends Component {
     render() {
@@ -11,28 +12,25 @@ class MapStatus extends Component {
 
         console.log(map.center, map.zoom);
 
-        if (!config.expandStatus) {
-            return <div id="mapStatus" className="closed">
-                <Compass app={app}/>
-                <i
-                    className="right icon far fa-caret-square-right"
-                    onClick={() => this.toggle()}
-                />
-            </div>
-        }
-
-        return <div id="mapStatus" className="open">
+        return <div id="mapStatus" className="closed">
             <Compass app={app}/>
             <i
-                className="right icon fas fa-caret-square-down"
-                onClick={() => this.toggle()}
+                className="right icon far fa-caret-square-right"
+                onClick={() => this.openStatus()}
             />
-
-            <BaseLayer app={app}/>
-
-            <LayerSelection app={app}/>
-
         </div>
+    }
+
+    openStatus() {
+        const app = this.props.app;
+        console.log("openStatus",app.desktop)
+        app.desktop.addWindow(
+            <Window key="layersWindow" title="Map Layers">
+                <BaseLayer app={app}/>
+
+                <LayerSelection app={app}/>
+            </Window>
+        )
     }
 
     toggle() {

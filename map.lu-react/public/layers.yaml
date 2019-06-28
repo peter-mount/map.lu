@@ -18,7 +18,8 @@ map:
       visible: true
 
 # debug, show the side bar expanded on startup
-expandStatus: true
+#expandStatus: true
+#openLayerDialog: true
 
 baseLayers:
   OS:

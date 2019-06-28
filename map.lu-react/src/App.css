@@ -63,43 +63,43 @@
     border-bottom: 1px solid darkgray;
 }
 
-.open #compass .nav,
-.open #compass .details {
+.open #compass .nav {
     display: inline-block;
     vertical-align: top;
 }
 
-.open #compass .details {
-    font-size: 0.75em;
+/* ==== latlong status bar panels */
+
+#latlongstatus .statusBarPanel {
+    width: 10em;
 }
 
-.open #compass .details span {
+#latlongstatus .statusBarPanel span {
     display: inline-block;
     text-align: right;
-    padding-right: 0.25em;
 }
 
-.open #compass .details .label {
+#latlongstatus .label {
     width: 2em;
     font-weight: bold;
 }
 
-.open #compass .details .deg,
-.open #compass .details .min,
-.open #compass .details .sec,
-.open #compass .details .dir {
+#latlongstatus .deg,
+#latlongstatus .min,
+#latlongstatus .sec,
+#latlongstatus .dir {
     font-weight: normal;
 }
 
-.open #compass .details .deg {
+#latlongstatus .deg {
     width: 2.2em;
 }
 
-.open #compass .details .min {
+#latlongstatus .min {
     width: 1.25em;
 }
 
-.open #compass .details .sec {
+#latlongstatus .sec {
     width: 3em;
 }
 
@@ -164,4 +164,86 @@ select#baseLayer {
 .overlays .overlayRow:last-child .fa-caret-down {
     opacity: 0.25;
     cursor: not-allowed;
+}
+
+#Attribution {
+    font-size: 11px;
+    background-color: rgba(255,255,255,0.7);
+    margin: 0;
+    padding: 0 5px;
+    box-shadow: none;
+    z-index: 99;
+    display: block;
+    position: fixed;
+    bottom: 2em;
+    right: 0;
+}
+.leaflet-control-attribution {
+    display: none;
+
+}
+/* ========== Desktop UI ========== */
+
+#desktop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: cadetblue;
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+#desktopStatusBar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1.6em;
+    border-top: 1px solid lightgray;
+    background-color: grey;
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+#desktopStatusBar .statusBarPanel {
+    border: 1px groove darkgrey;
+    background-color: lightgrey;
+    display: flex;
+    height: 1.25em;
+    padding-left: 0.1em;
+    padding-right: 0.1em;
+    margin: 0.1em;
+}
+
+#mainStatus {
+    display: flex;
+    flex: 1 1 auto;
+}
+.window {
+    position: fixed;
+    min-width: 50em;
+    min-height: 20em;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+    border-right: 2px solid darkgray;
+    border-bottom: 2px solid darkgray;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.window .title {
+    background-color: lightgrey;
+    border-bottom: 1px solid grey;
+    text-align: left;
+}
+
+.window .body {
+    display: flex;
+    flex: 1 1 auto;
+    background-color: white;
 }

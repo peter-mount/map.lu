@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import {layers} from './Layers'
+import Window from "./ui/Window";
 
 function arrayMoveMutate(array, from, to) {
     array.splice(to < 0 ? array.length + to : to, 0, array.splice(from, 1)[0]);
@@ -71,8 +72,16 @@ class LayerSelection extends Component {
             config = app.state,
             map = config.map;
 
+        let openLayerDialog;
+        if (config.openLayerDialog) {
+            openLayerDialog = this.createOpenDialog()
+        }
+
         return <div className="section">
-            <div className="title">Overlay Layers</div>
+            <div className="title">
+                Overlay Layers
+                <i className="far fa-folder-open right icon" onClick={() => this.showOpenDialog()}/>
+            </div>
             <div className="overlays">
                 {
                     map.overlays.reduce((a, layer) => {
@@ -83,10 +92,27 @@ class LayerSelection extends Component {
                         return a;
                     }, [])
                 }
+                {openLayerDialog}
             </div>
         </div>
     }
 
+    showOpenDialog() {
+        const app = this.props.app,
+            config = app.state;
+        if (!config.openLayerDialog) {
+            config.openLayerDialog = true;
+            app.setState(app.state)
+        }
+    }
+
+    createOpenDialog() {
+        return <Window
+            id="openOverlayLayer"
+            title="Add Overlay Layer"
+            icon="far fa-folder-open"
+        />
+    }
 }
 
 export default LayerSelection;
