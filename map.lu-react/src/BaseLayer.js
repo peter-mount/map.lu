@@ -12,6 +12,10 @@ class BaseLayer extends Component {
         map.forceRefresh = true;
 
         app.setState(config)
+
+        // force us to update as well
+        // FIXME why doesn't this get updated?
+        this.setState(new Date());
     }
 
     render() {
