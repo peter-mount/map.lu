@@ -138,6 +138,14 @@ select#baseLayer {
     overflow: hidden;
 }
 
+.overlayRow {
+    border-bottom: 1px solid grey;
+}
+
+.overlayRow:hover {
+    background-color: lightgray;
+}
+
 .overlayRow .left {
     float: left;
     padding-left: 0.25em;

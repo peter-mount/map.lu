@@ -8,7 +8,11 @@ class BaseLayer extends Component {
         const app = this.props.app,
             config = app.state,
             map = config.map;
+
+        // Change the baseLayer & force the map to be refreshed
         map.baseLayer = id;
+        map.forceRefresh = true;
+
         app.setState(config)
     }
 
@@ -22,10 +26,8 @@ class BaseLayer extends Component {
             <div>
                 <select id="baseLayer" value={map.baseLayer} onChange={e => this.selectLayer(e.target.value)}>
                     {
-                        layers.baseLayers.reduce((a, l) => {
-                            a.push(<option key={l.id} value={l.id}>{l.label}</option>);
-                            return a
-                        }, [])
+                        layers.baseLayers
+                            .map(l => <option key={l.id} value={l.id}>{l.label}</option>)
                     }
                 </select>
             </div>
