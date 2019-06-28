@@ -15,14 +15,15 @@ class BaseLayer extends Component {
     }
 
     render() {
-        const app = this.props.app,
+        const props = this.props,
+            app = props.app,
             config = app.state,
             baseLayers = config.baseLayers,
             map = config.map;
 
-        return <div className="section">
-            <div className="title">Base Layer</div>
-            <div>
+        return (
+            <fieldset className={"section " + props.className}>
+                <legend>Base layer</legend>
                 <select id="baseLayer" value={map.baseLayer} onChange={e => this.selectLayer(e.target.value)}>
                     {
                         Object.keys(baseLayers)
@@ -35,8 +36,8 @@ class BaseLayer extends Component {
                             .map(l => <option key={l.id} value={l.id}>{l.label}</option>)
                     }
                 </select>
-            </div>
-        </div>
+            </fieldset>
+        )
     }
 
 }

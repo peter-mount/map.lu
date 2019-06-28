@@ -9,10 +9,6 @@ class Desktop extends Component {
     };
 
     render() {
-        const props = this.props;
-
-        console.log("render", this.state.windows);
-
         return <div id="desktop">
             <div>{this.props.children}</div>
             <div>{this.state.windows}</div>
@@ -22,11 +18,19 @@ class Desktop extends Component {
     addWindow(window) {
         const state = this.state;
 
-        console.log("addWindow", window.key);
-        state.wid[window.key] = window;
+        state.wid[window.props.id] = window;
         state.windows.push(window);
-        console.log("addWindow", state.wid, state.windows);
+
         this.setState(state)
+    }
+
+    removeWindow(window) {
+        const state = this.state;
+        if (state.wid[window.props.id]) {
+            delete state.wid[window.props.id];
+            state.windows = state.windows.filter(w => w.props.id !== window.props.id);
+            this.setState(state)
+        }
     }
 }
 

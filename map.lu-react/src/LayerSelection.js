@@ -77,24 +77,29 @@ class LayerSelection extends Component {
             openLayerDialog = this.createOpenDialog()
         }
 
-        return <div className="section">
-            <div className="title">
-                Overlay Layers
-                <i className="far fa-folder-open right icon" onClick={() => this.showOpenDialog()}/>
-            </div>
-            <div className="overlays">
-                {
-                    map.overlays.reduce((a, layer) => {
-                        layers.overlayLayers.filter(l => l.id === layer.id)
-                            .forEach(l => {
-                                a.push(<LayerRow key={l.id} def={l} layer={layer} app={app}/>)
-                            });
-                        return a;
-                    }, [])
-                }
-                {openLayerDialog}
-            </div>
-        </div>
+        return (
+            <fieldset className="section overlays">
+                <legend>Overlay layers</legend>
+                <div className="title">
+                    Overlay Layers
+                    <i className="far fa-folder-open right icon" onClick={() => this.showOpenDialog()}/>
+                </div>
+                <div className="overlaysOuter">
+                    <div className="overlays">
+                        {
+                            map.overlays.reduce((a, layer) => {
+                                layers.overlayLayers.filter(l => l.id === layer.id)
+                                    .forEach(l => {
+                                        a.push(<LayerRow key={l.id} def={l} layer={layer} app={app}/>)
+                                    });
+                                return a;
+                            }, [])
+                        }
+                        {openLayerDialog}
+                    </div>
+                </div>
+            </fieldset>
+        )
     }
 
     showOpenDialog() {

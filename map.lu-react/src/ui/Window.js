@@ -1,27 +1,26 @@
 import React, {Component} from 'react';
 
 class Window extends Component {
-    setZIndex(zIndex) {
-        this.zIndex=zIndex
-    }
 
     render() {
-        const props = this.props,
-            title = props.title,
-            icon = props.icon ? <i className={props.icon}/> : "";
+        const props = this.props;
 
-        console.log("window render", this.zIndex);
         return <div className="window" id={props.id}>
-            <div className="title">
-                {icon}
+            <div className="windowTitle">
+                {props.icon ? <i className={props.icon}/> : ""}
                 {props.title}
+                {props.closeable ?
+                    <i className="far fa-times-circle icon windowRight" onClick={() => this.close()}/> : ""}
             </div>
-            <div className="body">
-                children
-            </div>
+            <div className="windowBody">{props.children}</div>
         </div>
     }
 
+    close() {
+        if (this.props.desktop) {
+            this.props.desktop.removeWindow(this)
+        }
+    }
 }
 
 export default Window;

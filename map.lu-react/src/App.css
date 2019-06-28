@@ -120,55 +120,94 @@
     display: inline-block;
 }
 
-select#baseLayer {
+/* ====== Layers window ====== */
+#layersWindow {
+    top: 10em;
+    left: 10em;
+    width: 50em;
+    height: 50em;
+    box-shadow: 5px 5px 5px #aaaaaa;
+}
+
+#layersWindow .windowBody {
+    display: block;
+    flex-direction: column;
+}
+
+#layersWindow .section {
+    border: 1px solid grey;
+    margin: 0.5em;
+    padding: 0.5em;
+}
+
+#layersWindow .section.baseLayer {
+    display: block;
+    flex: 1 1 auto;
+}
+
+#layersWindow .section.overlays {
+    display: flex;
+    flex: 3 1 auto;
+    flex-direction: column;
+}
+
+#layersWindow .section.baseLayer select {
     width: 100%;
     margin-top: 0.25em;
 }
 
-.section .overlays {
-    border-bottom: 1px solid black;
-    height: 15em;
+#layersWindow .section .overlaysOuter {
+    display: flex;
+    flex: 1 1 auto;
+}
+
+#layersWindow .section .overlays {
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
-.overlays .label {
+#layersWindow .overlays .label {
     display: inline-block;
     width: 80%;
     overflow: hidden;
 }
 
-.overlayRow {
+#layersWindow .overlayRow {
     border-bottom: 1px solid grey;
 }
 
-.overlayRow:hover {
+#layersWindow .overlayRow:hover {
     background-color: lightgray;
 }
 
-.overlayRow .left {
+#layersWindow .overlayRow .left {
     float: left;
     padding-left: 0.25em;
     padding-right: 0.25em;
 }
 
-.overlayRow .right {
+#layersWindow .overlayRow .right {
     float: right;
 }
 
-.overlayRow .right .fas {
+#layersWindow .overlayRow .right .fas {
     padding-left: 0.1em;
 }
 
-.overlays .overlayRow:first-child .fa-caret-up,
-.overlays .overlayRow:last-child .fa-caret-down {
+#layersWindow .overlays .overlayRow:first-child .fa-caret-up,
+#layersWindow .overlays .overlayRow:last-child .fa-caret-down {
     opacity: 0.25;
     cursor: not-allowed;
 }
 
+/* ====== */
+
 #Attribution {
     font-size: 11px;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255, 255, 255, 0.7);
     margin: 0;
     padding: 0 5px;
     box-shadow: none;
@@ -178,10 +217,12 @@ select#baseLayer {
     bottom: 2em;
     right: 0;
 }
+
 .leaflet-control-attribution {
     display: none;
 
 }
+
 /* ========== Desktop UI ========== */
 
 #desktop {
@@ -223,10 +264,11 @@ select#baseLayer {
     display: flex;
     flex: 1 1 auto;
 }
+
 .window {
     position: fixed;
-    min-width: 50em;
-    min-height: 20em;
+    min-width: 10em;
+    min-height: 10em;
     border-left: 1px solid grey;
     border-top: 1px solid grey;
     border-right: 2px solid darkgray;
@@ -236,14 +278,18 @@ select#baseLayer {
     text-align: left;
 }
 
-.window .title {
+.windowTitle {
     background-color: lightgrey;
     border-bottom: 1px solid grey;
     text-align: left;
 }
 
-.window .body {
+.windowBody {
     display: flex;
     flex: 1 1 auto;
     background-color: white;
+}
+
+.windowRight {
+    float: right;
 }
