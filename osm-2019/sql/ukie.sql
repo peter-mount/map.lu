@@ -2,9 +2,45 @@
 create schema if not exists osm;
 
 -- ==============================================================================================================
+-- Administrative boundaries
+--
+-- These have planet_osm_polygon.boundary = 'administrative' and admin_level of:
+--
+-- '2' & place is null  for the UK, Ireland, Isle of Man, Jersey
+--
+-- '4' & place is null  for England, Scotland, Wales, Guernsey.
+-- '4' & place='state'  for Sark & Alderney
+--
+-- '5' & place is null  for Regions like South East, West Midlands etc
+--
+-- '6' & place is null  for counties in the UK
+-- '6' & place='county' for counties in Ireland
+-- '6' & place='island' for islands in Ireland
+-- ==============================================================================================================
 
 drop table if exists osm.country;
 create table osm.country
+(
+    id          serial not null primary key,
+    osm_id      integer,
+    name        text,
+    uppername   text,
+    admin_level text,
+    geom        geometry(multipolygon, 3857)
+);
+create index gix_country on osm.country using gist (geom);
+insert into osm.country(osm_id, name, uppername, admin_level, geom)
+SELECT planet_osm_polygon.osm_id,
+       planet_osm_polygon.name                                        as name,
+       upper(planet_osm_polygon.name)                                 AS uppername,
+       admin_level,
+       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
+FROM planet_osm_polygon
+WHERE planet_osm_polygon.admin_level = '2'::text
+  AND planet_osm_polygon.boundary = 'administrative';
+
+drop table if exists osm.boundary;
+create table osm.boundary
 (
     id        serial not null primary key,
     osm_id    integer,
@@ -12,14 +48,57 @@ create table osm.country
     uppername text,
     geom      geometry(multipolygon, 3857)
 );
-create index gix_country on osm.country using gist (geom);
-insert into osm.country(osm_id, name, uppername, geom)
+create index gix_boundary on osm.boundary using gist (geom);
+insert into osm.boundary(osm_id, name, uppername, geom)
 SELECT planet_osm_polygon.osm_id,
        planet_osm_polygon.name                                        as name,
        upper(planet_osm_polygon.name)                                 AS uppername,
        st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
 FROM planet_osm_polygon
-WHERE planet_osm_polygon.admin_level = '2'::text
+--WHERE planet_osm_polygon.admin_level = '2'::text
+WHERE planet_osm_polygon.admin_level in ('2', '4')
+  AND planet_osm_polygon.boundary = 'administrative';
+
+drop table if exists osm.county;
+create table osm.county
+(
+    id        serial not null primary key,
+    osm_id    integer,
+    name      text,
+    uppername text,
+    geom      geometry(multipolygon, 3857)
+);
+create index gix_county on osm.county using gist (geom);
+--delete from osm.county;
+insert into osm.county(osm_id, name, uppername, geom)
+SELECT planet_osm_polygon.osm_id,
+       planet_osm_polygon.name                                        as name,
+       upper(planet_osm_polygon.name)                                 AS uppername,
+       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
+FROM planet_osm_polygon
+WHERE (planet_osm_polygon.place = 'county' OR
+       planet_osm_polygon.admin_level = '6')
+  AND planet_osm_polygon.boundary = 'administrative';
+
+-- ==============================================================================================================
+
+drop table if exists osm.district;
+create table osm.district
+(
+    id        serial not null primary key,
+    osm_id    integer,
+    name      text,
+    uppername text,
+    geom      geometry(multipolygon, 3857)
+);
+create index gix_district on osm.district using gist (geom);
+insert into osm.district(osm_id, name, uppername, geom)
+SELECT planet_osm_polygon.osm_id,
+       planet_osm_polygon.name,
+       upper(planet_osm_polygon.name)                                 AS uppername,
+       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
+FROM planet_osm_polygon
+WHERE planet_osm_polygon.admin_level = '9'::text
   AND planet_osm_polygon.boundary = 'administrative'::text;
 
 -- ==============================================================================================================
@@ -39,27 +118,6 @@ FROM planet_osm_polygon
 WHERE planet_osm_polygon.amenity IS NOT NULL
   AND (planet_osm_polygon.amenity = ANY
        (ARRAY ['college'::text, 'community_centre'::text, 'courthouse'::text, 'doctors'::text, 'embassy'::text, 'grave_yard'::text, 'hospital'::text, 'library'::text, 'marketplace'::text, 'prison'::text, 'public_building'::text, 'school'::text, 'simming_pool'::text, 'theatre'::text, 'townhall'::text, 'university'::text]));
-
--- ==============================================================================================================
-
-drop table if exists osm.boundary;
-create table osm.boundary
-(
-    id        serial not null primary key,
-    osm_id    integer,
-    name      text,
-    uppername text,
-    geom      geometry(multipolygon, 3857)
-);
-create index gix_boundary on osm.boundary using gist (geom);
-insert into osm.boundary(osm_id, name, uppername, geom)
-SELECT planet_osm_polygon.osm_id,
-       planet_osm_polygon.name                                        as name,
-       upper(planet_osm_polygon.name)                                 AS uppername,
-       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
-FROM planet_osm_polygon
-WHERE planet_osm_polygon.admin_level = '2'::text
-  AND planet_osm_polygon.boundary = 'administrative'::text;
 
 -- ==============================================================================================================
 
@@ -85,48 +143,6 @@ WHERE planet_osm_polygon.building IS NOT NULL
   AND st_area(planet_osm_polygon.way) < 100000::double precision;
 
 -- ==============================================================================================================
-
-drop table if exists osm.county;
-create table osm.county
-(
-    id        serial not null primary key,
-    osm_id    integer,
-    name      text,
-    uppername text,
-    geom      geometry(multipolygon, 3857)
-);
-create index gix_county on osm.county using gist (geom);
---delete from osm.county;
-insert into osm.county(osm_id, name, uppername, geom)
-SELECT planet_osm_polygon.osm_id,
-       planet_osm_polygon.name                                        as name,
-       upper(planet_osm_polygon.name)                                 AS uppername,
-       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
-FROM planet_osm_polygon
-WHERE (planet_osm_polygon.place = 'county'::text OR
-       planet_osm_polygon.admin_level = '6'::text AND planet_osm_polygon.name = 'Budapest'::text)
-  AND planet_osm_polygon.boundary = 'administrative'::text;
-
--- ==============================================================================================================
-
-drop table if exists osm.district;
-create table osm.district
-(
-    id        serial not null primary key,
-    osm_id    integer,
-    name      text,
-    uppername text,
-    geom      geometry(multipolygon, 3857)
-);
-create index gix_district on osm.district using gist (geom);
-insert into osm.district(osm_id, name, uppername, geom)
-SELECT planet_osm_polygon.osm_id,
-       planet_osm_polygon.name,
-       upper(planet_osm_polygon.name)                                 AS uppername,
-       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
-FROM planet_osm_polygon
-WHERE planet_osm_polygon.admin_level = '9'::text
-  AND planet_osm_polygon.boundary = 'administrative'::text;
 
 -- ==============================================================================================================
 
