@@ -25,7 +25,7 @@ class MapStatus extends Component {
         const app = this.props.app;
         console.log("openStatus",app.desktop)
         app.desktop.addWindow(
-            <Window id="layersWindow" desktop={app.desktop} title="Map Layers" closeable={true}>
+            <Window key="layersWindow" id="layersWindow" desktop={app.desktop} title="Map Layers" closeable={true}>
                 <BaseLayer className="baseLayer" app={app}/>
 
                 <LayerSelection app={app}/>

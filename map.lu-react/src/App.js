@@ -18,6 +18,10 @@ class App extends Component {
         this.desktop.addWindow(window)
     }
 
+    setDialog(window) {
+        this.desktop.setDialog(window)
+    }
+
     setStatus(text) {
         this.status.setText(text)
     }

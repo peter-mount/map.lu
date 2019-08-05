@@ -5,13 +5,20 @@ class Desktop extends Component {
         // Windows in render order
         windows: [],
         // Windows by id
-        wid: {}
+        wid: {},
+        // Active dialog
+        dialog: ""
     };
 
     render() {
+        const props=this.props,
+            state=this.state;
         return <div id="desktop">
-            <div>{this.props.children}</div>
-            <div>{this.state.windows}</div>
+            <div>{props.children}</div>
+            <div>
+                {state.windows}
+                {state.dialog}
+            </div>
         </div>
     }
 
@@ -30,7 +37,22 @@ class Desktop extends Component {
             delete state.wid[window.props.id];
             state.windows = state.windows.filter(w => w.props.id !== window.props.id);
             this.setState(state)
+        } else if(state.dialog && state.dialog.id === window.props.id) {
+            // Handle dialogs
+            state.dialog = ""
         }
+
+        this.setState(state)
+    }
+
+    setDialog(window) {
+        const state = this.state;
+        if (state.dialog) {
+            return false
+        }
+        state.dialog=window;
+        this.setState(state);
+        return true
     }
 }
 

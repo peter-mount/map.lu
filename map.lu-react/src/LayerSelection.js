@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import {layers} from './Layers'
-import Window from "./ui/Window";
+import Dialog from "./ui/Dialog";
 
 function arrayMoveMutate(array, from, to) {
     array.splice(to < 0 ? array.length + to : to, 0, array.splice(from, 1)[0]);
@@ -18,6 +18,7 @@ class LayerRow extends Component {
         const props = this.props,
             def = props.def,
             layer = props.layer;
+
         return <div className="overlayRow">
             <span className="left" onClick={() => this.toggleVisibility()}>
                 <i className={layer.visible ? "far fa-check-square" : "far fa-square"}/>
@@ -39,6 +40,9 @@ class LayerRow extends Component {
         layer.visible = !layer.visible;
 
         app.setState(app.state)
+
+        // FIXME short this on why this doesn't update
+        this.setState(new Date())
     }
 
     up() {
@@ -72,18 +76,9 @@ class LayerSelection extends Component {
             config = app.state,
             map = config.map;
 
-        let openLayerDialog;
-        if (config.openLayerDialog) {
-            openLayerDialog = this.createOpenDialog()
-        }
-
         return (
             <fieldset className="section overlays">
                 <legend>Overlay layers</legend>
-                <div className="title">
-                    Overlay Layers
-                    <i className="far fa-folder-open right icon" onClick={() => this.showOpenDialog()}/>
-                </div>
                 <div className="overlaysOuter">
                     <div className="overlays">
                         {
@@ -95,28 +90,25 @@ class LayerSelection extends Component {
                                 return a;
                             }, [])
                         }
-                        {openLayerDialog}
                     </div>
+                </div>
+                <div className="overlaysControl">
+                    <i className="far fa-folder-open right icon" onClick={() => this.showOpenDialog()}/>
                 </div>
             </fieldset>
         )
     }
 
     showOpenDialog() {
-        const app = this.props.app,
-            config = app.state;
-        if (!config.openLayerDialog) {
-            config.openLayerDialog = true;
-            app.setState(app.state)
-        }
-    }
-
-    createOpenDialog() {
-        return <Window
-            id="openOverlayLayer"
-            title="Add Overlay Layer"
-            icon="far fa-folder-open"
-        />
+        const app = this.props.app;
+        app.setDialog(
+            <Dialog
+                key="openOverlayLayer"
+                id="openOverlayLayer"
+                title="Add Overlay Layer"
+                icon="far fa-folder-open"
+            />
+        )
     }
 }
 
