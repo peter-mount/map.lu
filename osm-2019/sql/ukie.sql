@@ -222,43 +222,82 @@ WHERE planet_osm_polygon.landuse = 'residential';
 -- ==============================================================================================================
 -- forest, parkland
 
-drop table if exists osm.forestpark;
-create table osm.forestpark
+drop table if exists osm.parkland;
+create table osm.parkland
 (
-    id     serial not null primary key,
-    osm_id integer,
-    name   text,
-    geom   geometry(multipolygon, 3857)
+    id      serial not null primary key,
+    osm_id  integer,
+    name    text,
+    landuse text,
+    leisure text,
+    geom    geometry(multipolygon, 3857)
 );
-create index gix_forestpark on osm.forestpark using gist (geom);
-insert into osm.forestpark(osm_id, name, geom)
+create index gix_parkland on osm.parkland using gist (geom);
+insert into osm.parkland(osm_id, name, landuse, leisure, geom)
 SELECT planet_osm_polygon.osm_id,
        planet_osm_polygon.name,
+       planet_osm_polygon.landuse,
+       planet_osm_polygon.leisure,
        st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
 FROM planet_osm_polygon
-WHERE planet_osm_polygon.landuse IN (
-                                     'forest', 'orchard',
+WHERE planet_osm_polygon.landuse ILIKE '%grass%'
+   or planet_osm_polygon.landuse ILIKE '%moor%'
+   or planet_osm_polygon.landuse ILIKE '%park%'
+   or planet_osm_polygon.landuse ILIKE '%orchard%'
+   or planet_osm_polygon.landuse ILIKE '%vine%'
+   or planet_osm_polygon.landuse IN (
                                      'garden', 'Garden',
-                                     'grass', 'gra', 'grasas', 'grass;forest',
-                                     'grassland',
+                                     'gra', 'grasas',
                                      'greenfield',
                                      'meadow', 'meadow;grass',
-                                     'moor', 'moorland',
-                                     'park', 'parkland',
                                      'plant_nursery', 'plants',
-                                     'pitch',
                                      'recreation_ground', 'village_green',
                                      'vineyard'
     )
+   OR planet_osm_polygon.leisure ILIKE '%park%'
+   -- typo for grass?
+   OR planet_osm_polygon.leisure ILIKE '%geass%'
+   OR planet_osm_polygon.leisure ILIKE '%grass%'
    OR planet_osm_polygon.leisure IN (
-                                     'nature_reserve', 'park', 'dog_park', 'garden', 'golf_course', 'horse_riding',
-                                     'recreation_ground', 'stadium'
-    );
+                                     'nature_reserve',
+                                     'garden',
+                                     'golf_course',
+                                     'horse_riding',
+                                     'recreation_ground',
+                                     'stadium'
+    )
+   -- Might make these a new recreation layer
+   or planet_osm_polygon.leisure ilike '%beer%'
+   or planet_osm_polygon.leisure ilike '%picnic%'
+   or planet_osm_polygon.leisure ilike '%pitch%'
+   or planet_osm_polygon.leisure ilike '%playground%'
+   or planet_osm_polygon.leisure ilike '%playing%'
+   or planet_osm_polygon.leisure ilike '%pub%gard%'
+   or planet_osm_polygon.leisure ilike '%stadium%'
+;
 
---WHERE (planet_osm_polygon.landuse = ANY
---          (ARRAY ['forest'::text, 'orchard'::text, 'park'::text, 'plant_nursery'::text, 'grass'::text, 'greenfield'::text, 'meadow'::text, 'recreation_ground'::text, 'village_green'::text, 'vineyard'::text]))
---      OR (planet_osm_polygon.leisure = ANY
---             (ARRAY ['nature_reserve'::text, 'park'::text, 'dog_park'::text, 'garden'::text, 'golf_course'::text, 'horse_riding'::text, 'recreation_ground'::text, 'stadium'::text]));
+drop table if exists osm.forestwoodland;
+create table osm.forestwoodland
+(
+    id        serial not null primary key,
+    osm_id    integer,
+    name      text,
+    landuse   text,
+    "natural" text,
+    geom      geometry(multipolygon, 3857)
+);
+create index gix_forestwoodland on osm.forestwoodland using gist (geom);
+insert into osm.forestwoodland(osm_id, name, landuse, "natural", geom)
+SELECT planet_osm_polygon.osm_id,
+       planet_osm_polygon.name,
+       planet_osm_polygon.landuse,
+       planet_osm_polygon."natural",
+       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
+FROM planet_osm_polygon
+WHERE planet_osm_polygon.landuse ilike '%wood%'
+   or planet_osm_polygon.landuse ilike '%forest%'
+   or planet_osm_polygon."natural" ilike '%wood%'
+   or planet_osm_polygon."natural" ilike '%forest%';
 
 -- ==============================================================================================================
 
