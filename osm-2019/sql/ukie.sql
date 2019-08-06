@@ -2,9 +2,42 @@
 create schema if not exists osm;
 
 -- ==============================================================================================================
+-- Coastline - valid if osm2pgsql was run with keep coastlines in the import
+--
+-- There's 2 tables, one for polygons and the other for lines.
+
+drop table if exists osm.coastline_poly;
+create table osm.coastline_poly
+(
+    id        serial not null primary key,
+    osm_id    integer,
+    geom      geometry(multipolygon, 3857)
+);
+create index gix_coastline_poly on osm.coastline_poly using gist (geom);
+insert into osm.coastline_poly(osm_id, geom)
+SELECT planet_osm_polygon.osm_id,
+       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
+FROM planet_osm_polygon
+WHERE planet_osm_polygon.natural = 'coastline';
+
+drop table if exists osm.coastline_line;
+create table osm.coastline_line
+(
+    id        serial not null primary key,
+    osm_id    integer,
+    geom      geometry(multilinestring, 3857)
+);
+create index gix_coastline_line on osm.coastline_line using gist (geom);
+insert into osm.coastline_line(osm_id, geom)
+SELECT planet_osm_line.osm_id,
+       st_multi(planet_osm_line.way)::geometry(multilinestring, 3857) as way
+FROM planet_osm_line
+WHERE planet_osm_line.natural = 'coastline';
+
+-- ==============================================================================================================
 -- Administrative boundaries
 --
--- These have planet_osm_polygon.boundary = 'administrative' and admin_level of:
+-- These are broken down into Country, State, Region & County.
 --
 -- '2' & place is null  for the UK, Ireland, Isle of Man, Jersey
 --
@@ -18,29 +51,10 @@ create schema if not exists osm;
 -- '6' & place='island' for islands in Ireland
 -- ==============================================================================================================
 
+-- Country with admin_level 2
+-- e.g. United Kingdom
 drop table if exists osm.country;
 create table osm.country
-(
-    id          serial not null primary key,
-    osm_id      integer,
-    name        text,
-    uppername   text,
-    admin_level text,
-    geom        geometry(multipolygon, 3857)
-);
-create index gix_country on osm.country using gist (geom);
-insert into osm.country(osm_id, name, uppername, admin_level, geom)
-SELECT planet_osm_polygon.osm_id,
-       planet_osm_polygon.name                                        as name,
-       upper(planet_osm_polygon.name)                                 AS uppername,
-       admin_level,
-       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
-FROM planet_osm_polygon
-WHERE planet_osm_polygon.admin_level = '2'::text
-  AND planet_osm_polygon.boundary = 'administrative';
-
-drop table if exists osm.boundary;
-create table osm.boundary
 (
     id        serial not null primary key,
     osm_id    integer,
@@ -48,17 +62,62 @@ create table osm.boundary
     uppername text,
     geom      geometry(multipolygon, 3857)
 );
-create index gix_boundary on osm.boundary using gist (geom);
-insert into osm.boundary(osm_id, name, uppername, geom)
+create index gix_country on osm.country using gist (geom);
+insert into osm.country(osm_id, name, uppername, geom)
 SELECT planet_osm_polygon.osm_id,
        planet_osm_polygon.name                                        as name,
        upper(planet_osm_polygon.name)                                 AS uppername,
        st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
 FROM planet_osm_polygon
---WHERE planet_osm_polygon.admin_level = '2'::text
-WHERE planet_osm_polygon.admin_level in ('2', '4')
+WHERE planet_osm_polygon.admin_level = '2'
   AND planet_osm_polygon.boundary = 'administrative';
 
+-- State with admin_level 4
+-- e.g. England
+drop table if exists osm.state;
+create table osm.state
+(
+    id        serial not null primary key,
+    osm_id    integer,
+    name      text,
+    uppername text,
+    geom      geometry(multipolygon, 3857)
+);
+create index gix_state on osm.state using gist (geom);
+insert into osm.state(osm_id, name, uppername, geom)
+SELECT planet_osm_polygon.osm_id,
+       planet_osm_polygon.name                                        as name,
+       upper(planet_osm_polygon.name)                                 AS uppername,
+       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
+FROM planet_osm_polygon
+WHERE planet_osm_polygon.admin_level = '4'
+  AND planet_osm_polygon.boundary = 'administrative';
+
+-- Region admin_level 5
+-- e.g. South East
+-- This only covers England & Ireland as Wales, Scotland & Northern Ireland have no regions
+drop table if exists osm.region;
+create table osm.region
+(
+    id        serial not null primary key,
+    osm_id    integer,
+    name      text,
+    uppername text,
+    geom      geometry(multipolygon, 3857)
+);
+create index gix_region on osm.region using gist (geom);
+--delete from osm.county;
+insert into osm.region(osm_id, name, uppername, geom)
+SELECT planet_osm_polygon.osm_id,
+       planet_osm_polygon.name                                        as name,
+       upper(planet_osm_polygon.name)                                 AS uppername,
+       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
+FROM planet_osm_polygon
+WHERE planet_osm_polygon.admin_level = '5'
+  AND planet_osm_polygon.boundary = 'administrative';
+
+-- County admin_level 6 or place=county
+-- e.g. Kent
 drop table if exists osm.county;
 create table osm.county
 (
@@ -79,8 +138,6 @@ FROM planet_osm_polygon
 WHERE (planet_osm_polygon.place = 'county' OR
        planet_osm_polygon.admin_level = '6')
   AND planet_osm_polygon.boundary = 'administrative';
-
--- ==============================================================================================================
 
 drop table if exists osm.district;
 create table osm.district
@@ -115,9 +172,7 @@ insert into osm.amenity(osm_id, geom)
 SELECT planet_osm_polygon.osm_id,
        st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
 FROM planet_osm_polygon
-WHERE planet_osm_polygon.amenity IS NOT NULL
-  AND (planet_osm_polygon.amenity = ANY
-       (ARRAY ['college'::text, 'community_centre'::text, 'courthouse'::text, 'doctors'::text, 'embassy'::text, 'grave_yard'::text, 'hospital'::text, 'library'::text, 'marketplace'::text, 'prison'::text, 'public_building'::text, 'school'::text, 'simming_pool'::text, 'theatre'::text, 'townhall'::text, 'university'::text]));
+WHERE planet_osm_polygon.amenity IS NOT NULL;
 
 -- ==============================================================================================================
 
