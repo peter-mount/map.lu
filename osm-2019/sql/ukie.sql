@@ -9,9 +9,9 @@ create schema if not exists osm;
 drop table if exists osm.coastline_poly;
 create table osm.coastline_poly
 (
-    id        serial not null primary key,
-    osm_id    integer,
-    geom      geometry(multipolygon, 3857)
+    id     serial not null primary key,
+    osm_id integer,
+    geom   geometry(multipolygon, 3857)
 );
 create index gix_coastline_poly on osm.coastline_poly using gist (geom);
 insert into osm.coastline_poly(osm_id, geom)
@@ -23,9 +23,9 @@ WHERE planet_osm_polygon.natural = 'coastline';
 drop table if exists osm.coastline_line;
 create table osm.coastline_line
 (
-    id        serial not null primary key,
-    osm_id    integer,
-    geom      geometry(multilinestring, 3857)
+    id     serial not null primary key,
+    osm_id integer,
+    geom   geometry(multilinestring, 3857)
 );
 create index gix_coastline_line on osm.coastline_line using gist (geom);
 insert into osm.coastline_line(osm_id, geom)
@@ -139,6 +139,8 @@ WHERE (planet_osm_polygon.place = 'county' OR
        planet_osm_polygon.admin_level = '6')
   AND planet_osm_polygon.boundary = 'administrative';
 
+-- district admin_level 9
+-- parish admin_level 10
 drop table if exists osm.district;
 create table osm.district
 (
@@ -155,8 +157,8 @@ SELECT planet_osm_polygon.osm_id,
        upper(planet_osm_polygon.name)                                 AS uppername,
        st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
 FROM planet_osm_polygon
-WHERE planet_osm_polygon.admin_level = '9'::text
-  AND planet_osm_polygon.boundary = 'administrative'::text;
+WHERE planet_osm_polygon.admin_level IN ('9', '10')
+  AND planet_osm_polygon.boundary = 'administrative';
 
 -- ==============================================================================================================
 
@@ -175,6 +177,7 @@ FROM planet_osm_polygon
 WHERE planet_osm_polygon.amenity IS NOT NULL;
 
 -- ==============================================================================================================
+-- Buildings - specifically individual ones like churches, pubs etc
 
 drop table if exists osm.buildings;
 create table osm.buildings
@@ -196,6 +199,25 @@ SELECT planet_osm_polygon.osm_id,
 FROM planet_osm_polygon
 WHERE planet_osm_polygon.building IS NOT NULL
   AND st_area(planet_osm_polygon.way) < 100000::double precision;
+
+-- ==============================================================================================================
+-- residential - general land coverage of residential areas
+
+drop table if exists osm.residential;
+create table osm.residential
+(
+    id          serial not null primary key,
+    osm_id      integer,
+    name        text,
+    geom        geometry(multipolygon, 3857)
+);
+create index gix_residential on osm.residential using gist (geom);
+insert into osm.residential(osm_id, name, geom)
+SELECT planet_osm_polygon.osm_id,
+       planet_osm_polygon.name,
+       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
+FROM planet_osm_polygon
+WHERE planet_osm_polygon.landuse = 'residential';
 
 -- ==============================================================================================================
 
