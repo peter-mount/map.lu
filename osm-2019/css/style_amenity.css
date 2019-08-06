@@ -1,8 +1,38 @@
 [@scale < 100001] {
-  fill: #f9edd5;
+    fill: #f9edd5;
 }
 
 [@scale < 100001] [amenity = 'parking'] {
-  fill: #eeeeee;
-  stroke: #d6c9c6;
+    fill: #eeeeee;
+    stroke: #d6c9c6;
+    label-anchor: 0.5 0.5;
+    font-family: "Times New Roman";
+    font-fill: black;
+    font-style: normal;
+}
+
+[@scale <1000] [amenity = 'parking'] {
+    font-size: 24;
+    label: "P";
+}
+
+[@scale >1000] [@scale < 4261] [amenity = 'parking'] {
+    font-size: 18;
+    label: "P";
+}
+
+[@scale < 4261] [amenity = 'parking'] {
+    font-size: 14;
+    label: "P";
+}
+
+
+[@scale >= 4261] [@scale < 8521] [amenity = 'parking'] {
+    font-size: 10;
+    label: "P";
+}
+
+[@scale >= 8521] [@scale < 17000] [amenity = 'parking'] {
+    font-size: 6;
+    label: "P";
 }
