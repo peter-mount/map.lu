@@ -247,6 +247,7 @@ WHERE planet_osm_polygon.landuse ILIKE '%grass%'
    or planet_osm_polygon.landuse ILIKE '%vine%'
    or planet_osm_polygon.landuse IN (
                                      'garden', 'Garden',
+                                     -- spelling mistakes for grass? seen in the UKIE extract
                                      'gra', 'grasas',
                                      'greenfield',
                                      'meadow', 'meadow;grass',
