@@ -1,5 +1,5 @@
-* { 
-  font-fill: #484848; 
+* {
+  font-fill: #484848;
   font-family: "DejaVu Sans";
   font-weight: normal;
   halo-color: white;
@@ -40,4 +40,34 @@
   z-index: 0, 1;
   label: [name];
   font-size: 7;
+}
+
+[@scale < 10k] [highway = 'service'] {
+  stroke: #888, #fff;
+}
+
+[@scale >= 10k] [@scale < 35k] [highway = 'service'] {
+  stroke: #fff;
+}
+
+[@scale < 4k] [highway = 'path' or highway = 'footway'] {
+  stroke: #fa9989;
+  stroke-dasharray: 2 5;
+  stroke-width: 1, 1;
+  font-size: 10;
+  label: [name];
+}
+
+[@scale >= 4k] [@scale < 10k] [highway = 'path' or highway = 'footway'] {
+  stroke: #fa9989;
+  stroke-dasharray: 2 5;
+  stroke-width: 0.25, 0.25;
+  font-size: 7;
+  label: [name];
+}
+
+[@scale >= 10k] [@scale < 35k] [highway = 'path' or highway = 'footway'] {
+  stroke: #fa9989;
+  stroke-dasharray: 2 5;
+  stroke-width: 0.25, 0.25;
 }

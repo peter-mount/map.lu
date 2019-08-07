@@ -247,7 +247,7 @@ WHERE planet_osm_polygon.landuse ILIKE '%grass%'
    or planet_osm_polygon.landuse ILIKE '%vine%'
    or planet_osm_polygon.landuse IN (
                                      'garden', 'Garden',
-                                     -- spelling mistakes for grass? seen in the UKIE extract
+    -- spelling mistakes for grass? seen in the UKIE extract
                                      'gra', 'grasas',
                                      'greenfield',
                                      'meadow', 'meadow;grass',
@@ -362,23 +362,37 @@ FROM planet_osm_line
 WHERE planet_osm_line.highway = 'motorway'::text;
 
 -- ==============================================================================================================
+-- pedestrian includes footpaths, bridal paths, minor roads etc
 
 drop table if exists osm.pedestrian;
 create table osm.pedestrian
 (
-    id     serial not null primary key,
-    osm_id integer,
-    name   text,
-    geom   geometry(multilinestring, 3857)
+    id      serial not null primary key,
+    osm_id  integer,
+    name    text,
+    highway text,
+    foot    text,
+    bicycle text,
+    geom    geometry(multilinestring, 3857)
 );
 create index gix_pedestrian on osm.pedestrian using gist (geom);
-insert into osm.pedestrian(osm_id, name, geom)
+insert into osm.pedestrian(osm_id, name, highway, foot, bicycle, geom)
 SELECT planet_osm_line.osm_id,
        planet_osm_line.name,
+       planet_osm_line.highway,
+       planet_osm_line.foot,
+       planet_osm_line.bicycle,
        st_multi(planet_osm_line.way)::geometry(MultiLineString, 3857) as way
 FROM planet_osm_line
-WHERE planet_osm_line.highway = ANY
-      (ARRAY ['steps'::text, 'footway'::text, 'path'::text, 'pedestrian'::text, 'walkway'::text, 'service'::text, 'track'::text]);
+WHERE planet_osm_line.highway IN (
+                                  'footway',
+                                  'path',
+                                  'pedestrian',
+                                  'service',
+                                  'steps',
+                                  'track',
+                                  'walkway'
+    );
 
 -- ==============================================================================================================
 
