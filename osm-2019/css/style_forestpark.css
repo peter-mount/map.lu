@@ -8,6 +8,8 @@
   font-style: normal; 
   label-anchor: 0.5 0;
   label-offset: 0 5;
+  sort-by: z_order;
+  sort-by-group: woodland;
 }
 
 [@scale < 5001] {

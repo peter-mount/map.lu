@@ -1,32 +1,87 @@
+@styleTitle 'Amenities';
+
 * {
-  font-family: "DejaVu Sans";
-  halo-color: #ffffff;
-  halo-radius: 0.3;
-  font-weight: normal;
-  font-fill: #999;
-  font-style: normal; 
-  label-anchor: 0.5 0;
-  label-offset: 0 5;
+    fill: #666;
 }
 
-[@scale < 10001] [@scale > 5000] {
-  fill: #000000, #f0f0f0;
-  fill-opacity: 0.4, 1;
-  geometry: [offset(way, 0.5, -0.5)], [way];
+/* catch all for any amenity */
+[@scale < 100001] {
+    fill: #f9edd5;
 }
 
-[@scale < 5001] [@scale > 2500] {
-  fill: #000000, #f0f0f0;
-  fill-opacity: 0.4, 1;
-  geometry: [offset(way, 0.4, -0.4)], [way];
-  font-size: 8.5;
-  label: [name];
+/* @title Parking */
+[amenity = 'parking'] {
+[@scale < 100001] {
+    fill: #eeeeee;
+    stroke: #d6c9c6;
+    label-anchor: 0.5 0.5;
+    font-family: "Times New Roman";
+    font-fill: black;
+    font-style: normal;
+};
+
+[@scale <1000] {
+    font-size: 24;
+    label: "P";
+};
+
+[@scale >=1000] [@scale < 4261] {
+    font-size: 18;
+    label: "P";
+};
+
+[@scale < 4261] {
+    font-size: 14;
+    label: "P";
+};
+
+[@scale >= 4261] [@scale < 8521] {
+    font-size: 10;
+    label: "P";
+};
+
+[@scale >= 8521] [@scale < 17k] {
+    font-size: 6;
+    label: "P";
+};
 }
 
-[@scale < 2501] {
-  fill: #000000, #f0f0f0;
-  fill-opacity: 0.4, 1;
-  geometry: [offset(way, 0.3, -0.3)], [way];
-  font-size: 8.5;
-  label: [name];
+/* @title Bank */
+[amenity='bank'] {
+    fill: #ddd;
+}
+
+/* @title Bus Station */
+[amenity='bus_depot' or amenity='bus_garage' or amenity='bus_station' or amenity='bus_terminus'] {
+    fill: #000000, #c4b6ab;
+}
+
+/* @title Place of worship */
+[amenity = 'church' or amenity = 'place_of_worship'] {
+    fill: #000000, #c4b6ab;
+}
+
+/* @title Marketplace */
+[amenity='marketplace'] {
+    fill: #aaa;
+}
+
+/* @title Prison */
+[amenity='prison'] {
+    fill: lightgoldenrodyellow;
+
+    [@sd <2.5k] {
+        stroke: goldenrod;
+        stroke-width: 1;
+    };
+
+    [@sd <5k] {
+        stroke: goldenrod;
+        stroke-width: 0.25;
+    };
+}
+
+/* @title Theatre */
+[amenity='theatre'] {
+    fill: #0c6;
 }
