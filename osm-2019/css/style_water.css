@@ -1,3 +1,16 @@
-* { 
+/* @title Water */
+* {
   fill: #a3ccff;
+  sort-by: z_order;
+  sort-by-group: water;
+}
+
+/* @title Underground */
+[z_order < 0 ] {
+  fill: symbol("shape://times");
+  :fill {
+    size: 12;
+    stroke: #a3ccff;
+    stroke-width: 1px;
+  };
 }

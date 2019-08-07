@@ -320,28 +320,6 @@ WHERE landuse ilike '%wood%'
 
 -- ==============================================================================================================
 
-drop table if exists osm.lakes;
-create table osm.lakes
-(
-    id       serial not null primary key,
-    osm_id   integer,
-    name     text,
-    way_area real,
-    geom     geometry(multipolygon, 3857)
-);
-create index gix_lakes on osm.lakes using gist (geom);
-insert into osm.lakes(osm_id, name, way_area, geom)
-SELECT planet_osm_polygon.osm_id,
-       planet_osm_polygon.name,
-       planet_osm_polygon.way_area,
-       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
-FROM planet_osm_polygon
-WHERE planet_osm_polygon."natural" = 'water'::text
-  AND (planet_osm_polygon.water IS NULL OR
-       planet_osm_polygon.water IS NOT NULL AND planet_osm_polygon.water <> 'river'::text);
-
--- ==============================================================================================================
-
 drop table if exists osm.minor_roads;
 create table osm.minor_roads
 (
@@ -515,26 +493,49 @@ FROM planet_osm_line
 WHERE planet_osm_line.highway = ANY (ARRAY ['motorway_link'::text, 'trunk'::text, 'primary'::text]);
 
 -- ==============================================================================================================
+-- Water features
+
+drop table if exists osm.lakes;
+create table osm.lakes
+(
+    id       serial not null primary key,
+    osm_id   integer,
+    name     text,
+    way_area real,
+    z_order  int,
+    geom     geometry(multipolygon, 3857)
+);
+create index gix_lakes on osm.lakes using gist (geom);
+insert into osm.lakes(osm_id, name, way_area, z_order, geom)
+SELECT osm_id,
+       name,
+       way_area,
+       z_order,
+       st_multi(way)::geometry(MultiPolygon, 3857) as way
+FROM planet_osm_polygon
+WHERE "natural" = 'water'
+  AND (water IS NULL OR
+       water IS NOT NULL AND water <> 'river');
 
 drop table if exists osm.water;
 create table osm.water
 (
-    id     serial not null primary key,
-    osm_id integer,
-    name   text,
-    geom   geometry(multipolygon, 3857)
+    id      serial not null primary key,
+    osm_id  integer,
+    name    text,
+    z_order int,
+    geom    geometry(multipolygon, 3857)
 );
 create index gix_water on osm.water using gist (geom);
-insert into osm.water(osm_id, name, geom)
-SELECT planet_osm_polygon.osm_id,
-       planet_osm_polygon.name,
-       st_multi(planet_osm_polygon.way)::geometry(MultiPolygon, 3857) as way
+insert into osm.water(osm_id, name, z_order, geom)
+SELECT osm_id,
+       name,
+       z_order,
+       st_multi(way)::geometry(MultiPolygon, 3857) as way
 FROM planet_osm_polygon
-WHERE planet_osm_polygon."natural" = 'water'::text
-   OR planet_osm_polygon.water IS NOT NULL
-   OR planet_osm_polygon.waterway ~~ '%riverbank%'::text;
-
--- ==============================================================================================================
+WHERE "natural" = 'water'
+   OR water IS NOT NULL
+   OR waterway ~~ '%riverbank%';
 
 drop table if exists osm.waterway;
 create table osm.waterway
@@ -543,17 +544,25 @@ create table osm.waterway
     osm_id   integer,
     name     text,
     waterway text,
+    z_order  int,
     geom     geometry(multilinestring, 3857)
 );
 create index gix_waterway on osm.waterway using gist (geom);
-insert into osm.waterway(osm_id, name, waterway, geom)
-SELECT planet_osm_line.osm_id,
-       planet_osm_line.name,
-       planet_osm_line.waterway,
-       st_multi(planet_osm_line.way)::geometry(MultiLineString, 3857) as way
+insert into osm.waterway(osm_id, name, waterway, z_order, geom)
+SELECT osm_id,
+       name,
+       waterway,
+       z_order,
+       st_multi(way)::geometry(MultiLineString, 3857) as way
 FROM planet_osm_line
-WHERE planet_osm_line.waterway = ANY
-      (ARRAY ['drain'::text, 'canal'::text, 'waterfall'::text, 'river'::text, 'stream'::text, 'yes'::text]);
+WHERE waterway IN (
+                     'canal',
+                     'drain',
+                     'river',
+                     'stream',
+                     'waterfall',
+                     'yes'
+    );
 
 
 -- ==============================================================================================================

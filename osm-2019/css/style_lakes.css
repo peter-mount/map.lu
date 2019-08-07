@@ -1,8 +1,8 @@
-* { 
+* {
   font-family: "DejaVu Sans";
   font-weight: normal;
   font-fill: #5588cb;
-  font-style: italic; 
+  font-style: italic;
   label-anchor: 0.5 0;
   label-offset: 0 5;
   -gt-label-follow-line: true;

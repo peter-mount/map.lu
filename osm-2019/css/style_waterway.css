@@ -1,4 +1,4 @@
-* { 
+* {
   font-fill: #5588cb; 
   font-family: "DejaVu Sans";
   font-weight: italic;
@@ -9,30 +9,61 @@
   -gt-label-padding: 10;
   stroke-linecap: round;
   label-offset: 7px;
+  sort-by: z_order;
+  sort-by-group: water;
 }
 
-[@scale > 1000001] [waterway = 'river'] {
+/* @title Waterway */
+[waterway = 'yes'] {
   stroke: #a3ccff;
-  stroke-opacity: 0.7;
-  stroke-width: 0.5;
 }
 
-[@scale < 1000001] [@scale > 200001] [waterway = 'river']{
-  stroke-opacity: 0.7;
-  stroke-width: 1;
+/* @title Canal */
+[waterway = 'canal'] {
   stroke: #a3ccff;
-} 
+}
 
-[@scale < 200001] [@scale > 100001] {
+/* @title drain */
+[waterway = 'drain'] {
+  stroke: #a3ccff;
+}
+
+/* @title Stream */
+[waterway = 'stream'] {
+  stroke: #a3ccff;
+}
+
+  /* @title River */
+[waterway = 'river'] {
+  [@sd > 1000k] {
+    stroke: #a3ccff;
+    stroke-opacity: 0.7;
+    stroke-width: 0.5;
+  };
+
+  [@sd > 200k] [@sd <= 1000k] {
+    stroke-opacity: 0.7;
+    stroke-width: 1;
+    stroke: #a3ccff;
+  };
+
+}
+
+[@sd > 100k] [@sd <= 200k] {
   stroke-opacity: 0.7;
   stroke-width: 1.2;
   stroke: #a3ccff;
-} 
+}
 
-[@scale < 100001] {
+[@sd < 100k] {
   stroke: #a3ccff;
   stroke-opacity: 0.7;
   stroke-width: 1.5;
   font-size: 8.5;
   label: [name];
+}
+
+/* @title Underground */
+[z_order < 0 ] {
+  stroke-dasharray: 2 5;
 }
