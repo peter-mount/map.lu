@@ -84,21 +84,26 @@ func (t SqlTable) createSql(schema string) string {
 func (t SqlTable) insertSql(prefix, schema, featuretype, where string) string {
 	var s []string
 
-	s = append(s, fmt.Sprintf("INSERT INTO %s.%s (", schema, t.Name))
+	s = append(s)
 
-	sfmt := "    %s"
+	sfmt := fmt.Sprintf("INSERT INTO %s.%s ( ", schema, t.Name)
+	efmt := strings.Repeat(" ", len(sfmt)) + "%s"
+	sfmt = sfmt + "%s"
 	suffix := ","
 	for i, c := range t.Columns {
 		if (i + 1) == len(t.Columns) {
-			suffix = ""
+			suffix = " )"
 		}
 		if !c.PrimaryKey {
 			s = append(s, strings.TrimRightFunc(fmt.Sprintf(sfmt, c.Name), unicode.IsSpace)+suffix)
+			if sfmt[0] != ' ' {
+				sfmt = efmt
+			}
 		}
 	}
 
-	sfmt = ") SELECT %s"
-	efmt := "         %s"
+	sfmt = "SELECT %s"
+	efmt = "       %s"
 	suffix = ","
 	for i, c := range t.Columns {
 		if (i + 1) == len(t.Columns) {
