@@ -5,6 +5,7 @@
 country:
   category: administrative
   type: polygon
+  description: The country, e.g. United Kingdom
   columns:
     - name
     - uppername = upper(name)

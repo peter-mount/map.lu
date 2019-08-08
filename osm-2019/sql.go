@@ -21,20 +21,23 @@ type SqlColumn struct {
 }
 
 func (t TableDefinition) sql(prefix, schema string) []string {
-	var a []string
+	sep := "-- " + strings.Repeat("=", 70)
+	a := append([]string{}, sep)
+
+	if t.Description != "" {
+		a = splitText(a, "-- ", t.Description)
+		a = append(a, "-- ")
+	}
 
 	f := func(a []string, l, v string) []string {
 		if v != "" {
-			return append(a, fmt.Sprintf("-- %-10s %s", l, v))
+			return splitText(a, fmt.Sprintf("-- %-10s", l), v)
 		}
 		return a
 	}
 
-	sep := "-- " + strings.Repeat("=", 70)
-	a = append(a, sep)
-	a = f(a, "Schema", schema)
 	a = f(a, "Table", t.Name)
-	a = f(a, "Description", t.Description)
+	a = f(a, "Schema", schema)
 	a = f(a, "Category", t.Category)
 	a = f(a, "Type", t.Type)
 	a = append(a, sep)
@@ -133,6 +136,39 @@ func (t SqlTable) insertSql(prefix, schema, featuretype, where string) string {
 	}
 
 	return strings.Join(s, "\n")
+}
+
+func splitString(s string, i int) (string, string) {
+	if i > len(s) {
+		i = len(s)
+	}
+	l := strings.TrimFunc(s[:i], unicode.IsSpace)
+	r := ""
+	if i < len(s) {
+		r = strings.TrimFunc(s[i+1:], unicode.IsSpace)
+	}
+	return l, r
+}
+func splitPrefix(a []string, p, s string, i int) ([]string, string) {
+	l, r := splitString(s, i)
+	return append(a, p+l), r
+}
+func splitText(a []string, p, s string) []string {
+	for _, v := range strings.Split(s, "\n") {
+		for v != "" {
+			var i int
+			if len(v) < 70 {
+				i = 70
+			} else {
+				i = strings.LastIndex(v[:70], " ")
+				if i < 1 {
+					i = 70
+				}
+			}
+			a, v = splitPrefix(a, p, v, i)
+		}
+	}
+	return a
 }
 
 func (t *TableDefinition) getSqlTable() error {
