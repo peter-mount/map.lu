@@ -506,7 +506,11 @@ create table osm.lakes
     geom     geometry(multipolygon, 3857)
 );
 create index gix_lakes on osm.lakes using gist (geom);
-insert into osm.lakes(osm_id, name, way_area, z_order, geom)
+insert into osm.lakes(osm_id,
+                      name,
+                      way_area,
+                      z_order,
+                      geom)
 SELECT osm_id,
        name,
        way_area,
@@ -556,12 +560,12 @@ SELECT osm_id,
        st_multi(way)::geometry(MultiLineString, 3857) as way
 FROM planet_osm_line
 WHERE waterway IN (
-                     'canal',
-                     'drain',
-                     'river',
-                     'stream',
-                     'waterfall',
-                     'yes'
+                   'canal',
+                   'drain',
+                   'river',
+                   'stream',
+                   'waterfall',
+                   'yes'
     );
 
 

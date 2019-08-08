@@ -1,0 +1,387 @@
+# This is a .style file for osm2pgsql based on it's default.style with additional entries
+# to include the openrailwaymap tags.
+#
+# see: https://github.com/openstreetmap/osm2pgsql/blob/master/default.style
+#
+# This is the default osm2pgsql .style file that comes with osm2pgsql.
+#
+# A .style file has 4 columns that define how OSM objects end up in tables in
+# the database and what columns are created. It interacts with the command-line
+# hstore options.
+#
+# Columns
+# =======
+#
+# OsmType: This is either "node", "way" or "node,way" and indicates if this tag
+# applies to nodes, ways, or both.
+#
+# Tag: The tag
+#
+# DataType: The type of the column to be created. Normally "text"
+#
+# Flags: Flags that indicate what table the OSM object is moved into.
+#
+# There are 6 possible flags. These flags are used both to indicate if a column
+# should be created, and if ways with the tag are assumed to be areas. The area
+# assumptions can be overridden with an area=yes/no tag
+#
+# polygon - Create a column for this tag, and objects with the tag are areas
+#
+# linear - Create a column for this tag
+#
+# nocolumn - Override the above and don't create a column for the tag, but do
+# include objects with this tag
+#
+# phstore - Same as polygon,nocolumn for backward compatibility
+#
+# delete - Drop this tag completely and don't create a column for it. This also
+# prevents the tag from being added to hstore columns
+#
+# nocache - Deprecated and does nothing
+#
+# If an object has a tag that indicates it is an area or has area=yes/1,
+# osm2pgsql will try to turn it into an area. If it succeeds, it places it in
+# the polygon table. If it fails (e.g. not a closed way) it places it in the
+# line table.
+#
+# Nodes are never placed into the polygon or line table and are always placed in
+# the point table.
+#
+# Hstore
+# ======
+#
+# The options --hstore, --hstore-match-only, and --hstore-all interact with
+# the .style file.
+#
+# With --hstore any tags without a column will be added to the hstore column.
+# This will also cause all objects to be kept.
+#
+# With --hstore-match-only the behavior for tags is the same, but objects are
+# only kept if they have a non-NULL value in one of the columns.
+#
+# With --hstore-all all tags are added to the hstore column unless they appear
+# in the style file with a delete flag, causing duplication between the normal
+# columns and the hstore column.
+#
+# Special database columns
+# ========================
+#
+# There are some special database columns that if present in the .style file
+# will be populated by osm2pgsql.
+#
+# These are
+#
+# z_order - datatype int4
+#
+# way_area - datatype real. The area of the way, in the units of the projection
+# (e.g. square mercator meters). Only applies to areas
+#
+# osm_user - datatype text
+# osm_uid - datatype integer
+# osm_version - datatype integer
+# osm_changeset - datatype integer
+# osm_timestamp - datatype timestamptz(0).
+# Used with the --extra-attributes option to include metadata in the database.
+# If importing with both --hstore and --extra-attributes the meta-data will
+# end up in the tags hstore column regardless of the style file.
+
+# OsmType  Tag          DataType     Flags
+node,way   access       text         linear
+node,way   addr:housename      text  linear
+node,way   addr:housenumber    text  linear
+node,way   addr:interpolation  text  linear
+node,way   admin_level  text         linear
+node,way   aerialway    text         linear
+node,way   aeroway      text         polygon
+node,way   amenity      text         polygon
+node,way   area         text         polygon # hard coded support for area=1/yes => polygon is in osm2pgsql
+node,way   barrier      text         linear
+node,way   bicycle      text         linear
+node,way   brand        text         linear
+node,way   bridge       text         linear
+node,way   boundary     text         linear
+node,way   building     text         polygon
+node       capital      text         linear
+node,way   construction text         linear
+node,way   covered      text         linear
+node,way   culvert      text         linear
+node,way   cutting      text         linear
+node,way   denomination text         linear
+node,way   disused      text         linear
+node       ele          text         linear
+node,way   embankment   text         linear
+node,way   foot         text         linear
+node,way   generator:source    text  linear
+node,way   harbour      text         polygon
+node,way   highway      text         linear
+node,way   historic     text         polygon
+node,way   horse        text         linear
+node,way   intermittent text         linear
+node,way   junction     text         linear
+node,way   landuse      text         polygon
+node,way   layer        text         linear
+node,way   leisure      text         polygon
+node,way   lock         text         linear
+node,way   man_made     text         polygon
+node,way   military     text         polygon
+node,way   motorcar     text         linear
+node,way   name         text         linear
+node,way   natural      text         polygon  # natural=coastline tags are discarded by a hard coded rule in osm2pgsql
+node,way   office       text         polygon
+node,way   oneway       text         linear
+node,way   operator     text         linear
+node,way   place        text         polygon
+node,way   population   text         linear
+node,way   power        text         polygon
+node,way   power_source text         linear
+node,way   public_transport text     polygon
+node,way   railway      text         linear
+node,way   ref          text         linear
+node,way   religion     text         linear
+node,way   route        text         linear
+node,way   service      text         linear
+node,way   shop         text         polygon
+node,way   sport        text         polygon
+node,way   surface      text         linear
+node,way   toll         text         linear
+node,way   tourism      text         polygon
+node,way   tower:type   text         linear
+way        tracktype    text         linear
+node,way   tunnel       text         linear
+node,way   water        text         polygon
+node,way   waterway     text         polygon
+node,way   wetland      text         polygon
+node,way   width        text         linear
+node,way   wood         text         linear
+node,way   z_order      int4         linear # This is calculated during import
+way        way_area     real         linear # This is calculated during import
+
+# Area tags
+# We don't make columns for these tags, but objects with them are areas.
+# Mainly for use with hstore
+way         abandoned:aeroway       text    polygon,nocolumn
+way         abandoned:amenity       text    polygon,nocolumn
+way         abandoned:building      text    polygon,nocolumn
+way         abandoned:landuse       text    polygon,nocolumn
+way         abandoned:power         text    polygon,nocolumn
+way         area:highway            text    polygon,nocolumn
+
+# ==========================================================================================
+# openrailway specific tags
+#
+# See https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging as this lists them & was
+#     used to implement this list.
+#
+# These are grouped together as they appear on that page except they are not included if:
+# * They already exist in the default style
+# * They start with railway: as we include them all in the first statement below
+# * Another include below already includes them, usually a wildcard
+
+node,way   crossing:activation                                    text linear
+node,way   crossing:barrier                                       text linear
+node,way   crossing:bell                                          text linear
+node,way   crossing:chicane                                       text linear
+node,way   crossing:light                                         text linear
+node,way   crossing:on_demand                                     text linear
+node,way   crossing:saltire                                       text linear
+node,way   crossing:supervision                                   text linear
+node,way   payment:account_cards                                  text linear
+node,way   payment:coins                                          text linear
+node,way   payment:credit_cards                                   text linear
+node,way   payment:debit_cards                                    text linear
+node,way   payment:electronic_purses                              text linear
+node,way   payment:notes                                          text linear
+node,way   railway:atc                                            text linear
+node,way   railway:atp                                            text linear
+node,way   railway:aws                                            text linear
+node,way   railway:ballastless                                    text linear
+node,way   railway:bidirectional                                  text linear
+node,way   railway:caws                                           text linear
+node,way   railway:derail                                         text linear
+node,way   railway:electricity:jumpering                          text linear
+node,way   railway:etcs                                           text linear
+node,way   railway:gnt                                            text linear
+node,way   railway:interlaced                                     text linear
+node,way   railway:level_crossing:closure:average                 text linear
+node,way   railway:level_crossing:closure:max                     text linear
+node,way   railway:level_crossing:closure:min                     text linear
+node,way   railway:local_operated                                 text linear
+node,way   railway:maxspeed:diverging                             text linear
+node,way   railway:maxspeed:straight                              text linear
+node,way   railway:milestone:catenary_mast                        text linear
+node,way   railway:milestone:emergency_brake_override             text linear
+node,way   railway:milestone:emergency_brake_override:direction   text linear
+node,way   railway:passing_prohibited                             text linear
+node,way   railway:position                                       text linear
+node,way   railway:position:exact                                 text linear
+node,way   railway:preserved                                      text linear
+node,way   railway:radio                                          text linear
+node,way   railway:radius                                         text linear
+node,way   railway:rail                                           text linear
+node,way   railway:railway_crossing:movable                       text linear
+node,way   railway:ref                                            text linear
+node,way   railway:signal_box                                     text linear
+node,way   railway:station_category                               text linear
+node,way   railway:switch                                         text linear
+node,way   railway:switch:configuration                           text linear
+node,way   railway:switch:curved                                  text linear
+node,way   railway:switch:electric                                text linear
+node,way   railway:switch:heated                                  text linear
+node,way   railway:switch:movable_frog                            text linear
+node,way   railway:switch:resetting                               text linear
+node,way   railway:switch:switch_blade                            text linear
+node,way   railway:tilting                                        text linear
+node,way   railway:track_class                                    text linear
+node,way   railway:track_ref                                      text linear
+node,way   railway:traffic_mode                                   text linear
+node,way   railway:turnout_side                                   text linear
+node,way   railway:vacancy_detection                              text linear
+
+node,way   image                    text linear # url to an image of the feature, e.g. bridge, tunnel
+node,way   operating_times          text linear # Times the feature is manned or used
+node,way   start_date               text linear # Date feature went into service
+node,way   end_date                 text linear # Date feature went out of service
+node,way   wikipedia                text linear # Wikipedia article about the feature. Some features have their own eg bridge:wikipedia
+node,way   uic_ref                  text linear # UIC ref number of feature
+node,way   uic_name                 text linear # UIC name of feature
+node,way   network                  text linear # Network feature belongs to
+
+# General attributes
+node,way   description              text linear # Railway line names, more descriptive than name
+node,way   usage                    text linear # type of line
+node,way   highspeed                text linear # line is a highspeed line
+node,way   lit                      text linear # line is lit
+node,way   gauge                    text linear # gauge in mm TODO see if this can be an int4 instead
+node,way   embedded                 text linear # Tracks are embedded in any sort of pavement & type of embedding
+node,way   loading_gauge            text linear # The allowed loading gauge,which defines the maximum size of the vehicles, replaces structure_gauge=*.
+node,way   metre_load               text linear # The maximum allowed weight per metre of rolling stock in tons per metre.
+node,way   axle_load                text linear # The maximum allowed axle load of rolling stock in tons.
+node,way   rack                     text linear # Is railway equipped with a rack system & optionally type of
+node,way   maxspeed                 text linear # Maximum permissible speed in a track section
+node,way   maxspeed:tilting         text linear # Maximum permissible speed in a track section for trains equipped with tilting system, mainly in curves
+node,way   incline                  text linear # The slope (inclination) of track, in its direction. This tag can either carry a numeric value or up/down
+node,way   workrules                text linear # Describes which working rules (usually a law) applies on this track.
+
+# Electrified lines
+node,way   electrified              text linear # line is electrified & possible type
+node,way   electrified:rail         text linear # contact type of the third rail
+node,way   abandoned:electrified    text linear # abandoned electrified lines
+node,way   deelectrified            text linear # replaced by abandoned:electrified, TODO remove if unused
+node,way   voltage                  text linear # voltage of system
+node,way   frequency                text linear # frequency in Hz, 0 for DC
+
+# Bridges
+node,way   bridge:moveable          text linear # bascule/lift/swing only set if bridge=moveable
+node,way   bridge:name              text linear # Name of the bridge
+node,way   bridge:wikipedia         text linear # Wikipedia article about the bridge, uses the format <language code>:<article name>
+
+# Tunnels
+node,way   tunnel:name              text linear # Tunnels name
+node,way   tunnel:wikipedia         text linear # Wikipedia article about the tunnel, uses the format <language code>:<article name>
+
+# Signal box
+
+# Interlocking range
+node,way   crossing                 text linear # Level Crossings that are controlled by the Interlocking Tower should be given this role.. Do not include manually operated or fully automatic level crossings here.
+node,way   facility                 text linear # Operating Sites's relations should be given this role.. See the explanation of what they are if you are unsure what this means.
+node,way   signal                   text linear # Signals controlled by the interlocking should be given this role.
+node,way   signal_box               text linear # Other interlockings (with their relation) that are controlled by this interlocking tower should be given this role., as they are part of this interlocking's control area.
+node,way   switch                   text linear # Switches controlled by the interlocking should be given this role.
+
+# Stations / Stops, stop positions
+node,way   light_rail               text linear #  Stop position for light rail
+node,way   subway                   text linear # This is a subway station. The tagging scheme does not have a distinction between train and subway stations.
+node,way   train                    text linear # Stop position for railway
+node,way   tram                     text linear # Stop position for tram
+node,way   stop                     text linear # stop position(s) for operating sites
+node,way   platform                 text linear # Platforms for operating sites
+node,way   subway_entrance          text linear # subway_entrance(s) for operating sites
+
+# Railway lines
+node,way   type                     text linear # = "route"
+node,way   from                     text linear # Origin city
+node,way   to                       text linear # Destination city
+node,way   abandoned                text linear # Were the tracks of this right-of-way removed? If so, please use the above key historic=yes as well.
+
+# Platforms
+node,way   wheelchair               text linear # Is platform accessible
+node,way   tactile_paving           text linear # Is the platform equipped with tactile paving for a blindman's cane? The most widespread and important on the yellow line that borders the track end of the platform. Note that tactile_paving:yes cannot be used on areas, so if present should be mapped on a separate way.
+node,way   height                   text linear # The height of the platform in meters. If using feet, prefix with ft:.
+
+# Sewage
+node,way   waste                    text linear # Used for waste_disposal
+
+# Radio mast
+node,way   communication:gsm-r      text linear # Indicates that this tower transmits GSM-R.
+
+# ==========================================================================================
+
+# Deleted tags
+# These are tags that are generally regarded as useless for most rendering.
+# Most of them are from imports or intended as internal information for mappers
+# Some of them are automatically deleted by editors.
+# If you want some of them, perhaps for a debugging layer, just delete the lines.
+
+# These tags are used by mappers to keep track of data.
+# They aren't very useful for rendering.
+node,way    note                    text    delete
+node,way    note:*                  text    delete
+node,way    source                  text    delete
+node,way    source_ref              text    delete
+node,way    source:*                text    delete
+node,way    attribution             text    delete
+node,way    comment                 text    delete
+node,way    fixme                   text    delete
+
+# Tags generally dropped by editors, not otherwise covered
+node,way    created_by              text    delete
+node,way    odbl                    text    delete
+node,way    odbl:note               text    delete
+node,way    SK53_bulk:load          text    delete
+
+# Lots of import tags
+# TIGER (US)
+node,way    tiger:*                 text    delete
+
+# NHD (US)
+# NHD has been converted every way imaginable
+node,way    NHD:*                   text    delete
+node,way    nhd:*                   text    delete
+
+# GNIS (US)
+node,way    gnis:*                  text    delete
+
+# Geobase (CA)
+node,way    geobase:*               text    delete
+# NHN (CA)
+node,way    accuracy:meters         text    delete
+node,way    sub_sea:type            text    delete
+node,way    waterway:type           text    delete
+
+# KSJ2 (JA)
+# See also note:ja and source_ref above
+node,way    KSJ2:*                  text    delete
+# Yahoo/ALPS (JA)
+node,way    yh:*                    text    delete
+
+# osak (DK)
+node,way    osak:*                  text    delete
+
+# kms (DK)
+node,way    kms:*                   text    delete
+
+# ngbe (ES)
+# See also note:es and source:file above
+node,way    ngbe:*                  text    delete
+
+# naptan (UK)
+node,way    naptan:*                text    delete
+
+# Corine (CLC) (Europe)
+node,way    CLC:*                   text    delete
+
+# misc
+node,way    3dshapes:ggmodelk       text    delete
+node,way    AND_nosr_r              text    delete
+node,way    import                  text    delete
+node,way    it:fvg:*                text    delete

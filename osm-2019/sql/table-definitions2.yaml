@@ -1,0 +1,192 @@
+# This yaml file contains the table definitions used to create the various tables within the schema.
+# We use this as most of the SQL is identical so adding/removing columns is now easy & less prone to errors.
+
+# Coastlines
+coastline_poly:
+  category: coastline
+  type: polygon
+  where: natural = 'coastline'
+
+coastline_line:
+  category: coastline
+  type: line
+  where: "natural = 'coastline'"
+
+# Administration boundaries
+country:
+  category: administrative
+  type: polygon
+  columns:
+    - name
+    - "uppername = upper(name)"
+  where: "admin_level='2' and boundary='administrative'"
+
+state:
+  category: administrative
+  type: polygon
+  columns:
+    - name
+    - "uppername = upper(name)"
+  where: "admin_level='4' and boundary='administrative'"
+
+region:
+  category: administrative
+  type: polygon
+  columns:
+    - name
+    - "uppername = upper(name)"
+  where: "admin_level='5' and boundary='administrative'"
+
+county:
+  category: administrative
+  type: polygon
+  columns:
+    - name
+    - "uppername = upper(name)"
+  where: "admin_level='6' and boundary='administrative'"
+
+district:
+  category: administrative
+  type: polygon
+  columns:
+    - name
+    - "uppername = upper(name)"
+  where: "admin_level='9' and boundary='administrative'"
+
+subdistrict:
+  category: administrative
+  type: polygon
+  columns:
+    - name
+    - "uppername = upper(name)"
+  where: "admin_level='10' and boundary='administrative'"
+
+# Amenities
+amenity:
+  category: habitation
+  type: polygon
+  columns:
+    - amenity
+    - z_order integer
+  where: amenity is not null and building is null
+
+# Buildings
+buildings:
+  category: habitation
+  type: polygon
+  columns:
+    - name
+    - housename = "addr:housename"
+    - housenumber = "addr:housenumber"
+    - building
+    - amenity
+    - historic
+    - operator
+    - z_order integer
+  where: building is not null
+
+residential:
+  category: habitation
+  type: polygon
+  columns:
+    - name
+  where: landuse = 'residential'
+
+# Forests, parks etc
+parkland:
+  category: landscape
+  type: polygon
+  columns:
+    - name
+    - landuse
+    - leisure
+    - z_order integer
+  where: >
+    landuse ILIKE '%grass%'
+    OR landuse ILIKE '%moor%'
+    OR landuse ILIKE '%park%'
+    OR landuse ILIKE '%orchard%'
+    OR landuse ILIKE '%vine%'
+    OR landuse IN ( 'garden', 'Garden','gra', 'grasas', 'greenfield' )
+    OR landuse IN ('meadow', 'meadow;grass' )
+    OR landuse IN ( 'plant_nursery', 'plants')
+    OR landuse IN ( 'recreation_ground', 'village_green', 'vineyard' )
+    OR leisure ILIKE '%park%'
+    OR leisure ILIKE '%geass%'
+    OR leisure ILIKE '%grass%'
+    OR leisure IN ( 'nature_reserve', 'garden', 'golf_course', 'horse_riding', 'stadium' )
+    OR leisure ilike '%beer%'
+    OR leisure ilike '%picnic%'
+    OR leisure ilike '%pitch%'
+    OR leisure ilike '%playground%'
+    OR leisure ilike '%playing%'
+    OR leisure ilike '%pub%gard%'
+    OR leisure ilike '%stadium%'
+
+forestwoodland:
+  category: landscape
+  type: polygon
+  columns:
+    - name
+    - landuse
+    - natural
+    - z_order integer
+  where: >
+    leisure ilike '%wood%'
+    OR leisure ilike '%forest%'
+    OR "\"natural\" ilike '%wood%'"
+    OR "\"natural\" ilike '%forest%'"
+
+# Roads
+minor_roads:
+  category: roads
+  type: line
+  columns:
+    - name
+  where: >
+    highway IS NOT NULL
+    AND (railway IS NULL OR railway = 'no')
+    AND highway NOT IN ('motorway', 'motorway_link', 'trunk', 'primary', 'trunk_link', 'primary_link', 'secondary', 'secondary_link', 'road', 'tertiary', 'tertiary_link', 'steps', 'footway', 'path', 'pedestrian', 'walkway', 'service', 'track')
+
+roads:
+  category: roads
+  type: line
+  columns:
+    - name
+  where: highway IN ('trunk_link', 'primary_link', 'secondary', 'secondary_link', 'road', 'tertiary', 'tertiary_link')
+
+trunk_primary:
+  category: roads
+  type: line
+  columns:
+    - name
+  where: highway IN ('motorway_link'::text, 'trunk'::text, 'primary')
+
+motorway:
+  category: roads
+  type: line
+  columns:
+    - name
+  where: highway = 'motorway'
+
+pedestrian:
+  category: roads
+  type: line
+  columns:
+    - name
+  where: highway IN ('footway', 'path', 'pedestrian', 'service', 'steps', 'track', 'walkway')
+
+# Railways
+
+# Original rails table
+rails:
+  category: railway
+  type: line
+  columns:
+    - name
+  where: >
+    railway IS NOT NULL
+    AND (
+    railway IN ('light rail', 'rail', 'rail;construction', 'tram', 'yes', 'traverser')
+    OR railway ~~ '%rail%'
+    )
