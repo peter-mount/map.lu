@@ -20,18 +20,18 @@ type SqlColumn struct {
 	PrimaryKey bool
 }
 
-func (t TableDefinition) sql(prefix, schema string) []string {
+func (t TableDefinition) sql(a []string, prefix, schema string) []string {
 	sep := "-- " + strings.Repeat("=", 70)
-	a := append([]string{}, sep)
+	a = append(a, sep)
 
 	if t.Description != "" {
-		a = splitText(a, "-- ", t.Description)
+		a = splitText(a, "-- ", t.Description, -1)
 		a = append(a, "-- ")
 	}
 
 	f := func(a []string, l, v string) []string {
 		if v != "" {
-			return splitText(a, fmt.Sprintf("-- %-10s", l), v)
+			return splitText(a, fmt.Sprintf("-- %-10s", l), v, -1)
 		}
 		return a
 	}
@@ -42,10 +42,10 @@ func (t TableDefinition) sql(prefix, schema string) []string {
 	a = f(a, "Type", t.Type)
 	a = append(a, sep)
 
-	st := t.SqlTable
+	st := t.sqlTable
 	return append(a,
 		fmt.Sprintf("CREATE SCHEMA IF NOT EXISTS %s", schema),
-		fmt.Sprintf("DROP TABLE %s.%s", schema, st.Name),
+		fmt.Sprintf("DROP TABLE IF EXISTS %s.%s", schema, st.Name),
 		st.createSql(schema),
 		fmt.Sprintf("CREATE INDEX gix_%s ON %s.%s USING gist (geom)", st.Name, schema, st.Name),
 		st.insertSql(prefix, schema, t.Type, t.Where),
@@ -153,16 +153,20 @@ func splitPrefix(a []string, p, s string, i int) ([]string, string) {
 	l, r := splitString(s, i)
 	return append(a, p+l), r
 }
-func splitText(a []string, p, s string) []string {
+func splitText(a []string, p, s string, l int) []string {
+	// Ensure we have a valid value
+	if l < 10 {
+		l = 70
+	}
 	for _, v := range strings.Split(s, "\n") {
 		for v != "" {
 			var i int
-			if len(v) < 70 {
-				i = 70
+			if len(v) < l {
+				i = l
 			} else {
-				i = strings.LastIndex(v[:70], " ")
+				i = strings.LastIndex(v[:l], " ")
 				if i < 1 {
-					i = 70
+					i = l
 				}
 			}
 			a, v = splitPrefix(a, p, v, i)
@@ -171,8 +175,9 @@ func splitText(a []string, p, s string) []string {
 	return a
 }
 
-func (t *TableDefinition) getSqlTable() error {
-	st := &t.SqlTable
+// generateSqlTable creates the sqlTable based on the TableDefinition
+func (t *TableDefinition) generateSqlTable(srid int) error {
+	st := &t.sqlTable
 	st.Name = t.Name
 
 	// Our 2 mandatory columns at the start
@@ -219,11 +224,15 @@ func (t *TableDefinition) getSqlTable() error {
 	var expr string
 	switch t.Type {
 	case "polygon":
-		geom = "geometry(MultiPolygon, 3857)"
-		expr = "st_multi(way)::geometry(MultiPolygon, 3857)"
+		geom = fmt.Sprintf("geometry(MultiPolygon, %d)", srid)
+		expr = fmt.Sprintf("st_multi(way)::geometry(MultiPolygon, %d)", srid)
 	case "line":
-		geom = "geometry(MultiLinestring, 3857)"
-		expr = "st_multi(way)::geometry(MultiLinestring, 3857)"
+		geom = fmt.Sprintf("geometry(MultiLinestring, %d)", srid)
+		expr = fmt.Sprintf("st_multi(way)::geometry(MultiLinestring, %d)", srid)
+	case "":
+		return fmt.Errorf("Table %s has no type defined", t.Name)
+	default:
+		return fmt.Errorf("Table %s has unsupported type %s", t.Name, t.Type)
 	}
 	st.Columns = append(st.Columns, SqlColumn{
 		Name:       "geom",

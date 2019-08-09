@@ -3,9 +3,9 @@
 
 # Administration boundaries
 country:
+  description: The country, e.g. United Kingdom
   category: administrative
   type: polygon
-  description: The country, e.g. United Kingdom
   columns:
     - name
     - uppername = upper(name)
@@ -14,6 +14,7 @@ country:
     AND admin_level='2'
 
 state:
+  description: The state, e.g. England
   category: administrative
   type: polygon
   columns:
@@ -24,6 +25,7 @@ state:
     AND admin_level='4'
 
 region:
+  description: The region, e.g. South East
   category: administrative
   type: polygon
   columns:
@@ -34,6 +36,7 @@ region:
     AND admin_level='5'
 
 county:
+  description: The county, e.g. Kent
   category: administrative
   type: polygon
   columns:
@@ -65,16 +68,30 @@ subdistrict:
 
 # Coastlines & water features
 coastline_poly:
+  description: |-
+    Coast line data - this is for polygons.
+
+    Coastline data is normally excluded from osm2pgsql imports
+    unless the --keep-coastlines flag is used.
   category: coastline
   type: polygon
-  where: \"natural\" = 'coastline'
+  where: |-
+    "natural" = 'coastline'
 
 coastline_line:
+  description: |-
+    Coast line data - this is for lines.
+
+    Coastline data is normally excluded from osm2pgsql imports
+    unless the --keep-coastlines flag is used.
   category: coastline
   type: line
-  where: \"natural\" = 'coastline'
+  where: |-
+    "natural" = 'coastline'
 
 lakes:
+  description: |-
+    Lates - water features that are not rivers
   category: water
   type: polygon
   columns:
@@ -82,26 +99,30 @@ lakes:
     - way_area real
     - z_order integer
   where: |
-    \"natural\" = 'water'
+    "natural" = 'water'
     AND (
       water IS NULL
       OR water IS NOT NULL AND water <> 'river'
     )
 
 water:
+  description: |-
+    water areas that are not lakes or river banks
   category: water
   type: polygon
   columns:
     - name
     - z_order integer
   where: |
-    \"natural\" = 'water'
+    "natural" = 'water'
     OR water IS NOT NULL
     OR waterway ~~ '%riverbank%'
 
 waterway:
+  description: |-
+    waterway - linear water features like rivers, streams, drains
   category: water
-  type: polygon
+  type: line
   columns:
     - name
     - waterway
@@ -118,6 +139,7 @@ waterway:
 
 # Amenities
 amenity:
+  description: Amenity areas like schools, car parks, graveyards
   category: habitation
   type: polygon
   columns:
@@ -129,6 +151,7 @@ amenity:
 
 # Buildings
 buildings:
+  description: Buildings
   category: habitation
   type: polygon
   columns:
@@ -143,6 +166,7 @@ buildings:
   where: building IS NOT NULL
 
 residential:
+  description: Residential areas
   category: habitation
   type: polygon
   columns:
@@ -151,6 +175,7 @@ residential:
 
 # Forests, parks etc
 parkland:
+  description: Parks, moorland, orchards and vineyards
   category: landscape
   type: polygon
   columns:
@@ -196,21 +221,25 @@ parkland:
     OR leisure ILIKE '%stadium%'
 
 forestwoodland:
+  description: Forests & Woodland
   category: landscape
   type: polygon
   columns:
     - name
     - landuse
-    - natural
+    - "\"natural\""
     - z_order integer
   where: |
     leisure ILIKE '%wood%'
     OR leisure ILIKE '%forest%'
-    OR "\"natural\" ILIKE '%wood%'"
-    OR "\"natural\" ILIKE '%forest%'"
+    OR "natural" ILIKE '%wood%'
+    OR "natural" ILIKE '%forest%'
 
 # Roads
 minor_roads:
+  description: |-
+    Minor roads
+    This contains roads that are not main, trunk or motorways
   category: roads
   type: line
   columns:
@@ -232,6 +261,9 @@ minor_roads:
     )
 
 roads:
+  description: |-
+    Main roads
+    Contains roads that are not minor, trunk or motorways
   category: roads
   type: line
   columns:
@@ -246,6 +278,9 @@ roads:
     )
 
 trunk_primary:
+  description: |-
+    Trunk roads
+    Contains roads that are not minor, main or motorways
   category: roads
   type: line
   columns:
@@ -258,6 +293,9 @@ trunk_primary:
     )
 
 motorway:
+  description: |-
+    Motorways
+    Contains roads that are not minor, main or trunk roads
   category: roads
   type: line
   columns:
@@ -265,6 +303,9 @@ motorway:
   where: highway = 'motorway'
 
 pedestrian:
+  description: |-
+    Pedestrian walk ways
+    Contains footpaths, pedestrian walkways, service roads and tracks
   category: roads
   type: line
   columns:
@@ -284,6 +325,10 @@ pedestrian:
 
 # Original rails table
 rails:
+  description: |-
+    Simplistic railway line features
+    This is kept as it's from the origianal.
+    There is a new yaml file just for use with our own openrailwaymap osm2pgsql style file
   category: railway
   type: line
   columns:
