@@ -1,0 +1,54 @@
+# this yaml file goes along side openrailwaymap.style and represents the tables in that format
+
+track_mainline:
+  description: |
+    Mainline track, light rail, tram or under construction
+  category: railway
+  type: line
+  columns:
+    - railway
+    - name
+    - operator
+    - ref
+    - track_ref = "railway:track_ref"
+    - preserved = "railway:preserved"
+    - usage
+    - highspeed
+    - maxspeed
+    - tilting = "railway:tilting"
+    - tilting_maxspeed = "maxspeed:tilting"
+    - lit
+    - electrified
+    #- thirdRail = "electrified:rail"
+    - voltage
+    - frequency
+    - gauge
+    #- embedded
+    #- connections = "railway:rail"
+    - class = "railway:track_class"
+    - loading_gauge
+    #- metre_load
+    #- axle_load
+    #- ballastless = "railway:ballastless"
+    #- rack
+    - traffic_mode = "railway:traffic_mode"
+    - service
+    #- radio = "railway:radio"
+    - embankment
+    - cutting
+    - bidirectional = "railway:bidirectional"
+    - start_date
+    - end_date
+    #- incline
+    #- passing_prohibited = "railway:passing_prohibited"
+    #- workrules
+    - description
+    - z_order integer
+  where:
+    railway IS NOT NULL
+    AND railway IN (
+      'rail',
+      'construction',
+      'light_rail',
+      'tram'
+    )

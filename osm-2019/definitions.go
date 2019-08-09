@@ -25,6 +25,7 @@ type TableDefinitions struct {
 	prefix              *string
 	importCategoryFlag  *string
 	importAllTablesFlag *bool
+	inspectTableFlag    *string
 	useDBFlag           *bool
 	useTxFlag           *bool
 }
@@ -58,6 +59,7 @@ func (t *TableDefinitions) Init(k *kernel.Kernel) error {
 	t.importCategoryFlag = flag.String("c", "", "Import an entire category")
 	t.importTableFlag = flag.String("t", "", "Import a single table")
 	t.importAllTablesFlag = flag.Bool("a", false, "Import everything")
+	t.inspectTableFlag = flag.String("inspect", "", "Inspect table in DB")
 
 	t.useDBFlag = flag.Bool("i", false, "Import directly into postgis")
 	t.useTxFlag = flag.Bool("tx", false, "Wrap with transaction")
@@ -86,9 +88,21 @@ func ensureOnlyOneTrue(b ...bool) bool {
 
 func (t *TableDefinitions) PostInit() error {
 
-	// Test that only one of -a -c -l or -t are used
-	if !ensureOnlyOneTrue(*t.importAllTablesFlag, *t.importCategoryFlag != "", *t.listTablesFlag, *t.importTableFlag != "") {
+	// Ensure only one action is enabled
+	if !ensureOnlyOneTrue(
+		*t.importAllTablesFlag,
+		*t.importCategoryFlag != "",
+		*t.listTablesFlag,
+		*t.importTableFlag != "",
+		*t.inspectTableFlag != "",
+	) {
 		return errors.New("Requires only one of -a, -c, -l or -t. Try -h for a list of options")
+	}
+
+	// Ensure db actions have the db enabled
+	// currently only inspect as it performs queries
+	if ensureOnlyOneTrue(*t.inspectTableFlag != "") && !*t.useDBFlag {
+		return errors.New("Requested function requires -i to use the DB")
 	}
 
 	// in case someone tries a blank prefix overriding the default
@@ -166,6 +180,8 @@ func (t *TableDefinitions) Run() error {
 		err = t.importAllTables()
 	} else if *t.importCategoryFlag != "" {
 		err = t.importCategory()
+	} else if *t.inspectTableFlag != "" {
+		err = t.inspectTable()
 	} else {
 		return errors.New("Requested task is currently unsupported")
 	}

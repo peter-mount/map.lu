@@ -200,7 +200,6 @@ node,way   railway:caws                                           text linear
 node,way   railway:derail                                         text linear
 node,way   railway:electricity:jumpering                          text linear
 node,way   railway:etcs                                           text linear
-node,way   railway:gnt                                            text linear
 node,way   railway:interlaced                                     text linear
 node,way   railway:level_crossing:closure:average                 text linear
 node,way   railway:level_crossing:closure:max                     text linear
@@ -217,7 +216,7 @@ node,way   railway:position:exact                                 text linear
 node,way   railway:preserved                                      text linear
 node,way   railway:radio                                          text linear
 node,way   railway:radius                                         text linear
-node,way   railway:rail                                           text linear
+#node,way   railway:rail                                           text linear
 node,way   railway:railway_crossing:movable                       text linear
 node,way   railway:ref                                            text linear
 node,way   railway:signal_box                                     text linear
@@ -252,7 +251,7 @@ node,way   usage                    text linear # type of line
 node,way   highspeed                text linear # line is a highspeed line
 node,way   lit                      text linear # line is lit
 node,way   gauge                    text linear # gauge in mm TODO see if this can be an int4 instead
-node,way   embedded                 text linear # Tracks are embedded in any sort of pavement & type of embedding
+#node,way   embedded                 text linear # Tracks are embedded in any sort of pavement & type of embedding
 node,way   loading_gauge            text linear # The allowed loading gauge,which defines the maximum size of the vehicles, replaces structure_gauge=*.
 node,way   metre_load               text linear # The maximum allowed weight per metre of rolling stock in tons per metre.
 node,way   axle_load                text linear # The maximum allowed axle load of rolling stock in tons.
@@ -264,9 +263,9 @@ node,way   workrules                text linear # Describes which working rules 
 
 # Electrified lines
 node,way   electrified              text linear # line is electrified & possible type
-node,way   electrified:rail         text linear # contact type of the third rail
+# 2019-08-09 Doesn't seem to be used
+#node,way   electrified:rail         text linear # contact type of the third rail
 node,way   abandoned:electrified    text linear # abandoned electrified lines
-node,way   deelectrified            text linear # replaced by abandoned:electrified, TODO remove if unused
 node,way   voltage                  text linear # voltage of system
 node,way   frequency                text linear # frequency in Hz, 0 for DC
 
