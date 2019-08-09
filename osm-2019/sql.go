@@ -190,7 +190,7 @@ func (t *TableDefinition) generateSqlTable(srid int) error {
 	})
 	st.Columns = append(st.Columns, SqlColumn{
 		Name:      "osm_id",
-		Type:      "INTEGER",
+		Type:      "BIGINT",
 		Flags:     "NOT NULL",
 		Synthetic: true,
 	})
@@ -229,6 +229,9 @@ func (t *TableDefinition) generateSqlTable(srid int) error {
 	case "line":
 		geom = fmt.Sprintf("geometry(MultiLinestring, %d)", srid)
 		expr = fmt.Sprintf("st_multi(way)::geometry(MultiLinestring, %d)", srid)
+	case "point":
+		geom = fmt.Sprintf("geometry(MultiPoint, %d)", srid)
+		expr = fmt.Sprintf("st_multi(way)::geometry(MultiPoint, %d)", srid)
 	case "":
 		return fmt.Errorf("Table %s has no type defined", t.Name)
 	default:
