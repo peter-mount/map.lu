@@ -270,7 +270,7 @@ node,way   voltage                  text linear # voltage of system
 node,way   frequency                text linear # frequency in Hz, 0 for DC
 
 # Bridges
-node,way   bridge:moveable          text linear # bascule/lift/swing only set if bridge=moveable
+#node,way   bridge:moveable          text linear # bascule/lift/swing only set if bridge=moveable
 node,way   bridge:name              text linear # Name of the bridge
 node,way   bridge:wikipedia         text linear # Wikipedia article about the bridge, uses the format <language code>:<article name>
 

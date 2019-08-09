@@ -1,6 +1,6 @@
 # this yaml file goes along side openrailwaymap.style and represents the tables in that format
 
-track_mainline:
+rail_line:
   description: |
     Mainline track, light rail, tram or under construction
   category: railway
@@ -11,6 +11,7 @@ track_mainline:
     - operator
     - ref
     - track_ref = "railway:track_ref"
+    - historic
     - preserved = "railway:preserved"
     - usage
     - highspeed
@@ -19,36 +20,67 @@ track_mainline:
     - tilting_maxspeed = "maxspeed:tilting"
     - lit
     - electrified
-    #- thirdRail = "electrified:rail"
     - voltage
     - frequency
     - gauge
-    #- embedded
-    #- connections = "railway:rail"
     - class = "railway:track_class"
     - loading_gauge
-    #- metre_load
-    #- axle_load
-    #- ballastless = "railway:ballastless"
-    #- rack
     - traffic_mode = "railway:traffic_mode"
     - service
-    #- radio = "railway:radio"
     - embankment
     - cutting
     - bidirectional = "railway:bidirectional"
     - start_date
     - end_date
-    #- incline
-    #- passing_prohibited = "railway:passing_prohibited"
-    #- workrules
+    # TPS atc & aws are empty but refer to UK networks
+    #- tps_atc = "railway:atc"
+    - tps_atp = "railway:atp"
+    #- tps_aws = "railway:aws"
+    - tps_etcs = "railway:etcs"
+    # Bridges
+    - bridge
+    - bridge_name = "bridge:name"
+    - layer
+    # Tunnels
+    - tunnel
+    - tunnel_name = "tunnel:name"
+    # Wikipedia articles
+    # This field is a text array but we only include non-null values in it hence the weird select
+    - wikipedia text[] = (SELECT array_agg(id) FROM unnest( ARRAY[
+        wikipedia,
+        "bridge:wikipedia",
+        "tunnel:wikipedia"
+      ] ) AS id WHERE id IS NOT NULL)
+    # Lastly description & z_order
     - description
     - z_order integer
-  where:
+  where: |
     railway IS NOT NULL
     AND railway IN (
       'rail',
+      'proposed',
       'construction',
+      'disused',
+      'abandoned',
+      'razed',
+      'narrow_gauge',
       'light_rail',
-      'tram'
+      'subway',
+      'tram',
+      'miniature'
     )
+
+# For when we implement nodes
+#  # Switches
+#  - switch = "railway:switch"
+#  - switch_local_operated = "railway:local_operated"
+#  - switch_electric = "railway:switch:electric"
+#  - radius = "railway:radius"
+#  - maxspeed_straight = "railway:maxspeed:straight"
+#  - maxspeed_diverging = "railway:maxspeed:diverging"
+#  - turnout_side = "railway:turnout_side"
+#  - switch_curved = "railway:switch:curved"
+#  - switch_blade = "railway:switch:switch_blade"
+#  - switch_resetting = "railway:switch:resetting"
+#  - switch_config = "railway:switch:configuration"
+#  - switch_heated = "railway:switch:heated"
