@@ -236,6 +236,23 @@ node,way   railway:traffic_mode                                   text linear
 node,way   railway:turnout_side                                   text linear
 node,way   railway:vacancy_detection                              text linear
 
+# signals
+node,way   railway:signal:position text linear
+node,way   railway:signal:direction text linear
+node,way   railway:signal:catenary_mast text linear
+# signals uk
+node,way   railway:signal:main text linear
+node,way   railway:signal:main:states text linear
+node,way   railway:signal:main:design text linear
+node,way   railway:signal:main:form text linear
+node,way   railway:signal:route text linear
+node,way   railway:signal:route:design text linear
+node,way   railway:signal:route:states text linear
+node,way   railway:signal:route:form text linear
+node,way   railway:signal:shunting text linear
+node,way   railway:signal:shunting:form text linear
+
+
 node,way   image                    text linear # url to an image of the feature, e.g. bridge, tunnel
 node,way   operating_times          text linear # Times the feature is manned or used
 node,way   start_date               text linear # Date feature went into service

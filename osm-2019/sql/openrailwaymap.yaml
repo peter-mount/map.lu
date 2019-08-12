@@ -70,6 +70,86 @@ rail_line:
       'miniature'
     )
 
+rail_point:
+  description: General Point features including blockposts, crossing_box, milestones & signals
+  category: railway
+  type: point
+  columns:
+    - railway
+    - name
+    - operator
+    - ref
+    - position = "railway:position"
+    - position_exact = "railway:position:exact"
+    - start_date
+    - end_date
+    - operating_times
+    - image
+    - building
+    #- signal_position = "railway:signal:position"
+    #- signal_direction = "railway:signal:direction"
+    #- signal_catenary_mast = "railway:signal:catenary_mast"
+  where: |
+    railway IN (
+      'blockpost',
+      'crossing_box',
+      'milestone',
+      'signal'
+    )
+
+rail_route_line:
+  description: A named route e.g. Maidstone East Line
+  category: railway
+  type: line
+  columns:
+    - name
+    - operator
+    - route
+    - type
+  where: |
+    route = 'railway'
+    AND type
+station:
+  description: Stations, Stops
+  category: railway
+  type: point
+  columns:
+    - railway
+    - name
+    - operator
+    - network
+    - ref
+    - railway_ref = "railway:ref"
+    - uic_ref
+    #- uic_name
+    - start_date
+    - end_date
+    #- operating_times
+    - image
+    - wikipedia
+  where: |
+    railway IN (
+      'station',
+      'halt',
+      'tram_stop'
+    )
+
+junction:
+  description: Junctions
+  category: railway
+  type: point
+  columns:
+    - railway
+    - name
+    - operator
+    - ref
+    - railway_ref = "railway:ref"
+    - start_date
+    - end_date
+    - image
+    - wikipedia
+  where: railway = 'junction'
+
 # For when we implement nodes
 #  # Switches
 #  - switch = "railway:switch"

@@ -244,6 +244,9 @@ minor_roads:
   type: line
   columns:
     - name
+    - bridge
+    - tunnel
+    - z_order integer
   where: |
     highway IS NOT NULL
     AND (railway IS NULL OR railway = 'no')
@@ -268,6 +271,9 @@ roads:
   type: line
   columns:
     - name
+    - bridge
+    - tunnel
+    - z_order integer
   where: |
     highway IN (
       'trunk_link',
@@ -285,6 +291,9 @@ trunk_primary:
   type: line
   columns:
     - name
+    - bridge
+    - tunnel
+    - z_order integer
   where: |
     highway IN (
       'motorway_link',
@@ -300,6 +309,9 @@ motorway:
   type: line
   columns:
     - name
+    - bridge
+    - tunnel
+    - z_order integer
   where: highway = 'motorway'
 
 pedestrian:
@@ -310,6 +322,10 @@ pedestrian:
   type: line
   columns:
     - name
+    - highway
+    - bridge
+    - tunnel
+    - z_order integer
   where: |
     highway IN (
       'footway',
