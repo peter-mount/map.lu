@@ -1,0 +1,30 @@
+/* Railway Bridges */
+[railway = 'rail'] [bridge = 'yes' ] {
+    stroke: #8f8f8f, #eaeaea;
+    stroke-linecap: round;
+    z-index: 0, 1;
+    sort-by: z_order;
+    sort-by-group: railway;
+
+    [@sd > 10k] {
+        stroke-width: 0.8, 0.4;
+    };
+
+    [@sd >1k] [@sd <= 2.5k] {
+        stroke-width: 6, 2;
+
+        [bridge = 'yes' ] {
+            stroke-width: 6, 2;
+            z-index: 1, 2;
+        };
+    };
+
+    [@sd >2.5k] [@sd <= 5k] {
+        stroke-width: 4, 1;
+    };
+
+    [@sd >5k] [@sd <= 10k] {
+        stroke-width: 3, 0.25;
+    };
+
+}

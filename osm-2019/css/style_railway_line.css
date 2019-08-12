@@ -1,0 +1,44 @@
+[railway = 'rail'] {
+    stroke: #8f8f8f, #ccc;
+    stroke-linecap: round;
+    z-index: 0, 1;
+    sort-by: z_order;
+    sort-by-group: railway;
+
+    :nth-stroke(1) {
+        stroke: #8f8f8f, #ffffff;
+    };
+
+    [@scale > 10k] {
+        stroke-width: 0.5, 0.4;
+    };
+
+    [@sd >1k] [@scale <= 2.5k] {
+        stroke-width: 3, 2;
+    };
+
+    [@sd >2.5k] [@scale <= 5k] {
+        stroke-width: 2, 1;
+    };
+
+    [@sd >5k] [@scale <= 10k] {
+        stroke-width: 1, 0.25;
+    };
+
+    [tunnel = 'yes' ] {
+        stroke-dasharray: 5, 5;
+    };
+
+    [service = 'crossover' or service = 'runaway' or service = 'siding' or service = 'yard' or service = 'trap_points'] {
+        stroke-opacity: 0.2;
+    };
+
+    [service = 'spur' or service = 'test_track'] {
+        stroke-opacity: 0.2;
+    };
+
+    [service is null] {
+        stroke-opacity: 0.8;
+    };
+
+}
