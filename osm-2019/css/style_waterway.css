@@ -10,7 +10,7 @@
   stroke-linecap: round;
   label-offset: 7px;
   sort-by: z_order;
-  sort-by-group: water;
+  /*sort-by-group: waterway;*/
 }
 
 /* @title Waterway */
