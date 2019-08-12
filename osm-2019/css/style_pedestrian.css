@@ -11,20 +11,20 @@
   stroke-linecap: round;
 }
 
-[@scale < 50001] [@scale > 25001] {
+[@sd < 50001] [@sd > 25001] {
   stroke: #d5d4c8;
   stroke-opacity: 0.5;
   stroke-width: 0.1;
 }
 
-[@scale < 25001] [@scale > 10001] {
+[@sd < 25001] [@sd > 10001] {
   stroke: #c8c4b8, #d5d4c8;
   stroke-opacity: 0.5, 1;
   stroke-width: 0.5, 0.3;
   z-index: 0, 1;
 }
 
-[@scale < 10001] [@scale > 5001]{
+[@sd < 10001] [@sd > 5001]{
   stroke: #888, #ddd;
   stroke-opacity: 0.5, 1;
   stroke-width: 2, 1.5;
@@ -33,7 +33,7 @@
   font-size: 6;
 }
 
-[@scale < 5001] {
+[@sd < 5001] {
   stroke: #888, #ddd;
   stroke-opacity: 0.5, 1;
   stroke-width: 3.5, 3;
@@ -43,23 +43,23 @@
 }
 
 [highway = 'service'] {
-  [@scale < 10k]  {
+  [@sd < 10k]  {
     stroke: #888, #fff;
   };
 
-  [@scale >= 10k] [@scale < 35k] {
+  [@sd >= 10k] [@sd < 35k] {
     stroke: #fff;
   };
 }
 
 [highway = 'pedestrian'] {
-  [@scale < 10k] {
+  [@sd < 10k] {
     stroke: #888, #eeeeee;
   };
 }
 
 [highway = 'path' or highway = 'footway'] {
-  [@scale < 4k] {
+  [@sd < 4k] {
     stroke: #fa9989;
     stroke-dasharray: 2 5;
     stroke-width: 1, 1;
@@ -67,7 +67,7 @@
     label: [name];
   };
 
-  [@scale >= 4k] [@scale < 10k] {
+  [@sd >= 4k] [@sd < 10k] {
     stroke: #fa9989;
     stroke-dasharray: 2 5;
     stroke-width: 0.25, 0.25;
@@ -75,9 +75,31 @@
     label: [name];
   };
 
-  [@scale >= 10k] [@scale < 35k] {
+  [@sd >= 10k] [@sd < 35k] {
     stroke: #fa9989;
     stroke-dasharray: 2 5;
+    stroke-width: 0.25, 0.25;
+  };
+}
+
+[highway = 'steps'] {
+  stroke: #fa9989;
+  stroke-dasharray: 1 2.5;
+
+  [@sd < 4k] {
+    stroke: #fa9989;
+    stroke-width: 1, 1;
+    font-size: 10;
+    label: [name];
+  };
+
+  [@sd >= 4k] [@sd < 10k] {
+    stroke-width: 0.25, 0.25;
+    font-size: 7;
+    label: [name];
+  };
+
+  [@sd >= 10k] [@sd < 35k] {
     stroke-width: 0.25, 0.25;
   };
 }
