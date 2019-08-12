@@ -97,18 +97,6 @@ rail_point:
       'signal'
     )
 
-rail_route_line:
-  description: A named route e.g. Maidstone East Line
-  category: railway
-  type: line
-  columns:
-    - name
-    - operator
-    - route
-    - type
-  where: |
-    route = 'railway'
-    AND type
 station:
   description: Stations, Stops
   category: railway
