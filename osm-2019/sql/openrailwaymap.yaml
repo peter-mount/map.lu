@@ -6,32 +6,63 @@ rail_line:
   category: railway
   type: line
   columns:
-    - railway
-    - name
-    - operator
-    - ref
-    - track_ref = "railway:track_ref"
+    - access
+    - area
+    - barrier
+    - bicycle
+    - construction
+    - covered
+    - cutting
+    - disused
+    - embankment
+    - foot
+    - highway
     - historic
+    - horse
+    - motorcar
+    - name
+    - oneway
+    - operator
+    - public_transport
+    - railway
+    - ref
+    - route
+    - service
+    - surface
+    - tourism
+    - tracktype
+    - bidirectional = "railway:bidirectional"
     - preserved = "railway:preserved"
+    - tilting = "railway:tilting"
+    - track_ref = "railway:track_ref"
+    - traffic_mode = "railway:traffic_mode"
+    - image
+    - start_date
+    - end_date
+    - network
     - usage
     - highspeed
-    - maxspeed
-    - tilting = "railway:tilting"
-    - tilting_maxspeed = "maxspeed:tilting"
     - lit
+    - gauge
+    - loading_gauge
+    - rack
+    - maxspeed
+    - maxspeed_tilting = "maxspeed:tilting"
+    - incline
     - electrified
     - voltage
     - frequency
-    - gauge
-    - class = "railway:track_class"
-    - loading_gauge
-    - traffic_mode = "railway:traffic_mode"
-    - service
-    - embankment
-    - cutting
-    - bidirectional = "railway:bidirectional"
-    - start_date
-    - end_date
+    - light_rail
+    - subway
+    - train
+    - tram
+    - platform
+    - type
+    - from_station = "from"
+    - to_station = "to"
+    - abandoned
+    - wheelchair
+    - tactile_paving
     # TPS atc & aws are empty but refer to UK networks
     #- tps_atc = "railway:atc"
     - tps_atp = "railway:atp"
@@ -51,51 +82,190 @@ rail_line:
         "bridge:wikipedia",
         "tunnel:wikipedia"
       ] ) AS id WHERE id IS NOT NULL)
+    # Dimension
+    - width
+    - height
     # Lastly description & z_order
     - description
     - z_order integer
   where: |
     railway IS NOT NULL
-    AND railway IN (
-      'rail',
-      'proposed',
-      'construction',
-      'disused',
-      'abandoned',
-      'razed',
-      'narrow_gauge',
-      'light_rail',
-      'subway',
-      'tram',
-      'miniature'
-    )
 
 rail_point:
   description: General Point features including blockposts, crossing_box, milestones & signals
   category: railway
   type: point
   columns:
-    - railway
+    - access
+    - housename = "addr:housename"
+    - housenumber = "addr:housenumber"
+    - amenity
+    - barrier
+    - bicycle
+    - brand
+    - building
+    - construction
+    - covered
+    - disused
+    - ele
+    - foot
+    - highway
+    - historic
+    - horse
+    - layer
+    - man_made
+    - motorcar
     - name
+    - '"natural" = "natural"'
     - operator
+    - place
+    - public_transport
+    - railway
     - ref
+    - '"railway:ref"'
+    - route
+    - service
+    - surface
+    - tourism
+    - local_operated = "railway:local_operated"
     - position = "railway:position"
-    - position_exact = "railway:position:exact"
+    - preserved = "railway:preserved"
+    # Crossings
+    - crossing
+    - '"crossing:activation"'
+    - '"crossing:barrier"'
+    - '"crossing:bell"'
+    - '"crossing:light"'
+    - '"crossing:on_demand"'
+    # Signals
+    - '"railway:signal:position"'
+    - '"railway:signal:direction"'
+    - '"railway:signal:main"'
+    - '"railway:signal:main:states"'
+    - '"railway:signal:main:design"'
+    - '"railway:signal:main:form"'
+    - '"railway:signal:route"'
+    - '"railway:signal:route:design"'
+    - '"railway:signal:route:states"'
+    - '"railway:signal:route:form"'
+    - '"railway:signal:shunting"'
+    - '"railway:signal:shunting:form"'
+    #
+    - '"railway:turnout_side"'
+    - image
     - start_date
     - end_date
-    - operating_times
-    - image
+    - wikipedia
+    - uic_ref
+    - network
+    - usage
+    - lit
+    - gauge
+    - electrified
+    - voltage
+    - frequency
+    - light_rail
+    - subway
+    - train
+    - tram
+    - type
+    - abandoned
+    - wheelchair
+    - tactile_paving
+    - description
+  where: railway IS NOT NULL
+
+rail_polygon:
+  description: Polygon railway features
+  category: railway
+  type: polygon
+  columns:
+    - access
+    - housename = "addr:housename"
+    - housenumber = "addr:housenumber"
+    - amenity
+    - barrier
+    - bicycle
     - building
-    #- signal_position = "railway:signal:position"
-    #- signal_direction = "railway:signal:direction"
-    #- signal_catenary_mast = "railway:signal:catenary_mast"
-  where: |
-    railway IN (
-      'blockpost',
-      'crossing_box',
-      'milestone',
-      'signal'
-    )
+    - covered
+    - disused
+    - embankment
+    - foot
+    - highway
+    - historic
+    - horse
+    - landuse
+    - man_made
+    - '"natural" = "natural"'
+    - operator
+    - public_transport
+    - railway
+    - ref
+    - '"railway:ref"'
+    - service
+    - surface
+    - tourism
+    - local_operated = "railway:local_operated"
+    - signal_box = "railway:signal_box"
+    - start_date
+    - end_date
+    - uic_ref
+    - network
+    - lit
+    - electrified
+    - light_rail
+    - subway
+    - train
+    - tram
+    - platform
+    - type
+    - abandoned
+    - wheelchair
+    - tactile_paving
+    # bridges
+    - bridge
+    - layer
+    # tunnels
+    - tunnel
+    # wikipedia
+    - wikipedia
+    # Dimensions
+    - width
+    - height
+    - way_area
+    # Finally
+    - z_order integer
+    - description
+  where: railway IS NOT NULL
+
+rail_building:
+  description: Buildings on the railway
+  type: polygon
+  columns:
+    - name
+    - housename = "addr:housename"
+    - housenumber = "addr:housenumber"
+    - railway
+    - building
+    - amenity
+    - area
+    - barrier
+    - bridge
+    - covered
+    - disused
+    - highway
+    - historic
+    - landuse
+    - layer
+    - man_made
+    - operator
+    - public_transport
+    - ref
+    - surface
+    - tunnel
+    - way_area
+    - z_order integer
+  where: railway IS NOT NULL
 
 station:
   description: Stations, Stops
@@ -137,18 +307,3 @@ junction:
     - image
     - wikipedia
   where: railway = 'junction'
-
-# For when we implement nodes
-#  # Switches
-#  - switch = "railway:switch"
-#  - switch_local_operated = "railway:local_operated"
-#  - switch_electric = "railway:switch:electric"
-#  - radius = "railway:radius"
-#  - maxspeed_straight = "railway:maxspeed:straight"
-#  - maxspeed_diverging = "railway:maxspeed:diverging"
-#  - turnout_side = "railway:turnout_side"
-#  - switch_curved = "railway:switch:curved"
-#  - switch_blade = "railway:switch:switch_blade"
-#  - switch_resetting = "railway:switch:resetting"
-#  - switch_config = "railway:switch:configuration"
-#  - switch_heated = "railway:switch:heated"
