@@ -12,6 +12,9 @@ country:
   where: |
     boundary='administrative'
     AND admin_level='2'
+  index:
+    - name
+    - uppername
 
 state:
   description: The state, e.g. England
@@ -23,6 +26,9 @@ state:
   where: |
     boundary='administrative'
     AND admin_level='4'
+  index:
+    - name
+    - uppername
 
 region:
   description: The region, e.g. South East
@@ -34,6 +40,9 @@ region:
   where: |
     boundary='administrative'
     AND admin_level='5'
+  index:
+    - name
+    - uppername
 
 county:
   description: The county, e.g. Kent
@@ -45,6 +54,9 @@ county:
   where: |
     boundary='administrative'
     AND admin_level='6'
+  index:
+    - name
+    - uppername
 
 district:
   category: administrative
@@ -55,6 +67,9 @@ district:
   where: |
     boundary='administrative'
     AND admin_level='9'
+  index:
+    - name
+    - uppername
 
 subdistrict:
   category: administrative
@@ -65,6 +80,9 @@ subdistrict:
   where: |
     boundary='administrative'
     AND admin_level='10'
+  index:
+    - name
+    - uppername
 
 # Coastlines & water features
 coastline_poly:
@@ -104,6 +122,8 @@ lakes:
       water IS NULL
       OR water IS NOT NULL AND water <> 'river'
     )
+  index:
+    - name
 
 water:
   description: |-
@@ -117,6 +137,8 @@ water:
     "natural" = 'water'
     OR water IS NOT NULL
     OR waterway ~~ '%riverbank%'
+  index:
+    - name
 
 waterway:
   description: |-
@@ -136,6 +158,10 @@ waterway:
       'waterfall',
       'yes'
     )
+  index:
+    - name
+    - waterway
+    - name, waterway
 
 # Amenities
 amenity:
@@ -148,6 +174,8 @@ amenity:
   where: |
     amenity IS NOT NULL
     AND building IS NULL
+  index:
+    - amenity
 
 # Buildings
 buildings:
@@ -164,6 +192,12 @@ buildings:
     - operator
     - z_order integer
   where: building IS NOT NULL
+  index:
+    - name
+    - housename
+    - building
+    - amenity
+    - historic
 
 residential:
   description: Residential areas
@@ -172,6 +206,8 @@ residential:
   columns:
     - name
   where: landuse = 'residential'
+  index:
+    - name
 
 # Forests, parks etc
 parkland:
@@ -219,6 +255,10 @@ parkland:
     OR leisure ILIKE '%playing%'
     OR leisure ILIKE '%pub%gard%'
     OR leisure ILIKE '%stadium%'
+  index:
+    - name
+    - landuse
+    - leisure
 
 forestwoodland:
   description: Forests & Woodland
@@ -234,6 +274,9 @@ forestwoodland:
     OR leisure ILIKE '%forest%'
     OR "natural" ILIKE '%wood%'
     OR "natural" ILIKE '%forest%'
+  index:
+    - name
+    - landuse
 
 # Roads
 minor_roads:
@@ -262,6 +305,10 @@ minor_roads:
       'service',
       'track'
     )
+  index:
+    - name
+    - bridge
+    - tunnel
 
 roads:
   description: |-
@@ -282,6 +329,10 @@ roads:
       'road',
       'tertiary', 'tertiary_link'
     )
+  index:
+    - name
+    - bridge
+    - tunnel
 
 trunk_primary:
   description: |-
@@ -300,6 +351,10 @@ trunk_primary:
       'trunk',
       'primary'
     )
+  index:
+    - name
+    - bridge
+    - tunnel
 
 motorway:
   description: |-
@@ -313,6 +368,10 @@ motorway:
     - tunnel
     - z_order integer
   where: highway = 'motorway'
+  index:
+    - name
+    - bridge
+    - tunnel
 
 pedestrian:
   description: |-
@@ -336,29 +395,7 @@ pedestrian:
       'track',
       'walkway'
     )
-
-# Railways
-
-# Original rails table
-rails:
-  description: |-
-    Simplistic railway line features
-    This is kept as it's from the origianal.
-    There is a new yaml file just for use with our own openrailwaymap osm2pgsql style file
-  category: railway
-  type: line
-  columns:
+  index:
     - name
-  where: |
-    railway IS NOT NULL
-    AND (
-      railway IN (
-        'light rail',
-        'rail',
-        'rail;construction',
-        'tram',
-        'yes',
-        'traverser'
-      )
-      OR railway ~~ '%rail%'
-    )
+    - bridge
+    - tunnel

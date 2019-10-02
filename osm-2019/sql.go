@@ -43,13 +43,24 @@ func (t TableDefinition) sql(a []string, prefix, schema string) []string {
 	a = append(a, sep)
 
 	st := t.sqlTable
-	return append(a,
+	a = append(a,
 		fmt.Sprintf("CREATE SCHEMA IF NOT EXISTS %s", schema),
 		fmt.Sprintf("DROP TABLE IF EXISTS %s.%s", schema, st.Name),
 		st.createSql(schema),
-		fmt.Sprintf("CREATE INDEX gix_%s ON %s.%s USING gist (geom)", st.Name, schema, st.Name),
 		st.insertSql(prefix, schema, t.Type, t.Where),
+		// index using gist
+		//fmt.Sprintf("CREATE INDEX gix_%s ON %s.%s USING gist (geom)", st.Name, schema, st.Name),
+		// trialling geohash index
+		fmt.Sprintf("CREATE INDEX geohash_%s ON %s.%s (ST_GeoHash(ST_Transform(geom,4326)))", st.Name, schema, st.Name),
+		// cluster by index
+		fmt.Sprintf("CLUSTER %s.%s USING geohash_%s", schema, st.Name, st.Name),
 	)
+
+	if len(t.Index) > 0 {
+		a = append(a, st.indexSql(prefix, schema, t.Index)...)
+	}
+
+	return a
 }
 
 func (t SqlTable) createSql(schema string) string {
@@ -136,6 +147,16 @@ func (t SqlTable) insertSql(prefix, schema, featuretype, where string) string {
 	}
 
 	return strings.Join(s, "\n")
+}
+
+func (t SqlTable) indexSql(prefix, schema string, indices []string) []string {
+	var s []string
+
+	for i, in := range indices {
+		s = append(s, fmt.Sprintf("CREATE INDEX %s_%d ON %s.%s (%s)", t.Name, i, schema, t.Name, in))
+	}
+
+	return s
 }
 
 func splitString(s string, i int) (string, string) {

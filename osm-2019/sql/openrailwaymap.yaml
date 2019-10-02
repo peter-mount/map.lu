@@ -90,6 +90,9 @@ rail_line:
     - z_order integer
   where: |
     railway IS NOT NULL
+  index:
+    - railway
+    - operator
 
 rail_point:
   description: General Point features including blockposts, crossing_box, milestones & signals
@@ -174,6 +177,9 @@ rail_point:
     - tactile_paving
     - description
   where: railway IS NOT NULL
+  index:
+    - railway
+    - operator
 
 rail_polygon:
   description: Polygon railway features
@@ -237,6 +243,10 @@ rail_polygon:
     - z_order integer
     - description
   where: railway IS NOT NULL
+  index:
+    - railway
+    - amenity
+    - operator
 
 rail_building:
   description: Buildings on the railway
@@ -266,6 +276,15 @@ rail_building:
     - way_area
     - z_order integer
   where: railway IS NOT NULL
+  index:
+    - railway
+    - building
+    - amenity
+    - bridge
+    - landuse
+    - public_transport
+    - ref
+    - tunnel
 
 station:
   description: Stations, Stops
@@ -291,19 +310,11 @@ station:
       'halt',
       'tram_stop'
     )
-
-junction:
-  description: Junctions
-  category: railway
-  type: point
-  columns:
+  index:
     - railway
     - name
     - operator
-    - ref
-    - railway_ref = "railway:ref"
-    - start_date
-    - end_date
-    - image
-    - wikipedia
-  where: railway = 'junction'
+    - network
+    - uic_ref
+    - railway, name
+    - railway, operator

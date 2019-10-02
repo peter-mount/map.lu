@@ -32,12 +32,13 @@ type TableDefinitions struct {
 
 // A table definition in the yaml file
 type TableDefinition struct {
-	Name        string   `yaml:"name"`
-	Category    string   `yaml:"category"`
-	Description string   `yaml:"description"`
-	Type        string   `yaml:"type"`
-	Columns     []string `yaml:"columns"`
-	Where       string   `yaml:"where"`
+	Name        string   `yaml:"name"`        // Name of table to generate
+	Category    string   `yaml:"category"`    // Category of the table
+	Description string   `yaml:"description"` // Description of the table
+	Type        string   `yaml:"type"`        // Type, one of "point", "line" or "polygon"
+	Columns     []string `yaml:"columns"`     // Columns to extract
+	Where       string   `yaml:"where"`       // Where clause to limit what's inserted into the table
+	Index       []string `yaml:"index"`       // Columns to index
 	sqlTable    SqlTable
 }
 
