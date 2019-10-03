@@ -245,39 +245,6 @@ rail_polygon:
   where: railway IS NOT NULL
   index:
     - railway
-    - amenity
-    - operator
-
-rail_building:
-  description: Buildings on the railway
-  type: polygon
-  columns:
-    - name
-    - housename = "addr:housename"
-    - housenumber = "addr:housenumber"
-    - railway
-    - building
-    - amenity
-    - area
-    - barrier
-    - bridge
-    - covered
-    - disused
-    - highway
-    - historic
-    - landuse
-    - layer
-    - man_made
-    - operator
-    - public_transport
-    - ref
-    - surface
-    - tunnel
-    - way_area
-    - z_order integer
-  where: railway IS NOT NULL
-  index:
-    - railway
     - building
     - amenity
     - bridge
@@ -286,7 +253,7 @@ rail_building:
     - ref
     - tunnel
 
-station:
+rail_station:
   description: Stations, Stops
   category: railway
   type: point
