@@ -230,11 +230,19 @@ func (t *TableDefinitions) listTables() {
 	os.Exit(0)
 }
 
+func (t *TableDefinitions) GetTable(tableName string) (*TableDefinition, error) {
+	table, exists := t.tables[tableName]
+	if !exists {
+		return nil, fmt.Errorf("Unknown table %s", tableName)
+	}
+	return table, nil
+}
+
 func (t *TableDefinitions) importTable() error {
 
-	table, exists := t.tables[*t.importTableFlag]
-	if !exists {
-		return fmt.Errorf("Unknown table %s", *t.importTableFlag)
+	table, err := t.GetTable(*t.importTableFlag)
+	if err != nil {
+		return err
 	}
 
 	sql, err := t.wrapTX(func(sql []string) ([]string, error) {
@@ -266,12 +274,21 @@ func (t *TableDefinitions) importAllTables() error {
 	return t.importSql(sql)
 }
 
+func (t *TableDefinitions) GetCategory(cat string) ([]string, error) {
+	_, cats := t.getCategories()
+	tables, exists := cats[cat]
+	if !exists {
+		return nil, fmt.Errorf("Unknown category %s", *t.importCategoryFlag)
+	}
+
+	return tables, nil
+}
+
 func (t *TableDefinitions) importCategory() error {
 
-	_, cats := t.getCategories()
-	tables, exists := cats[*t.importCategoryFlag]
-	if !exists {
-		return fmt.Errorf("Unknown category %s", *t.importCategoryFlag)
+	tables, err := t.GetCategory(*t.importCategoryFlag)
+	if err != nil {
+		return err
 	}
 
 	sql, err := t.wrapTX(func(sql []string) ([]string, error) {

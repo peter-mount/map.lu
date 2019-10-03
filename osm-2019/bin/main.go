@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
-	err := kernel.Launch(&osm_2019.TableDefinitions{})
+	err := kernel.Launch(
+		&osm_2019.Dump{},
+		&osm_2019.TableDefinitions{},
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
